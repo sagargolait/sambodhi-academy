@@ -18,4 +18,52 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+
+  .custom-carousel .carousel .control-dots {
+    position: relative;
+    bottom: 0;
+    margin-top: 20px;
+  }
+  
+}
+
+.custom-carousel .carousel .control-dots {
+  position: relative;
+  bottom: 0;
+  margin-top: 20px;
+}
+.custom-carousel .carousel .control-dots .dot {
+  background: #10375C;
+  box-shadow: none;
+  width: 12px;
+  height: 12px;
+  margin: 0 8px;
+  opacity: 0.5;
+}
+.custom-carousel .carousel .control-dots .dot.selected {
+  background: #F3C623;
+  opacity: 1;
+}
+.custom-carousel .carousel .control-arrow {
+  background: rgba(16, 55, 92, 0.6);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.custom-carousel .carousel .control-arrow:hover {
+  background: rgba(16, 55, 92, 0.8);
+}
+.custom-carousel .carousel .control-prev {
+  left: 20px;
+}
+.custom-carousel .carousel .control-next {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-bottom: 70px;
+  }
 }
