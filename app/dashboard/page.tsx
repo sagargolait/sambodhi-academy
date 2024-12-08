@@ -1,10 +1,20 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { Hero, Features, SuccessStories, Infrastructure, VideoLectures, NotificationsAndArticles, OurStory, FAQs, RequestCounseling, Footer, MobileMenu } from '@/components'
+import React, { useState } from "react";
+import {
+  Hero,
+  Features,
+  SuccessStories,
+  Infrastructure,
+  NotificationsAndArticles,
+  OurStory,
+  FAQs,
+  RequestCounseling,
+  MobileMenu,
+} from "@/components";
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
@@ -20,8 +30,11 @@ export default function Home() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        <MobileMenu
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+        />
       )}
     </div>
-  )
+  );
 }

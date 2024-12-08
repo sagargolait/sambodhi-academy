@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+const ContactUs = () => {
+  return <div>ContactUs</div>;
+};
 
-const ContactUs = (props: Props) => {
-  return (
-    <div>ContactUs</div>
-  )
-}
-
-export default ContactUs
+export default ContactUs;

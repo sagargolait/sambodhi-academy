@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, GraduationCap, Info, BookOpen, Home, X, Bell } from "lucide-react";
+import { Phone, GraduationCap, Info, BookOpen, Home, Bell } from "lucide-react";
 import Link from "next/link";
 import TopBar from "./TopBar";
 import { Button } from "./ui/button";
@@ -10,23 +10,35 @@ import Image from "next/image";
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const mobileMenuRef = useRef(null)
+  const mobileMenuRef = useRef(null);
   const menuItems = [
-    { name: 'Home', href: '/', icon: <Home className="h-6 w-6" /> },
-    { name: 'Courses', href: '/courses', icon: <BookOpen className="h-6 w-6" /> },
-    { name: 'About', href: '/about', icon: <Info className="h-6 w-6" /> },
-    { name: 'Exams', href: '/exams', icon: <GraduationCap className="h-6 w-6" /> },
-    { name: 'Social Development', href: '/development', icon: <GraduationCap className="h-6 w-6" /> },
-    { name: 'Contact', href: '/contact', icon: <Phone className="h-6 w-6" /> },
-  ]
+    { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
+    {
+      name: "Courses",
+      href: "/courses",
+      icon: <BookOpen className="h-6 w-6" />,
+    },
+    { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
+    {
+      name: "Exams",
+      href: "/exams",
+      icon: <GraduationCap className="h-6 w-6" />,
+    },
+    {
+      name: "Social Development",
+      href: "/development",
+      icon: <GraduationCap className="h-6 w-6" />,
+    },
+    { name: "Contact", href: "/contact", icon: <Phone className="h-6 w-6" /> },
+  ];
 
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset";
     }
-  }, [mobileMenuOpen])
+  }, [mobileMenuOpen]);
 
   return (
     <>
@@ -52,29 +64,36 @@ export default function NavBar() {
               </Link>
               <nav className="hidden md:flex space-x-4">
                 {menuItems.map((item) => (
-                  <Link key={item.name} href={item.href} className="text-[#FFF] hover:text-[#F3C623]">
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-[#FFF] hover:text-[#F3C623]"
+                  >
                     {item.name}
                   </Link>
                 ))}
               </nav>
               <div className="md:flex hidden items-center gap-4 ">
-              <div className="relative mr-4">
-                <Bell className="h-6 w-6 text-[#fff] hover:text-[#F3C623] cursor-pointer" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  3
-                </span>
-              </div>
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"
-                >
-                  Login
-                </Button>
-              </Link>
+                <div className="relative mr-4">
+                  <Bell className="h-6 w-6 text-[#fff] hover:text-[#F3C623] cursor-pointer" />
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    3
+                  </span>
+                </div>
+                <Link href="/login">
+                  <Button
+                    variant="outline"
+                    className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"
+                  >
+                    Login
+                  </Button>
+                </Link>
               </div>
               <div className="md:hidden relative" ref={mobileMenuRef}>
-                <Button variant="ghost" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <Button
+                  variant="ghost"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
                 {mobileMenuOpen && (
@@ -97,7 +116,6 @@ export default function NavBar() {
           </div>
         </header>
       </div>
-
     </>
   );
 }

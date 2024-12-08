@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+const SocialDevelopmentPage = () => {
+  return <div>SocialDevelopmentPage</div>;
+};
 
-const SocialDevelopmentPage = (props: Props) => {
-  return (
-    <div>SocialDevelopmentPage</div>
-  )
-}
-
-export default SocialDevelopmentPage
+export default SocialDevelopmentPage;

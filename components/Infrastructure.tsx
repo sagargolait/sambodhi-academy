@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import type { CarouselProps } from 'react-responsive-carousel'
-import { Button } from './ui/button'
-import Link from 'next/link'
-import SectionHeading from './SectionHeading'
+import React from "react";
+import dynamic from "next/dynamic";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import type { CarouselProps } from "react-responsive-carousel";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import SectionHeading from "./SectionHeading";
 
 const Carousel = dynamic(
-  () => import('react-responsive-carousel').then((mod) => mod.Carousel),
+  () => import("react-responsive-carousel").then((mod) => mod.Carousel),
   { ssr: false }
-)
+);
 
-const carouselProps: CarouselProps = {
+const carouselProps: Partial<CarouselProps> = {
   showArrows: true,
   showStatus: false,
   showIndicators: true,
@@ -21,25 +21,21 @@ const carouselProps: CarouselProps = {
   showThumbs: false,
   autoPlay: true,
   interval: 5000,
-  axis: 'horizontal',
+  axis: "horizontal",
   centerMode: false,
   centerSlidePercentage: 100,
   labels: {
-    leftArrow: 'Previous slide',
-    rightArrow: 'Next slide',
-    item: 'slide item'
+    leftArrow: "Previous slide",
+    rightArrow: "Next slide",
+    item: "slide item",
   },
-  onClickItem: () => { },
-  onClickThumb: () => { },
-  onChange: () => { },
-  onSwipeStart: () => { },
-  onSwipeEnd: (event) => {
-    return true; // Return a boolean value
-  },
-  onSwipeMove: (event) => {
-    return true; // Return a boolean value
-  },
-}
+  onClickItem: () => {},
+  onClickThumb: () => {},
+  onChange: () => {},
+  onSwipeStart: () => {},
+  onSwipeEnd: () => true,
+  onSwipeMove: () => true,
+};
 
 const Infrastructure: React.FC = () => {
   return (
@@ -48,8 +44,14 @@ const Infrastructure: React.FC = () => {
         <SectionHeading>Our Infrastructure</SectionHeading>
 
         <div className="max-w-4xl mx-auto">
-          <Carousel {...carouselProps}>
-            {['Library', 'Computer Lab', 'Classroom', 'Auditorium', 'Sports Complex'].map((facility, index) => (
+          <Carousel {...(carouselProps as CarouselProps)}>
+            {[
+              "Library",
+              "Computer Lab",
+              "Classroom",
+              "Auditorium",
+              "Sports Complex",
+            ].map((facility, index) => (
               <div key={facility}>
                 <img
                   src={`/gallery/jpg${index + 1}.jpeg`}
@@ -70,7 +72,7 @@ const Infrastructure: React.FC = () => {
         </Link>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Infrastructure
+export default Infrastructure;

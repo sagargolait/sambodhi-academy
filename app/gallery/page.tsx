@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+const Gallery = () => {
+  return <div>Gallery</div>;
+};
 
-const Gallery = (props: Props) => {
-  return (
-    <div>Gallery</div>
-  )
-}
-
-export default Gallery
+export default Gallery;

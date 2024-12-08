@@ -1,39 +1,36 @@
-import React from 'react'
-import { RadioGroup as RadixRadioGroup, RadioGroupItem as RadixRadioGroupItem } from '@radix-ui/react-radio-group'
-import { cva, VariantProps } from 'class-variance-authority'
+import React from "react";
+import {
+  RadioGroup as RadixRadioGroup,
+  RadioGroupItem as RadixRadioGroupItem,
+} from "@radix-ui/react-radio-group";
+import { cva } from "class-variance-authority";
 
-const radioGroupStyles = cva(
-  'space-y-2',
-  {
-    variants: {
-      orientation: {
-        horizontal: 'flex space-x-4',
-        vertical: 'space-y-2',
-      },
+const radioGroupStyles = cva("space-y-2", {
+  variants: {
+    orientation: {
+      horizontal: "flex space-x-4",
+      vertical: "space-y-2",
     },
-    defaultVariants: {
-      orientation: 'vertical',
-    },
-  }
-)
+  },
+  defaultVariants: {
+    orientation: "vertical",
+  },
+});
 
-const radioGroupItemStyles = cva(
-  'relative flex items-center',
-  {
-    variants: {
-      size: {
-        default: 'h-4 w-4 border border-gray-300 bg-white',
-        sm: 'h-3 w-3 border border-gray-300 bg-white',
-      },
+const radioGroupItemStyles = cva("relative flex items-center", {
+  variants: {
+    size: {
+      default: "h-4 w-4 border border-gray-300 bg-white",
+      sm: "h-3 w-3 border border-gray-300 bg-white",
     },
-    defaultVariants: {
-      size: 'default',
-    },
-  }
-)
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
 
 interface RadioGroupProps extends React.ComponentProps<typeof RadixRadioGroup> {
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: "horizontal" | "vertical";
 }
 
 const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
@@ -44,13 +41,14 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-RadioGroup.displayName = 'RadioGroup'
+);
+RadioGroup.displayName = "RadioGroup";
 
-interface RadioGroupItemProps extends React.ComponentProps<typeof RadixRadioGroupItem> {
-  size?: 'default' | 'sm'
+interface RadioGroupItemProps
+  extends React.ComponentProps<typeof RadixRadioGroupItem> {
+  size?: "default" | "sm";
 }
 
 const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
@@ -61,9 +59,9 @@ const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-RadioGroupItem.displayName = 'RadioGroupItem'
+);
+RadioGroupItem.displayName = "RadioGroupItem";
 
-export { RadioGroup, RadioGroupItem }
+export { RadioGroup, RadioGroupItem };

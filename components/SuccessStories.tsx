@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import type { CarouselProps } from 'react-responsive-carousel'
+import React from "react";
+import dynamic from "next/dynamic";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import type { CarouselProps } from "react-responsive-carousel";
 
 const Carousel = dynamic(
-  () => import('react-responsive-carousel').then((mod) => mod.Carousel),
+  () => import("react-responsive-carousel").then((mod) => mod.Carousel),
   { ssr: false }
-)
+);
 
-const carouselProps: CarouselProps = {
+const carouselProps: Partial<CarouselProps> = {
   showArrows: true,
   showStatus: false,
   showIndicators: true,
@@ -18,21 +18,21 @@ const carouselProps: CarouselProps = {
   showThumbs: false,
   autoPlay: true,
   interval: 5000,
-  axis: 'horizontal',
+  axis: "horizontal",
   centerMode: false,
   centerSlidePercentage: 100,
   labels: {
-    leftArrow: 'Previous slide',
-    rightArrow: 'Next slide',
-    item: 'slide item'
+    leftArrow: "Previous slide",
+    rightArrow: "Next slide",
+    item: "slide item",
   },
   onClickItem: () => {},
   onClickThumb: () => {},
   onChange: () => {},
   onSwipeStart: () => {},
-  onSwipeEnd: () => {},
-  onSwipeMove: () => {},
-}
+  onSwipeEnd: () => true,
+  onSwipeMove: () => true,
+};
 
 const SuccessStories: React.FC = () => {
   return (
@@ -42,9 +42,12 @@ const SuccessStories: React.FC = () => {
           Our Successful Students
         </h2>
         <div className="max-w-4xl mx-auto">
-          <Carousel {...carouselProps}>
+          <Carousel {...(carouselProps as CarouselProps)}>
             {[1, 2, 3, 4, 5].map((student, index) => (
-              <div key={student} className="bg-white p-6 h-[200px] rounded-lg shadow-md">
+              <div
+                key={student}
+                className="bg-white p-6 h-[200px] rounded-lg shadow-md"
+              >
                 <img
                   src={`/gallery/jpg${index + 1}.jpeg`}
                   alt={`Student ${student}`}
@@ -53,14 +56,16 @@ const SuccessStories: React.FC = () => {
                 <h3 className="text-xl font-semibold mb-2 text-[#10375C]">
                   Student Name {student}
                 </h3>
-                <p className="text-[#EB8317]">Cleared Exam XYZ with 95% marks</p>
+                <p className="text-[#EB8317]">
+                  Cleared Exam XYZ with 95% marks
+                </p>
               </div>
             ))}
           </Carousel>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SuccessStories
+export default SuccessStories;
