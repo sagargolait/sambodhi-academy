@@ -1,50 +1,34 @@
-'use client'
+// layout.tsx
+import ClientLayout from '@/components/ClientLayout'
+import { Metadata } from 'next'
 
-import { Footer } from '@/components'
-import Navbar from '@/components/NavBar'
-import '@/styles/globals.css'
-import { MessageCircle, Send } from 'lucide-react'
-import { useState, useRef } from 'react'
-
+export const metadata: Metadata = {
+  title: 'Sambodhi Academy',
+  description: 'Your site description goes here',
+  keywords: ['Sambodhi Academy'],
+  openGraph: {
+    title: 'Sambodhi Academy',
+    description: 'Your site description goes here',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://sambodhiacademy.com/',
+    siteName: 'Sambodhi Academy'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sambodhi Academy',
+    description: 'Your site description goes here',
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [showFloatingFooter, setShowFloatingFooter] = useState(true)
-  
-  return (
-    <html lang="en">
-      <body>
-        <main>
-          <Navbar />
-          {children}
-          <Footer setShowFloatingFooter={setShowFloatingFooter} />
-          {showFloatingFooter && <a
-            href="https://wa.me/911234567890"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fixed bottom-20 right-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300"
-            aria-label="Chat with us on WhatsApp"
-          >
-            <MessageCircle className="h-6 w-6" />
-          </a>}
-          {showFloatingFooter && (
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#10375C] p-4 z-40">
-              <a
-                href="https://t.me/sambodhimpsc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full bg-[#F3C623] text-[#10375C] py-2 px-4 rounded-md text-center font-semibold hover:bg-[#EB8317] transition-colors duration-300"
-              >
-                <Send className="inline-block mr-2 h-5 w-5" />
-                Join our Telegram
-              </a>
-            </div>
-          )}
-        </main>
-      </body>
-    </html>
-  )
+  return <ClientLayout>{children}</ClientLayout>
 }

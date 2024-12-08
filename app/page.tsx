@@ -2,7 +2,7 @@
 
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { Hero, OurStory } from '@/components'
+import { Hero, OurStory, SuccessStories } from '@/components'
 
 // Dynamic imports for other components
 const CountDown = dynamic(() => import('@/components/CountDown'))
@@ -14,7 +14,6 @@ const NotificationsAndArticles = dynamic(() => import('@/components/Notification
 const FAQs = dynamic(() => import('@/components/FAQs'))
 const RequestCounseling = dynamic(() => import('@/components/RequestCounseling'))
 const Associates = dynamic(() => import('@/components/Associates'))
-const MobileMenu = dynamic(() => import('@/components/MobileMenu'))
 
 export default function Home() {
 
