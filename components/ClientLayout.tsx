@@ -14,9 +14,9 @@ export default function ClientLayout({
   const [showFloatingFooter, setShowFloatingFooter] = useState(true);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      {children}
+      <main className="flex-grow">{children}</main>
       <Footer setShowFloatingFooter={setShowFloatingFooter} />
       {showFloatingFooter && (
         <a
@@ -42,6 +42,6 @@ export default function ClientLayout({
           </a>
         </div>
       )}
-    </>
+    </div>
   );
 }
