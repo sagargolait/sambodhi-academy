@@ -20,6 +20,11 @@ export default function NavBar() {
     },
     { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
     {
+      name: "Careers",
+      href: "/careers",
+      icon: <Info className="h-6 w-6" />,
+    },
+    {
       name: "Exams",
       href: "/exams",
       icon: <GraduationCap className="h-6 w-6" />,
@@ -62,7 +67,7 @@ export default function NavBar() {
                   Sambodhi <br /> Academy
                 </span>
               </Link>
-              <nav className="hidden md:flex space-x-4">
+              <nav className="hidden md:flex space-x-8">
                 {menuItems.map((item) => (
                   <Link
                     key={item.name}

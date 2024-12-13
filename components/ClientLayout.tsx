@@ -5,6 +5,7 @@ import Navbar from "@/components/NavBar";
 import "@/styles/globals.css";
 import { MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
+import { NotificationModal } from "./notificationModal";
 
 export default function ClientLayout({
   children,
@@ -42,6 +43,7 @@ export default function ClientLayout({
           </a>
         </div>
       )}
+      <NotificationModal />
     </div>
   );
 }

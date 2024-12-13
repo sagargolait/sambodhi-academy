@@ -1,5 +1,6 @@
 // layout.tsx
 import ClientLayout from "@/components/ClientLayout";
+import { NotificationProvider } from "@/context/notificationContext";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <NotificationProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </NotificationProvider>
       </body>
     </html>
   );

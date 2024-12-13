@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
-import Link from 'next/link'
-import Image from 'next/image';
+import React, { useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 // Define the props type
 interface FooterProps {
@@ -9,22 +9,26 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
   const centers = [
-    { city: "Aurangabad", address: "3rd Floor, ‘C’ Building, Nirman Bharti City Centre, Opp. Government Library, Nirala Bajar, Aurangabad – 431001." },
+    {
+      city: "Aurangabad",
+      address:
+        "3rd Floor, ‘C’ Building, Nirman Bharti City Centre, Opp. Government Library, Nirala Bajar, Aurangabad – 431001.",
+    },
     { city: "Pune", address: "456 Learning Lane, Mumbai, 400001" },
-    { city: "Parbhani", address: "789 Knowledge Park, Bangalore, 560001" }
-  ]
-  const footerRef = useRef<HTMLDivElement>(null)
+    { city: "Parbhani", address: "789 Knowledge Park, Bangalore, 560001" },
+  ];
+  const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (footerRef.current) {
-        const footerRect = footerRef.current.getBoundingClientRect()
-        setShowFloatingFooter(footerRect.top > window.innerHeight)
+        const footerRect = footerRef.current.getBoundingClientRect();
+        setShowFloatingFooter(footerRect.top > window.innerHeight);
       }
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <footer ref={footerRef} className="bg-[#10375C] text-[#F4F6FF] py-8">
       <div className="container mx-auto px-4">
@@ -32,10 +36,31 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/courses" className="hover:text-[#F3C623]">Courses</Link></li>
-              <li><Link href="/exams" className="hover:text-[#F3C623]">Exams</Link></li>
-              <li><Link href="/about" className="hover:text-[#F3C623]">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-[#F3C623]">Contact</Link></li>
+              <li>
+                <Link href="/courses" className="hover:text-[#F3C623]">
+                  Courses
+                </Link>
+              </li>
+              <li>
+                <Link href="/exams" className="hover:text-[#F3C623]">
+                  Exams
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#F3C623]">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-[#F3C623]">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#F3C623]">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -51,10 +76,24 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/Sambodhi-Academy-Maharashtra-605121983233081" className="hover:text-[#F3C623]">Facebook</a>
-              <a href="#" className="hover:text-[#F3C623]">Twitter</a>
-              <a href="#" className="hover:text-[#F3C623]">Instagram</a>
-              <a href="https://www.youtube.com/channel/UCOUbtszMJ-3A6TK3fl0ksUQ" className="hover:text-[#F3C623]">Youtube</a>
+              <a
+                href="https://www.facebook.com/Sambodhi-Academy-Maharashtra-605121983233081"
+                className="hover:text-[#F3C623]"
+              >
+                Facebook
+              </a>
+              <a href="#" className="hover:text-[#F3C623]">
+                Twitter
+              </a>
+              <a href="#" className="hover:text-[#F3C623]">
+                Instagram
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCOUbtszMJ-3A6TK3fl0ksUQ"
+                className="hover:text-[#F3C623]"
+              >
+                Youtube
+              </a>
             </div>
           </div>
           <div>
@@ -84,16 +123,27 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
           </div>
         </div>
         <div>
-          <Link target='_blank' href="https://play.google.com/store/apps/details?id=co.white.tqqcq" rel="noopener noreferrer">
-            <Image src={'/google-play-logo.svg'} width={120} height={50} alt='google-play-btn' />
+          <Link
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=co.white.tqqcq"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={"/google-play-logo.svg"}
+              width={120}
+              height={50}
+              alt="google-play-btn"
+            />
           </Link>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2024 Sambodhi Academy. All rights reserved. Powered By ITyans</p>
+          <p>
+            &copy; 2024 Sambodhi Academy. All rights reserved. Powered By ITyans
+          </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
