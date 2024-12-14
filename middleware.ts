@@ -4,28 +4,33 @@ import { routing } from "./i18n/routing";
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const defaultLocale = "en"; // Set your default locale here
-  const supportedLocales = ["hi", "en", "mr"]; // List your supported locales
+  const defaultLocale = routing.defaultLocale;
+  const locales = routing.locales;
 
-  // Check if the pathname starts with a supported locale
-  const pathnameHasLocale = supportedLocales.some(
+  // Check if pathname already starts with a locale
+  const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // If no locale is present, redirect to the default locale
+  // If no locale is present, redirect to default locale
   if (!pathnameHasLocale) {
-    const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url);
+    const newUrl = new URL(
+      `/${defaultLocale}${pathname === "/" ? "" : pathname}`,
+      request.url
+    );
     return Response.redirect(newUrl);
   }
 
   // Use next-intl middleware for internationalization
   return createMiddleware({
-    locales: supportedLocales,
+    locales,
     defaultLocale,
   })(request);
 }
 
 export const config = {
-  // Match all routes except those with file extensions and API routes
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    // Include all routes except these
+    "/((?!_next/static|_next/image|favicon.ico|api).*)",
+  ],
 };
