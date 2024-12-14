@@ -15,9 +15,9 @@ const NotificationsAndArticles = dynamic(
     () => import("@/components/NotificationsAndArticles")
 );
 const FAQs = dynamic(() => import("@/components/FAQs"));
-const RequestCounseling = dynamic(
-    () => import("@/components/RequestCounseling")
-);
+// const RequestCounseling = dynamic(
+//     () => import("@/components/RequestCounseling")
+// );
 const Associates = dynamic(() => import("@/components/Associates"));
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
             {/* <VideoLectures /> */}
             <Testimonials />
             <FAQs />
-            <RequestCounseling />
+            {/* <RequestCounseling /> */}
         </div>
     );
 }
