@@ -13,6 +13,14 @@ const Associates = () => {
       name: "Mahatma Jyoti Phule Research and Training Institute (Mahajyoti) ",
       image: "/mahajyoti.png",
     },
+    {
+      name: "Tribal Research & Training Institute (TRTI)",
+      image: "/logo-trti.png",
+    },
+    {
+      name: "Chhatrapati Shahu Maharaj Research, Training and Human Development Institute (SARTHI)",
+      image: "/sarthi_logo.png",
+    },
   ];
   return (
     <section className="py-20 ">
@@ -20,7 +28,7 @@ const Associates = () => {
         <SectionHeading>
           Our Associates and Facilitators from The Government
         </SectionHeading>
-        <div className="flex justify-center gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {associates.map((associate, index) => (
             <Card key={index} className="text-center">
               <CardContent className="pt-6">

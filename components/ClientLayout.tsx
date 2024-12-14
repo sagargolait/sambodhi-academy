@@ -5,7 +5,8 @@ import Navbar from "@/components/NavBar";
 import "@/styles/globals.css";
 import { MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
-import { NotificationModal } from "./notificationModal";
+// import { NotificationModal } from "./notificationModal";
+
 
 export default function ClientLayout({
   children,
@@ -13,6 +14,7 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [showFloatingFooter, setShowFloatingFooter] = useState(true);
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -43,7 +45,7 @@ export default function ClientLayout({
           </a>
         </div>
       )}
-      <NotificationModal />
+      {/* <NotificationModal /> */}
     </div>
   );
 }

@@ -1,14 +1,32 @@
 "use client";
 
-import { Phone, GraduationCap, Info, BookOpen, Home, Bell } from "lucide-react";
+import {
+  Phone,
+  GraduationCap,
+  Info,
+  BookOpen,
+  Home,
+  Bell,
+  Globe,
+} from "lucide-react";
 import Link from "next/link";
 import TopBar from "./TopBar";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
+
+
 
 export default function NavBar() {
+  const t = useTranslations('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const menuItems = [
@@ -29,12 +47,13 @@ export default function NavBar() {
       href: "/exams",
       icon: <GraduationCap className="h-6 w-6" />,
     },
-    {
-      name: "Social Development",
-      href: "/development",
-      icon: <GraduationCap className="h-6 w-6" />,
-    },
     { name: "Contact", href: "/contact", icon: <Phone className="h-6 w-6" /> },
+  ];
+
+  const languages = [
+    { code: "en", name: "English" },
+    { code: "hi", name: "हिंदी" },
+    { code: "mr", name: "मराठी" },
   ];
 
   useEffect(() => {
@@ -74,7 +93,7 @@ export default function NavBar() {
                     href={item.href}
                     className="text-[#FFF] hover:text-[#F3C623]"
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Link>
                 ))}
               </nav>
@@ -111,12 +130,35 @@ export default function NavBar() {
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {item.icon}
-                        <span className="ml-2">{item.name}</span>
+                        <span className="ml-2">{t(item.name)}</span>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-white hover:text-[#F3C623]"
+                  >
+                    <Globe className="h-4 w-4 mr-2" />
+                    <span className="hidden sm:inline">language</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {languages.map((lang) => (
+                    <DropdownMenuItem
+                      key={lang.code}
+                    >
+                      <Link href={`/${lang.code}`}>
+                        {lang.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </nav>
           </div>
         </header>

@@ -2,21 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 
   .custom-carousel .carousel .control-dots {
@@ -24,7 +10,6 @@ body {
     bottom: 0;
     margin-top: 20px;
   }
-  
 }
 
 .custom-carousel .carousel .control-dots {
@@ -33,7 +18,7 @@ body {
   margin-top: 20px;
 }
 .custom-carousel .carousel .control-dots .dot {
-  background: #10375C;
+  background: #10375c;
   box-shadow: none;
   width: 12px;
   height: 12px;
@@ -41,7 +26,7 @@ body {
   opacity: 0.5;
 }
 .custom-carousel .carousel .control-dots .dot.selected {
-  background: #F3C623;
+  background: #f3c623;
   opacity: 1;
 }
 .custom-carousel .carousel .control-arrow {
@@ -65,5 +50,11 @@ body {
 @media (max-width: 768px) {
   main {
     padding-bottom: 70px;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }

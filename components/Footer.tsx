@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { LucideFacebook, LucideInstagram, LucideTwitter, LucideYoutube } from "lucide-react";
 
 // Define the props type
 interface FooterProps {
@@ -32,7 +34,30 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
   return (
     <footer ref={footerRef} className="bg-[#10375C] text-[#F4F6FF] py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-[#10375C] text-4xl flex items-center gap-4">
+                  <Image
+                    src={"/sambodhi-logo.png"}
+                    width={25}
+                    height={25}
+                    alt="logo"
+                    className="aspect-w-4 aspect-h-3"
+                  />
+                  Sambodhi Academy
+                </CardTitle>
+                <CardContent className="mt-2">
+                  Founded in 2005, Sambodhi Academy began with a vision to empower
+                  India&apos;s youth with the knowledge and skills needed to excel
+                  in government service examinations. Our journey started with a
+                  small batch of 50 students and has now grown to become one of the
+                  leading institutes in the country.
+                </CardContent>
+              </CardHeader>
+            </Card>
+          </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
@@ -64,6 +89,36 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
             </ul>
           </div>
           <div>
+            <h3 className="text-lg font-semibold mb-4">Products</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="hover:text-[#F3C623]">
+                  Mock Tests
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="hover:text-[#F3C623]">
+                  Live Classes
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="hover:text-[#F3C623]">
+                  Video Courses
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="hover:text-[#F3C623]">
+                  Ebooks
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#F3C623]">
+                  Books
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <p>Head Office:</p>
             <p>3rd Floor, ‘C’ Building,</p>
@@ -78,21 +133,22 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
             <div className="flex space-x-4">
               <a
                 href="https://www.facebook.com/Sambodhi-Academy-Maharashtra-605121983233081"
-                className="hover:text-[#F3C623]"
+                className="hover:text-[#F3C623] flex"
               >
-                Facebook
+                <LucideFacebook size={25} />
+
               </a>
               <a href="#" className="hover:text-[#F3C623]">
-                Twitter
+                <LucideTwitter size={25} />
               </a>
               <a href="#" className="hover:text-[#F3C623]">
-                Instagram
+                <LucideInstagram size={25} />
               </a>
               <a
                 href="https://www.youtube.com/channel/UCOUbtszMJ-3A6TK3fl0ksUQ"
                 className="hover:text-[#F3C623]"
               >
-                Youtube
+                <LucideYoutube size={25} />
               </a>
             </div>
           </div>
@@ -110,6 +166,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
               ></iframe>
             </div>
           </div>
+
         </div>
         <div className="mt-8">
           <h3 className="text-lg font-semibold mb-4">Our Centers</h3>
