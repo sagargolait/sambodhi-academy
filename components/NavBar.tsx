@@ -104,7 +104,7 @@ export default function NavBar() {
                     3
                   </span>
                 </div>
-                <Link href="/login">
+                <Link href="/admin">
                   <Button
                     variant="outline"
                     className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"

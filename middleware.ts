@@ -4,6 +4,16 @@ import { routing } from "./i18n/routing";
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for admin routes
+  if (
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/my-route") ||
+    pathname.startsWith("/api")
+  ) {
+    return;
+  }
+
   const defaultLocale = routing.defaultLocale;
   const locales = routing.locales;
 
@@ -30,7 +40,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Include all routes except these
-    "/((?!_next/static|_next/image|favicon.ico|api).*)",
+    // Skip admin routes and other static assets
+    "/((?!admin|_next/static|_next/image|favicon.ico|api).*)",
   ],
 };

@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
+
 
 const examCategories = [
   {
@@ -104,17 +105,31 @@ const examCards = [
   },
 ];
 
+type Exam = {
+  title: string;
+  // Add other exam properties as needed
+}
+
 export default function ExamExplorer() {
   const [searchQuery, setSearchQuery] = useState("");
-  // const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
-  // const toggleCategory = (category: string) => {
-  //   setExpandedCategories((prev) =>
-  //     prev.includes(category)
-  //       ? prev.filter((c) => c !== category)
-  //       : [...prev, category]
-  //   );
-  // };
+  useEffect(() => {
+    const fetchExams = async () => {
+      try {
+        const response = await fetch(`/api/exams`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch exams');
+        }
+        const results = await response.json();
+        const exams = results.docs.map((item: Exam) => item.title);
+        console.log(exams)
+      } catch (err) {
+        console.error('Error fetching exams:', err);
+      }
+    };
+
+    fetchExams();
+  }, []);
 
   const filteredExams = examCards.filter((exam) =>
     exam.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -195,7 +210,7 @@ export default function ExamExplorer() {
 
         {/* Main Content */}
         <div className="lg:w-3/4">
-          <div className="mb-6 flex hidden flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="relative w-full sm:w-auto ml-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
