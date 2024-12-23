@@ -21,6 +21,7 @@ import { News } from "./collections/News";
 import { Articles } from "./collections/Articles";
 import { Notifications } from "./collections/Notifications";
 import { ImageGallery } from "./collections/ImageGallery";
+import { Addresses } from "./collections/Address";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -46,6 +47,7 @@ export default buildConfig({
     Articles,
     Notifications,
     ImageGallery,
+    Addresses,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

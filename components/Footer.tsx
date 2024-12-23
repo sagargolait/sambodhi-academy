@@ -4,23 +4,18 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { LucideFacebook, LucideInstagram, LucideTwitter, LucideYoutube } from "lucide-react";
+import { LucideFacebook, LucideInstagram, LucideTwitter, LucideYoutube, Phone } from "lucide-react";
+import { CollectionSlug, DataFromCollectionSlug } from "payload";
+import { objectToArray } from "@/lib/utils";
 
 // Define the props type
 interface FooterProps {
   setShowFloatingFooter: (show: boolean) => void;
+  addresses: DataFromCollectionSlug<CollectionSlug>[] | undefined;
 }
 
-const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
-  const centers = [
-    {
-      city: "Aurangabad",
-      address:
-        "3rd Floor, ‘C’ Building, Nirman Bharti City Centre, Opp. Government Library, Nirala Bajar, Aurangabad – 431001.",
-    },
-    { city: "Pune", address: "456 Learning Lane, Mumbai, 400001" },
-    { city: "Parbhani", address: "789 Knowledge Park, Bangalore, 560001" },
-  ];
+const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => {
+  const centers = addresses ? objectToArray(addresses) : []
   const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -154,7 +149,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
               </a>
             </div>
           </div>
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Our Location</h3>
             <div className="w-full h-48 md:h-full rounded-lg overflow-hidden">
               <iframe
@@ -167,16 +162,32 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter }) => {
                 title="Sambodhi Academy Location"
               ></iframe>
             </div>
-          </div>
+          </div> */}
 
         </div>
         <div className="mt-8">
           <h3 className="text-lg font-semibold mb-4">Our Centers</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {centers.map((center, index) => (
-              <div key={index} className="mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+            {centers.map((center) => (
+              <div key={center.id} className="mb-4">
                 <h4 className="font-semibold text-[#F3C623]">{center.city}</h4>
-                <p className="text-sm">{center.address}</p>
+                <p className="text-sm">{`${center.street}, ${center.state}, ${center.postalCode}`}</p>
+                <a href={`tel:${center.phoneNumber}`} className="flex items-center mt-2 text-sm font-bold">
+                  <Phone className="w-3 h-3 mr-1 " />
+                  {center.phoneNumber}
+                </a>
+                <div className="md:h-full overflow-hidden">
+                  <iframe
+                    className="mt-4"
+                    src={center.googleMapsUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    title="Sambodhi Academy Location"
+                  ></iframe>
+                </div>
               </div>
             ))}
           </div>

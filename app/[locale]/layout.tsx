@@ -5,6 +5,8 @@ import { routing } from '@/i18n/routing';
 import { NotificationProvider } from '@/context/notificationContext';
 import ClientLayout from '@/components/ClientLayout';
 import { unstable_setRequestLocale } from 'next-intl/server';
+import { CollectionSlug, getPayload } from 'payload'
+import config from '@payload-config'
 
 type Locale = typeof routing.locales[number];
 
@@ -24,18 +26,23 @@ export default async function LocaleLayout({
     if (!routing.locales.includes(locale as Locale)) {
         notFound();
     }
-
+    const payload = await getPayload({ config })
     const messages = await getMessages();
+    const addresses = await payload.find({
+        collection: 'addresses' as CollectionSlug,
+        depth: 2
+    })
+
 
     return (
         <html lang={locale}>
             <body>
                 <NextIntlClientProvider messages={messages}>
                     <NotificationProvider>
-                        <ClientLayout>{children}</ClientLayout>
+                        <ClientLayout data={{ ...addresses.docs }}>{children}</ClientLayout>
                     </NotificationProvider>
                 </NextIntlClientProvider>
             </body>
-        </html>
+        </html >
     );
 }

@@ -4,14 +4,17 @@ import { Footer } from "@/components";
 import Navbar from "@/components/NavBar";
 import "@/styles/globals.css";
 import { MessageCircle, Send } from "lucide-react";
+import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { useState } from "react";
 // import { NotificationModal } from "./notificationModal";
 
 
 export default function ClientLayout({
   children,
+  data
 }: {
   children: React.ReactNode;
+  data: DataFromCollectionSlug<CollectionSlug>[] | undefined;
 }) {
   const [showFloatingFooter, setShowFloatingFooter] = useState(true);
 
@@ -20,7 +23,7 @@ export default function ClientLayout({
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">{children}</main>
-      <Footer setShowFloatingFooter={setShowFloatingFooter} />
+      <Footer addresses={data} setShowFloatingFooter={setShowFloatingFooter} />
       {showFloatingFooter && (
         <a
           href="https://wa.me/911234567890"
