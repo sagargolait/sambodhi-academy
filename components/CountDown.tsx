@@ -1,3 +1,5 @@
+'use client';
+
 import { BookOpenCheck, Building, GraduationCap } from "lucide-react";
 import { Users } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";

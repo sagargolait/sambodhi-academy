@@ -14,6 +14,13 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { SubExams } from "./collections/SubExams";
 import { Courses } from "./collections/Courses";
 import Page from "./collections/Page";
+import { Associates } from "./collections/Associates";
+import { Testimonials } from "./collections/Testimonials";
+import { Faqs } from "./collections/Faqs";
+import { News } from "./collections/News";
+import { Articles } from "./collections/Articles";
+import { Notifications } from "./collections/Notifications";
+import { ImageGallery } from "./collections/ImageGallery";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -25,7 +32,21 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Exams, SubExams, Courses, Page],
+  collections: [
+    Users,
+    Media,
+    Exams,
+    SubExams,
+    Courses,
+    Page,
+    Associates,
+    Testimonials,
+    Faqs,
+    News,
+    Articles,
+    Notifications,
+    ImageGallery,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

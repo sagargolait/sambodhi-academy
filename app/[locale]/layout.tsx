@@ -4,23 +4,27 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { NotificationProvider } from '@/context/notificationContext';
 import ClientLayout from '@/components/ClientLayout';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 type Locale = typeof routing.locales[number];
 
+interface LayoutProps {
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
+}
+
 export default async function LocaleLayout({
     children,
-    params: { locale }
-}: {
-    children: React.ReactNode;
-    params: { locale: string };
-}) {
-    // Ensure that the incoming `locale` is valid
+    params,
+}: LayoutProps) {
+    const { locale } = await params;
+
+    unstable_setRequestLocale(locale);
+
     if (!routing.locales.includes(locale as Locale)) {
         notFound();
     }
 
-    // Providing all messages to the client
-    // side is the easiest way to get started
     const messages = await getMessages();
 
     return (

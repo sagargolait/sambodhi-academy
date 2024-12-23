@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
+import { CollectionSlug, DataFromCollectionSlug } from "payload";
 
 
 const examCategories = [
@@ -105,31 +106,9 @@ const examCards = [
   },
 ];
 
-type Exam = {
-  title: string;
-  // Add other exam properties as needed
-}
 
-export default function ExamExplorer() {
+export default function ExamExplorer(_: DataFromCollectionSlug<CollectionSlug>[]) {
   const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    const fetchExams = async () => {
-      try {
-        const response = await fetch(`/api/exams`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch exams');
-        }
-        const results = await response.json();
-        const exams = results.docs.map((item: Exam) => item.title);
-        console.log(exams)
-      } catch (err) {
-        console.error('Error fetching exams:', err);
-      }
-    };
-
-    fetchExams();
-  }, []);
 
   const filteredExams = examCards.filter((exam) =>
     exam.title.toLowerCase().includes(searchQuery.toLowerCase())

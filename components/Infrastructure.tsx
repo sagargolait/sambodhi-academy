@@ -7,6 +7,9 @@ import type { CarouselProps } from "react-responsive-carousel";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import SectionHeading from "./SectionHeading";
+import { CollectionSlug, DataFromCollectionSlug } from "payload";
+import { objectToArray } from "@/lib/utils";
+import Image from "next/image";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
@@ -29,39 +32,44 @@ const carouselProps: Partial<CarouselProps> = {
     rightArrow: "Next slide",
     item: "slide item",
   },
-  onClickItem: () => {},
-  onClickThumb: () => {},
-  onChange: () => {},
-  onSwipeStart: () => {},
+  onClickItem: () => { },
+  onClickThumb: () => { },
+  onChange: () => { },
+  onSwipeStart: () => { },
   onSwipeEnd: () => true,
   onSwipeMove: () => true,
 };
 
-const Infrastructure: React.FC = () => {
+
+const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[]) => {
+  const galleryImageByCategory = objectToArray(galleryImages);
+
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
-        <SectionHeading>Our Infrastructure</SectionHeading>
+        <SectionHeading>Gallery</SectionHeading>
 
         <div className="max-w-4xl mx-auto">
-          <Carousel {...(carouselProps as CarouselProps)}>
-            {[
-              "Library",
-              "Computer Lab",
-              "Classroom",
-              "Auditorium",
-              "Sports Complex",
-            ].map((facility, index) => (
-              <div key={facility}>
-                <img
-                  src={`/gallery/jpg${index + 1}.jpeg`}
-                  alt={facility}
-                  className="w-full h-[400px] object-cover"
-                />
-                <p className="legend bg-[#10375C] text-[#F4F6FF]">{facility}</p>
-              </div>
-            ))}
+
+          <Carousel  {...(carouselProps as CarouselProps)}>
+            {galleryImageByCategory.flatMap(category =>
+              category.images.map((image: any) => (
+                <div key={image.id}>
+                  <Image
+                    src={image.image.url}
+                    alt={image.image.alt}
+                    width={500}
+                    height={500}
+                    className="rounded-md object-fill mb-4"
+                  />
+                  <p className="legend bg-[#10375C] text-[#F4F6FF]">
+                    {category.category}
+                  </p>
+                </div>
+              ))
+            )}
           </Carousel>
+
         </div>
       </div>
       <div className="mt-8 text-center">
