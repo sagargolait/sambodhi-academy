@@ -1,26 +1,84 @@
-import type { CollectionConfig, CollectionSlug } from "payload";
+import type { CollectionConfig, Field } from 'payload';
 
+// Define the Exam document type
+interface ExamDocument {
+  id: string;
+  title: string;
+  slug: string;
+  logo?: {
+    id: string;
+    filename: string;
+    mimeType: string;
+    filesize: number;
+    width?: number;
+    height?: number;
+    url: string;
+  };
+}
+
+// Define hook types
+type BeforeValidateHook = (args: {
+  data?: Partial<ExamDocument>;
+  originalDoc?: ExamDocument;
+  req?: any;
+}) => string | Promise<string>;
+
+// Slugify utility function
+const slugify = (str: string): string => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+// Slug field configuration with TypeScript
+const slugField: Field = {
+  name: 'slug',
+  type: 'text',
+  required: true,
+  admin: {
+    position: 'sidebar',
+  },
+  hooks: {
+    beforeValidate: [
+      (({ data }) => {
+        if (!data?.slug && data?.title) {
+          return slugify(data.title);
+        }
+        return data?.slug || '';
+      }) as BeforeValidateHook,
+    ],
+  },
+  validate: (val: any) => {
+    if (typeof val !== 'string') {
+      return 'Slug must be a string';
+    }
+    if (!/^[a-zA-Z0-9-]+$/.test(val)) {
+      return 'Slug must contain only letters, numbers, and hyphens';
+    }
+    return true;
+  },
+};
+
+// Main collection configuration
 export const Exams: CollectionConfig = {
-  slug: "exams",
+  slug: 'exams',
   access: {
-    read: () => true,
+    read: (): boolean => true,
   },
   fields: [
     {
-      name: "categories",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
+    slugField,
     {
-      name: "logo",
-      type: "upload",
-      relationTo: "media",
-    },
-    {
-      name: "exam",
-      type: "join",
-      on: "exam",
-      collection: "subExams" as CollectionSlug,
+      name: 'logo',
+      type: 'upload',
+      relationTo: 'media',
     },
   ],
 };

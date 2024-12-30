@@ -46,9 +46,10 @@ export default async function Home() {
             depth: 2
         })
     ])
+
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
-            <Hero />
+            <Hero {...galleryImages.docs} />
 
             <Associates {...associates.docs} />
             {/* <OurStory /> */}

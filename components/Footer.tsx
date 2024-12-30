@@ -37,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
               <CardHeader>
                 <CardTitle className="text-[#10375C] text-4xl flex items-center gap-4">
                   <Image
-                    src={"/sambodhi-logo.png"}
+                    src={"/api/media/file/sambodhi-logo.png"}
                     width={25}
                     height={25}
                     alt="logo"

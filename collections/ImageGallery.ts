@@ -4,7 +4,7 @@ export const ImageGallery: CollectionConfig = {
   slug: "galleries",
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "category", "publishedAt"],
+    defaultColumns: ["title", "category", "location", "publishedAt"],
   },
   fields: [
     {
@@ -17,16 +17,35 @@ export const ImageGallery: CollectionConfig = {
       type: "textarea",
     },
     {
-      name: "category",
+      name: "location",
       type: "select",
       required: true,
+      options: [
+        { label: "Hingoli", value: "hingoli" },
+        { label: "Pune", value: "Pune" },
+        { label: "Parbhani", value: "parbhani" },
+        { label: "Chhatrapati Sambhaji Nagar", value: "aurangabad" },
+      ],
+    },
+    {
+      name: "category",
+      type: "select",
       options: [
         { label: "Classroom", value: "Classroom" },
         { label: "Lab", value: "Lab" },
         { label: "Events", value: "Events" },
         { label: "Campus", value: "Campus" },
         { label: "Faculty", value: "Faculty" },
+        { label: "Hero", value: "Hero" },
       ],
+    },
+    {
+      name: "customCategory",
+      type: "text",
+      label: "Custom Category",
+      admin: {
+        description: "Add a custom category if the predefined options do not fit.",
+      },
     },
     {
       name: "images",

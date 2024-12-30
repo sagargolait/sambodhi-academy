@@ -8,6 +8,7 @@ import {
   Home,
   Bell,
   Globe,
+  GalleryHorizontal,
 } from "lucide-react";
 import Link from "next/link";
 import TopBar from "./TopBar";
@@ -22,6 +23,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
+import { Calendar } from "./ui/calendar";
+import { EventCalendar } from "./EventsCalendar";
 
 
 
@@ -43,9 +46,14 @@ export default function NavBar() {
       icon: <Info className="h-6 w-6" />,
     },
     {
-      name: "Exams",
-      href: "/exams",
+      name: "Govt Schemes",
+      href: "/schemes",
       icon: <GraduationCap className="h-6 w-6" />,
+    },
+    {
+      name: "Gallery",
+      href: "/gallery",
+      icon: <GalleryHorizontal className="h-6 w-6" />,
     },
     { name: "Contact", href: "/contact", icon: <Phone className="h-6 w-6" /> },
   ];
@@ -55,6 +63,11 @@ export default function NavBar() {
     { code: "hi", name: "हिंदी" },
     { code: "mr", name: "मराठी" },
   ];
+
+  const login = [
+    { code: "admin", name: "Admin" },
+    { code: "user-login", name: "User Login" },
+  ]
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -76,7 +89,7 @@ export default function NavBar() {
                 className="flex items-center gap-4 text-xl font-bold"
               >
                 <Image
-                  src={"/sambodhi-logo.png"}
+                  src={"/api/media/file/sambodhi-logo.png"}
                   width={50}
                   height={25}
                   alt="logo"
@@ -104,14 +117,28 @@ export default function NavBar() {
                     3
                   </span>
                 </div>
-                <Link href="/admin">
-                  <Button
-                    variant="outline"
-                    className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"
+                    >
+                      Login
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="center">
+                    {login.map((lang) => (
+                      <DropdownMenuItem
+                        key={lang.code}
+                      >
+                        <Link href={`/${lang.code}`}>
+                          {lang.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
               </div>
               <div className="md:hidden relative" ref={mobileMenuRef}>
                 <Button
@@ -136,6 +163,7 @@ export default function NavBar() {
                   </div>
                 )}
               </div>
+              <EventCalendar />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button

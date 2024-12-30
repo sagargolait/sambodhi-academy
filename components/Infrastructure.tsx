@@ -54,13 +54,13 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
           <Carousel  {...(carouselProps as CarouselProps)}>
             {galleryImageByCategory.flatMap(category =>
               category.images.map((image: any) => (
-                <div key={image.id}>
+                <div key={image.id} className="relative h-[400px]">
                   <Image
                     src={image.image.url}
                     alt={image.image.alt}
-                    width={500}
-                    height={500}
-                    className="rounded-md object-fill mb-4"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-md object-fit mb-4"
                   />
                   <p className="legend bg-[#10375C] text-[#F4F6FF]">
                     {category.category}

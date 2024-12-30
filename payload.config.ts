@@ -11,7 +11,6 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Exams } from "./collections/Exams";
 import { s3Storage } from "@payloadcms/storage-s3";
-import { SubExams } from "./collections/SubExams";
 import { Courses } from "./collections/Courses";
 import Page from "./collections/Page";
 import { Associates } from "./collections/Associates";
@@ -22,6 +21,13 @@ import { Articles } from "./collections/Articles";
 import { Notifications } from "./collections/Notifications";
 import { ImageGallery } from "./collections/ImageGallery";
 import { Addresses } from "./collections/Address";
+import { ExamPages } from "./collections/ExamsPage";
+import { GovernmentSchemes } from "./collections/GovtSchemes";
+import { Events } from "./collections/Events";
+import StudentInquiries from "./collections/StudentInquiries";
+import CareerOpenings from "./collections/CareerOpenings";
+import JobApplications from "./collections/JobApplications";
+
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -37,7 +43,6 @@ export default buildConfig({
     Users,
     Media,
     Exams,
-    SubExams,
     Courses,
     Page,
     Associates,
@@ -48,6 +53,12 @@ export default buildConfig({
     Notifications,
     ImageGallery,
     Addresses,
+    ExamPages,
+    GovernmentSchemes,
+    Events,
+    StudentInquiries,
+    CareerOpenings,
+    JobApplications
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

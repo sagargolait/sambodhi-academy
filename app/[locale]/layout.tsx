@@ -7,6 +7,7 @@ import ClientLayout from '@/components/ClientLayout';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
+import { Toaster } from "@/components/ui/sonner"
 
 type Locale = typeof routing.locales[number];
 
@@ -21,17 +22,15 @@ export default async function LocaleLayout({
 }: LayoutProps) {
     const { locale } = await params;
 
-    unstable_setRequestLocale(locale);
-
     if (!routing.locales.includes(locale as Locale)) {
         notFound();
     }
     const payload = await getPayload({ config })
     const messages = await getMessages();
-    const addresses = await payload.find({
+    const [addresses] = await Promise.all([payload.find({
         collection: 'addresses' as CollectionSlug,
-        depth: 2
-    })
+        depth: 2,
+    })])
 
 
     return (
@@ -39,6 +38,7 @@ export default async function LocaleLayout({
             <body>
                 <NextIntlClientProvider messages={messages}>
                     <NotificationProvider>
+                      <Toaster position='top-right'/>
                         <ClientLayout data={{ ...addresses.docs }}>{children}</ClientLayout>
                     </NotificationProvider>
                 </NextIntlClientProvider>

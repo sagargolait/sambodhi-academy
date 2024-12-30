@@ -2,7 +2,7 @@
   "Home": "मुख्यपृष्ठ",
   "Courses": "अभ्यासक्रम",
   "About": "आमच्याबद्दल",
-  "Exams": "परीक्षा",
+  "Govt Schemes": "सरकार कई योजनाएं",
   "Contact": "संपर्क",
   "Careers": "करिअर",
   "Social Development": "सामाजिक विकास",
@@ -14,5 +14,6 @@
   "marathi": "मराठी",
   "phoneNumber": "+91 123 456 7890",
   "email": "info@goveduinstitute.com",
-  "instituteName": "गवएडुइन्स्टिट्यूट"
+  "instituteName": "गवएडुइन्स्टिट्यूट",
+  "Gallery": "गॅलरी"
 }

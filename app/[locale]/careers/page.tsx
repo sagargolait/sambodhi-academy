@@ -47,6 +47,8 @@ export default function CareersPage() {
   const [resume, setResume] = useState<File | null>(null);
   const [coverLetter, setCoverLetter] = useState("");
 
+  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send this data to your backend

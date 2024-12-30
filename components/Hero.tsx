@@ -7,6 +7,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import type { CarouselProps } from "react-responsive-carousel";
 import Link from "next/link";
 import Image from "next/image";
+import { CollectionSlug, DataFromCollectionSlug } from "payload";
+import { objectToArray } from "@/lib/utils";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
@@ -37,24 +39,31 @@ const carouselProps: Partial<CarouselProps> = {
   onSwipeMove: () => false,
 };
 
-const Hero: React.FC = () => {
+const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
+  const Imgs = objectToArray(heroImages);
+  const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
+
   return (
     <section className="relative">
-      <div className="h-[500px]">
-        <Carousel {...(carouselProps as CarouselProps)}>
-          {[1, 2, 3].map((index) => (
-            <div key={index} className="h-[500px]">
-              <Image
-                src={`/banner${index}.jpg`}
-                priority
-                width={500}
-                height={500}
-                alt={`Hero background ${index}`}
-                className="object-cover w-full h-full"
-              />
+      <div className="h-[500px] w-full">
+        {heroCategoryData.map((item) => (
+          <div key={item.id} className="image-category w-full">
+            <div className="image-list w-full">
+              <Carousel {...(carouselProps as CarouselProps)}>
+                {item.images.map((imageItem: any) => (
+                  <div key={imageItem.id} className="h-[500px]">
+                    <Image
+                      src={imageItem.image.url}
+                      alt={imageItem.image.alt}
+                      layout="fill"
+                      objectFit="center"
+                    />
+                  </div>
+                ))}
+              </Carousel>
             </div>
-          ))}
-        </Carousel>
+          </div>
+        ))}
       </div>
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div className="text-center">

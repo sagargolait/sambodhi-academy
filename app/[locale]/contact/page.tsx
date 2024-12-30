@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,27 +14,78 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
+import { toast } from "sonner";
 
-const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-3xl font-bold text-center mb-12 text-[#10375C] relative pb-4">
-    {children}
-    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#F3C623]"></span>
-  </h2>
-);
+interface Address {
+  id: string;
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+  isPrimary: boolean;
+}
 
 export default function ContactPage() {
-  const [name, setName] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [studentName, setStudentName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send this data to your backend
-    console.log({ name, email, message });
-    // Reset form
-    setName("");
-    setEmail("");
-    setMessage("");
+  const [address, setAddress] = useState<Address[]>([])
+
+  const primaryAddress = address.filter((item: any) => item.isPrimary)[0]
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        const response = await fetch("/api/addresses", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setAddress(data.docs)
+      } catch (error) {
+        console.error("There was a problem fetching the addresses:", error);
+      }
+    };
+
+    fetchAddresses();
+  }, []);
+
+  const onSubmit = async (data: any) => {
+    const formData = { studentName: data.studentName, email: data.email, message: data.message, phone: data.phone };
+
+    try {
+      const response = await fetch("/api/student-inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      toast.success("Form submitted successfully!");
+
+      setStudentName("");
+      setEmail("");
+      setMessage("");
+      setPhone("");
+    } catch (error) {
+      toast.error(`There was a problem with the form submission. ${error}`);
+    }
   };
 
   return (
@@ -43,43 +95,74 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card>
             <CardHeader>
-              <CardTitle className="text-[#10375C]">
-                Send us a Message
-              </CardTitle>
+              <CardTitle className="text-[#10375C]">Send us a Message</CardTitle>
               <CardDescription>
                 We&apos;d love to hear from you. Fill out the form below and
                 we&apos;ll get back to you as soon as possible.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="studentName">Name</Label>
                   <Input
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
+                    id="studentName"
+                    {...register("studentName", { required: "Name is required" })}
                   />
+                  {errors.studentName && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.studentName.message?.toString()}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input
+                    id="phone"
+                    {...register("phone", {
+                      required: "Phone is required",
+                      pattern: {
+                        value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
+                        message: "Please enter a valid phone number",
+                      },
+                    })}
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.phone.message?.toString()}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
+                    {...register("message", { required: "Message is required" })}
                   />
+                  {errors.message && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message.message?.toString()}
+                    </p>
+                  )}
                 </div>
                 <Button
                   type="submit"
@@ -100,28 +183,28 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 mr-2 text-[#F3C623]" />
-                <span>+91 123 456 7890</span>
-              </div>
-              <div className="flex items-center">
-                <Mail className="h-5 w-5 mr-2 text-[#F3C623]" />
-                <span>info@goveduinstitute.com</span>
+              <div className="flex items-center space-x-4">
+                <a href={'tel:0240297990'} className="flex items-center text-sm font-bold">
+                  <Phone className="w-5 h-5 mr-1 " />
+                  (0240) 297 0990
+                </a>
+                <a href={'mailto:sambodhipbn@gmail.com'} className="flex items-center text-sm font-bold">
+                  <Mail className="w-5 h-5 mr-1" />
+                  sambodhiapbn@gmail.com
+                </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2 text-[#F3C623]" />
-                <span>123 Education Street, New Delhi, India 110001</span>
+                {primaryAddress && <span>{primaryAddress.street}, {primaryAddress.city}, {primaryAddress.state} , {primaryAddress.country}, {primaryAddress?.postalCode} </span>}
               </div>
               <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-2 text-[#10375C]">
                   Our Locations
                 </h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>New Delhi (Head Office)</li>
-                  <li>Mumbai</li>
-                  <li>Bangalore</li>
-                  <li>Chennai</li>
-                  <li>Kolkata</li>
+                <ul className="list-disc list-inside space-y-4">
+                  {address.map((item: any) => (
+                    <li key={item.id}>{item.city}</li>
+                  ))}
                 </ul>
               </div>
             </CardContent>
