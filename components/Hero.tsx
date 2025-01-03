@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
+import { WhatsNewSection } from "./whatsNewSection";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
@@ -44,19 +45,20 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
 
   return (
-    <section className="relative">
-      <div className="h-[500px] w-full">
+    <section className="flex flex-wrap justify-between gap-4 relative bg-[url('/api/media/file/blur-coffee-shop.jpg')]">
+      <div className="h-[550px] w-full lg:w-2/3">
         {heroCategoryData.map((item) => (
           <div key={item.id} className="image-category w-full">
-            <div className="image-list w-full">
+            <div className="image-list w-full p-4">
               <Carousel {...(carouselProps as CarouselProps)}>
                 {item.images.map((imageItem: any) => (
-                  <div key={imageItem.id} className="h-[500px]">
+                  <div key={imageItem.id} className="h-[550px]">
                     <Image
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
                       layout="fill"
                       objectFit="center"
+                      className="rounded-xl"
                     />
                   </div>
                 ))}
@@ -65,7 +67,7 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#F4F6FF]">
             Prepare for Government Exams
@@ -78,11 +80,12 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
               size="lg"
               className="bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]"
             >
-              Explore Courses
+              Explore Exams
             </Button>
           </Link>
         </div>
-      </div>
+      </div> */}
+      <WhatsNewSection />
     </section>
   );
 };

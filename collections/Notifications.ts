@@ -16,22 +16,11 @@ export const Notifications: CollectionConfig = {
       type: "textarea",
       required: true,
     },
-    {
-      name: "type",
-      type: "select",
-      options: [
-        { label: "Info", value: "info" },
-        { label: "Warning", value: "warning" },
-        { label: "Success", value: "success" },
-        { label: "Error", value: "error" },
-      ],
-      required: true,
-    },
-    {
-      name: "isRead",
-      type: "checkbox",
-      defaultValue: false,
-    },
+   {
+    name: "link",
+    type: "text",
+    required: true,
+   }
   ],
   timestamps: true,
 };

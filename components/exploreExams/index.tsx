@@ -28,10 +28,10 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content */}
         <div className="container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
             {examCards.map((exam) => (
               <Link key={exam.id} href={`/exams/${exam.slug}`}>
-                <Card className="hover:shadow-lg h-[150px] flex justify-center transition-shadow border-[#10375C]">
+                <Card className="hover:shadow-lg h-[100px] flex justify-center transition-shadow border-[#10375C]">
                   <CardContent className="p-4 flex items-center gap-3">
                     <Image
                       src={exam.logo.url}

@@ -6,6 +6,8 @@ import "@/styles/globals.css";
 import { MessageCircle, Send } from "lucide-react";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { useState } from "react";
+import { NotificationStrip } from "./notificaionsStrip";
+import { link } from "fs";
 // import { NotificationModal } from "./notificationModal";
 
 
@@ -18,10 +20,10 @@ export default function ClientLayout({
 }) {
   const [showFloatingFooter, setShowFloatingFooter] = useState(true);
 
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <NotificationStrip />
       <main className="flex-grow">{children}</main>
       <Footer addresses={data} setShowFloatingFooter={setShowFloatingFooter} />
       {showFloatingFooter && (

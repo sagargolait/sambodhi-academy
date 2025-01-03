@@ -34,22 +34,22 @@ export default function NavBar() {
   const mobileMenuRef = useRef(null);
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
-    {
-      name: "Courses",
-      href: "/courses",
-      icon: <BookOpen className="h-6 w-6" />,
-    },
+    // {
+    //   name: "Courses",
+    //   href: "/courses",
+    //   icon: <BookOpen className="h-6 w-6" />,
+    // },
     { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
     {
       name: "Careers",
       href: "/careers",
       icon: <Info className="h-6 w-6" />,
     },
-    {
-      name: "Govt Schemes",
-      href: "/schemes",
-      icon: <GraduationCap className="h-6 w-6" />,
-    },
+    // {
+    //   name: "Govt Schemes",
+    //   href: "/schemes",
+    //   icon: <GraduationCap className="h-6 w-6" />,
+    // },
     {
       name: "Gallery",
       href: "/gallery",
@@ -110,6 +110,7 @@ export default function NavBar() {
                   </Link>
                 ))}
               </nav>
+              <EventCalendar />
               <div className="md:flex hidden items-center gap-4 ">
                 <div className="relative mr-4">
                   <Bell className="h-6 w-6 text-[#fff] hover:text-[#F3C623] cursor-pointer" />
@@ -163,7 +164,7 @@ export default function NavBar() {
                   </div>
                 )}
               </div>
-              <EventCalendar />
+              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
