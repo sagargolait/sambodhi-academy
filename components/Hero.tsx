@@ -52,6 +52,7 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
                 {item.images.map((imageItem: any) => (
                   <div key={imageItem.id} className="h-[550px]">
                     <Image
+                      priority={true}
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
                       layout="fill"

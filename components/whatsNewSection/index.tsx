@@ -26,7 +26,6 @@ export function WhatsNewSection() {
     const scrollInterval = setInterval(() => {
       setScrollPosition((prevPosition) => {
         const newPosition = prevPosition + 1
-        // const containerHeight = containerRef.current?.clientHeight || 0
         const contentHeight = containerRef.current?.scrollHeight || 0
         return newPosition >= contentHeight ? 0 : newPosition
       })

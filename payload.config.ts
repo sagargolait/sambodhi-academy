@@ -12,7 +12,6 @@ import { Media } from "./collections/Media";
 import { Exams } from "./collections/Exams";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { Courses } from "./collections/Courses";
-import Page from "./collections/Page";
 import { Associates } from "./collections/Associates";
 import { Testimonials } from "./collections/Testimonials";
 import { Faqs } from "./collections/Faqs";
@@ -45,7 +44,6 @@ export default buildConfig({
     Media,
     Exams,
     Courses,
-    Page,
     Associates,
     Testimonials,
     Faqs,

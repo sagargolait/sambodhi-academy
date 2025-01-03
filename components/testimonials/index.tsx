@@ -29,11 +29,11 @@ export default function Testimonials(testimonials: DataFromCollectionSlug<Collec
             <Card className="bg-white shadow-lg">
                 <CardContent className="p-6">
                     <div className="flex flex-col items-center text-center">
-                        {objectToArray(testimonials)[currentIndex]?.image && <Image
-                            src={objectToArray(testimonials)[currentIndex]?.image}
-                            alt={objectToArray(testimonials)[currentIndex]?.name}
-                            width={100}
-                            height={100}
+                        {objectToArray(testimonials)[currentIndex]?.Image && <Image
+                            src={objectToArray(testimonials)[currentIndex]?.Image.url}
+                            alt={objectToArray(testimonials)[currentIndex]?.Image.alt}
+                            width={140}
+                            height={140}
                             className="rounded-full mb-4"
                         />}
                         <p className="text-lg mb-4 text-[#10375C]">&quot;{objectToArray(testimonials)[currentIndex].quote}&quot;</p>

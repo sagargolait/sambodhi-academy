@@ -24,7 +24,7 @@ const Associates = dynamic(() => import("@/components/Associates"));
 
 export default async function Home() {
     const payload = await getPayload({ config })
-    const [associates, exams, testimonials, faqs, galleryImages] = await Promise.all([
+    const [associates, exams, testimonials, faqs, galleryImages, features] = await Promise.all([
         payload.find({
             collection: 'associates' as CollectionSlug,
             depth: 2
@@ -44,6 +44,10 @@ export default async function Home() {
         payload.find({
             collection: 'galleries' as CollectionSlug,
             depth: 2
+        }),
+        payload.find({
+            collection: 'feature-descriptions' as CollectionSlug,
+            depth: 2
         })
     ])
 
@@ -55,7 +59,7 @@ export default async function Home() {
             {/* <OurStory /> */}
             <ExamExplorer {...exams.docs} />
             <CountDown />
-            <Features />
+            <Features {...features.docs} />
             <NotificationsAndArticles />
             {/* <SuccessStories /> */}
             <Infrastructure {...galleryImages.docs} />
