@@ -40,7 +40,7 @@ export function WhatsNewSection() {
     const scrollInterval = setInterval(() => {
       setScrollPosition((prevPosition) => {
         const newPosition = prevPosition + 1
-        const containerHeight = containerRef.current?.clientHeight || 0
+        // const containerHeight = containerRef.current?.clientHeight || 0
         const contentHeight = containerRef.current?.scrollHeight || 0
         return newPosition >= contentHeight ? 0 : newPosition
       })
@@ -56,13 +56,13 @@ export function WhatsNewSection() {
         <h3 className="text-xl font-semibold mb-4 text-white">Registrations Open</h3>
       </div>
       <div className="relative h-[330px] overflow-hidden" ref={containerRef}>
-        <div 
+        <div
           className="absolute w-full transition-transform duration-1000 ease-linear"
           style={{ transform: `translateY(-${scrollPosition}px)` }}
         >
           {[...announcements, ...announcements].map((announcement, index) => (
             <div key={`${announcement.id}-${index}`} className="mb-4">
-              <Link 
+              <Link
                 href={announcement.href}
                 className="flex items-start space-x-2 hover:text-[#F3C623] transition-colors"
               >
@@ -73,11 +73,11 @@ export function WhatsNewSection() {
           ))}
         </div>
       </div>
-      <Link 
-        href="/announcements" 
+      <Link
+        href="/announcements"
         className="inline-flex items-center text-[#F3C623] hover:text-white transition-colors mt-4"
       >
-        View All 
+        View All
         <ChevronRight className="ml-1 h-4 w-4" />
       </Link>
     </div>

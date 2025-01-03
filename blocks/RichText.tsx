@@ -59,27 +59,9 @@ interface ParagraphNode {
   children: (TextNode | LinkNode)[];
 }
 
-interface TableNode {
-  type: 'table';
-  tableCaption: string;
-  rows: {
-    cells: {
-      content: RichTextNode[];
-      isHeader: boolean;
-    }[];
-  }[];
-  style: 'default' | 'striped' | 'bordered';
-}
-
-interface RootNode {
-  root: {
-    children: ParagraphNode[];
-    type: 'root';
-  };
-}
 
 interface RichTextProps {
-  content: RootNode;
+  content: any;
   type?: string
 }
 
@@ -121,26 +103,26 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
           </p>
         );
 
-        case 'list':
-      const ListTag = node.style === 'ordered' ? 'ol' : 'ul'; // Dynamically choose `ul` or `ol`
-      const listClass =
-        node.style === 'ordered' ? 'list-decimal list-inside mb-4' : 'list-disc list-inside mb-4';
+      case 'list':
+        const ListTag = node.style === 'ordered' ? 'ol' : 'ul'; // Dynamically choose `ul` or `ol`
+        const listClass =
+          node.style === 'ordered' ? 'list-decimal list-inside mb-4' : 'list-disc list-inside mb-4';
 
-      return (
-        <ListTag className={listClass}>
-          {node.children?.map((listItem: any, index: number) => (
-            <li key={index} className="mb-2">
-              {listItem.children?.map((child: any, childIndex: number) => (
-                <React.Fragment key={childIndex}>
-                  {renderNode(child)}
-                </React.Fragment>
-              ))}
-            </li>
-          ))}
-        </ListTag>
-      );
+        return (
+          <ListTag className={listClass}>
+            {node.children?.map((listItem: any, index: number) => (
+              <li key={index} className="mb-2">
+                {listItem.children?.map((child: any, childIndex: number) => (
+                  <React.Fragment key={childIndex}>
+                    {renderNode(child)}
+                  </React.Fragment>
+                ))}
+              </li>
+            ))}
+          </ListTag>
+        );
 
-        
+
 
       case 'root':
         return node.children?.map((child: any, index: number) => (

@@ -5,9 +5,7 @@ import SectionHeading from '../SectionHeading'
 import { Button } from '../ui/button'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import Image from 'next/image'
-import { it } from 'node:test'
 import { objectToArray } from '@/lib/utils'
-import { LucideYoutube, Youtube, YoutubeIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = {
@@ -45,7 +43,7 @@ const GalleryComponent = ({ galleryImages }: Props) => {
         </div>
 
         {FilteredImages.map((item) => (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full">
+          <div key={item.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full">
             <>
               {item.images.map((imageItem: any) => (
                 <Image

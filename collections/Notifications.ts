@@ -5,6 +5,9 @@ export const Notifications: CollectionConfig = {
   admin: {
     useAsTitle: "title",
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: "title",
@@ -16,11 +19,11 @@ export const Notifications: CollectionConfig = {
       type: "textarea",
       required: true,
     },
-   {
-    name: "link",
-    type: "text",
-    required: true,
-   }
+    {
+      name: "link",
+      type: "text",
+      required: true,
+    },
   ],
   timestamps: true,
 };

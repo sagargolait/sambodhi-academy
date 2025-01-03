@@ -29,11 +29,6 @@ interface Address {
 
 export default function ContactPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [studentName, setStudentName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [phone, setPhone] = useState("");
-
   const [address, setAddress] = useState<Address[]>([])
 
   const primaryAddress = address.filter((item: any) => item.isPrimary)[0]
@@ -78,11 +73,6 @@ export default function ContactPage() {
         throw new Error("Network response was not ok");
       }
       toast.success("Form submitted successfully!");
-
-      setStudentName("");
-      setEmail("");
-      setMessage("");
-      setPhone("");
     } catch (error) {
       toast.error(`There was a problem with the form submission. ${error}`);
     }

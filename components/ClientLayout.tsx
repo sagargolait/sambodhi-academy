@@ -7,7 +7,6 @@ import { MessageCircle, Send } from "lucide-react";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { useState } from "react";
 import { NotificationStrip } from "./notificaionsStrip";
-import { link } from "fs";
 // import { NotificationModal } from "./notificationModal";
 
 

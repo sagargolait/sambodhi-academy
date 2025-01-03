@@ -1,15 +1,6 @@
 'use client'
 
-import { useState } from "react";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  Collapsible,
-  // CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import Link from "next/link";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
@@ -17,7 +8,6 @@ import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
 
 export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlug>[]) {
-  const [searchQuery, setSearchQuery] = useState("");
 
   const examCards = objectToArray(exams)
   return (

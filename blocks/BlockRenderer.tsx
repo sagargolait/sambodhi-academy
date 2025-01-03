@@ -1,10 +1,14 @@
 import React from 'react';
 import RichText, { Block as BaseBlock } from './RichText';
-
-
-
-type Block = BaseBlock;
 import { ElementType } from 'react';
+
+
+
+type Block = BaseBlock & {
+  rows?: Row[];
+  style?: string;
+  tableCaption?: string;
+};
 
 interface BlockRendererProps {
   blocks: Block[];
@@ -34,23 +38,23 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
           h3: "text-2xl font-semibold mb-3 mt-5",
           h4: "text-xl font-semibold mb-2 mt-4"
         }[block.level || 'h2'];
-        
+
         return <HeadingTag className={headingClasses}>{block.text}</HeadingTag>;
       }
-      
+
       case 'paragraph':
         return (
           <div className="mb-4">
-              <RichText content={block.text} />
+            <RichText content={block.text} />
           </div>
         );
-      
+
       case 'image':
         return (
           <figure className="my-8">
-            <img 
-              src={block.image?.url} 
-              alt={block.altText || ''} 
+            <img
+              src={block.image?.url}
+              alt={block.altText || ''}
               className="w-full h-auto rounded-lg shadow-lg"
             />
             {block.caption && (
@@ -60,7 +64,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
             )}
           </figure>
         );
-      
+
       case 'examQuestion':
         return (
           <div className="bg-gray-50 rounded-lg p-6 my-8 shadow-sm">
@@ -70,13 +74,13 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
             <div className="space-y-3">
               {block.options?.map((option, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <input 
-                    type="radio" 
-                    name={`question-${block.id}`} 
-                    id={`option-${block.id}-${index}`} 
+                  <input
+                    type="radio"
+                    name={`question-${block.id}`}
+                    id={`option-${block.id}-${index}`}
                     className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                   />
-                  <label 
+                  <label
                     htmlFor={`option-${block.id}-${index}`}
                     className="text-gray-700 cursor-pointer select-none"
                   >
@@ -95,7 +99,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
           </div>
         );
 
-        case 'table': // Handling table block
+      case 'table': // Handling table block
         return (
           <div className={`table-container ${block.style || 'default'} my-8`}>
             {block.tableCaption && (
@@ -135,7 +139,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
             </table>
           </div>
         );
-      
+
       default:
         return null;
     }

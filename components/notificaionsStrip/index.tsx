@@ -29,14 +29,14 @@ export function NotificationStrip() {
 
   useEffect(() => {
     if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth
+      // const containerWidth = containerRef.current.offsetWidth
       const contentWidth = containerRef.current.scrollWidth
       const duration = (contentWidth / 50) * 1000 // 50 pixels per second
       setAnimationDuration(duration)
     }
   }, [messages])
 
-  if(messages.length === 0) return null
+  if (messages?.length === 0 || !messages) return null
 
   return (
     <div className="bg-primary text-white py-1 overflow-hidden">

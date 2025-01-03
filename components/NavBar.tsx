@@ -2,9 +2,7 @@
 
 import {
   Phone,
-  GraduationCap,
   Info,
-  BookOpen,
   Home,
   Bell,
   Globe,
@@ -23,7 +21,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
-import { Calendar } from "./ui/calendar";
 import { EventCalendar } from "./EventsCalendar";
 
 
@@ -164,7 +161,7 @@ export default function NavBar() {
                   </div>
                 )}
               </div>
-              
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button

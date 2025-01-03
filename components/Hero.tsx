@@ -2,10 +2,8 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { Button } from "./ui/button";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import type { CarouselProps } from "react-responsive-carousel";
-import Link from "next/link";
 import Image from "next/image";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
@@ -32,9 +30,9 @@ const carouselProps: Partial<CarouselProps> = {
     rightArrow: "Next slide",
     item: "slide item",
   },
-  onClickItem: () => {},
-  onClickThumb: () => {},
-  onChange: () => {},
+  onClickItem: () => { },
+  onClickThumb: () => { },
+  onChange: () => { },
   onSwipeStart: () => false,
   onSwipeEnd: () => false,
   onSwipeMove: () => false,

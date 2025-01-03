@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { NotificationProvider } from '@/context/notificationContext';
 import ClientLayout from '@/components/ClientLayout';
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
 import { Toaster } from "@/components/ui/sonner"
@@ -38,7 +37,7 @@ export default async function LocaleLayout({
             <body>
                 <NextIntlClientProvider messages={messages}>
                     <NotificationProvider>
-                      <Toaster position='top-right'/>
+                        <Toaster position='top-right' />
                         <ClientLayout data={{ ...addresses.docs }}>{children}</ClientLayout>
                     </NotificationProvider>
                 </NextIntlClientProvider>
