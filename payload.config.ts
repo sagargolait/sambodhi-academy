@@ -27,7 +27,8 @@ import { Events } from "./collections/Events";
 import StudentInquiries from "./collections/StudentInquiries";
 import CareerOpenings from "./collections/CareerOpenings";
 import JobApplications from "./collections/JobApplications";
-
+import { Announcements } from "./collections/Announcements";
+import { FeatureDescriptions } from "./collections/FeatureDescription";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -58,7 +59,9 @@ export default buildConfig({
     Events,
     StudentInquiries,
     CareerOpenings,
-    JobApplications
+    JobApplications,
+    Announcements,
+    FeatureDescriptions,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

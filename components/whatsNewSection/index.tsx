@@ -4,37 +4,23 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 
-const announcements = [
-  {
-    id: 1,
-    title: "Download EPIC! November 2024 – The Monthly Current Affairs Magazine by ForumIAS",
-    href: "#"
-  },
-  {
-    id: 2,
-    title: "State PSC Success Program (SPS) - UPPSC Mains Test Series 2024 | 5th Jan. 2024 | Available in English & Hindi Medium",
-    href: "#"
-  },
-  {
-    id: 3,
-    title: "MGP 2026 | Cohort - 1 | English Medium | Starts on 28th Jan. 2025 | Enroll Now!",
-    href: "#"
-  },
-  {
-    id: 4,
-    title: "MGP 2025 | Cohort 21 | Hindi Medium | Starts on 25th Dec. 2024 | Enroll Now!",
-    href: "#"
-  },
-  {
-    id: 5,
-    title: "MGP 2025 | Cohort-18, 18 (Rapid) English Medium | Cohort 19 Hindi Medium | Starts on 15th Dec. 2024 | Enroll Now!",
-    href: "#"
-  }
-]
-
 export function WhatsNewSection() {
   const [scrollPosition, setScrollPosition] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [announcements, setAnnouncements] = useState<{ id: string; title: string; link: string }[]>([]);
+
+  useEffect(() => {
+    async function fetchAnnouncements() {
+      try {
+        const response = await fetch('/api/announcements')
+        const data = await response.json()
+        setAnnouncements(data.docs)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchAnnouncements()
+  }, [])
 
   useEffect(() => {
     const scrollInterval = setInterval(() => {
@@ -60,10 +46,10 @@ export function WhatsNewSection() {
           className="absolute w-full transition-transform duration-1000 ease-linear"
           style={{ transform: `translateY(-${scrollPosition}px)` }}
         >
-          {[...announcements, ...announcements].map((announcement, index) => (
-            <div key={`${announcement.id}-${index}`} className="mb-4">
+          {announcements.map((announcement) => (
+            <div key={`${announcement.id}`} className="mb-4">
               <Link
-                href={announcement.href}
+                href={announcement.link}
                 className="flex items-start space-x-2 hover:text-[#F3C623] transition-colors"
               >
                 <span className="mt-1.5">•</span>

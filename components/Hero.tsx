@@ -65,24 +65,6 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
           </div>
         ))}
       </div>
-      {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#F4F6FF]">
-            Prepare for Government Exams
-          </h1>
-          <p className="text-xl mb-8 text-[#F4F6FF]">
-            Expert-led courses and comprehensive study materials
-          </p>
-          <Link href="/courses">
-            <Button
-              size="lg"
-              className="bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]"
-            >
-              Explore Exams
-            </Button>
-          </Link>
-        </div>
-      </div> */}
       <WhatsNewSection />
     </section>
   );
