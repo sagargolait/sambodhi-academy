@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from './ui/card'
 import SectionHeading from './SectionHeading'
 import Image from 'next/image'
