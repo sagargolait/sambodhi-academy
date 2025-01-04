@@ -11,7 +11,7 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
 
   const examCards = objectToArray(exams)
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-10">
       <SectionHeading>
         Explore by <span className="text-[#F3C623]">Exams</span>
       </SectionHeading>

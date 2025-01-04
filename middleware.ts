@@ -5,11 +5,13 @@ import { routing } from "./i18n/routing";
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Skip middleware for admin routes
+  // Skip middleware for specific routes and public assets
   if (
     pathname.startsWith("/admin") ||
     pathname.startsWith("/my-route") ||
-    pathname.startsWith("/api")
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/public") ||
+    pathname.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)
   ) {
     return;
   }
@@ -40,7 +42,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip admin routes and other static assets
-    "/((?!admin|_next/static|_next/image|favicon.ico|api).*)",
+    // Match all paths except those starting with specified prefixes
+    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin).*)",
   ],
 };

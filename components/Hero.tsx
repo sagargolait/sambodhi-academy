@@ -43,7 +43,7 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
 
   return (
-    <section className="flex flex-wrap justify-between gap-4 relative bg-[url('/api/media/file/blur-coffee-shop.jpg')]">
+    <section className="flex flex-wrap justify-between gap-4 relative bg-[url('/blur-bg.jpg')]">
       <div className="h-[550px] w-full lg:w-2/3">
         {heroCategoryData.map((item) => (
           <div key={item.id} className="image-category w-full">

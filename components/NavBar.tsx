@@ -86,7 +86,8 @@ export default function NavBar() {
                 className="flex items-center gap-4 text-xl font-bold"
               >
                 <Image
-                  src={"/api/media/file/sambodhi-logo.png"}
+                  src={"/sambodhi-logo.png"}
+                  priority={true}
                   width={50}
                   height={25}
                   alt="logo"
