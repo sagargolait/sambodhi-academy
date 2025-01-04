@@ -11,7 +11,10 @@ import { WhatsNewSection } from "./whatsNewSection";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => <div className="animate-pulse bg-gray-200 h-[550px] rounded-xl" />
+  }
 );
 
 const carouselProps: Partial<CarouselProps> = {
@@ -30,17 +33,20 @@ const carouselProps: Partial<CarouselProps> = {
     rightArrow: "Next slide",
     item: "slide item",
   },
-  onClickItem: () => { },
-  onClickThumb: () => { },
-  onChange: () => { },
-  onSwipeStart: () => false,
-  onSwipeEnd: () => false,
-  onSwipeMove: () => false,
 };
 
 const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const Imgs = objectToArray(heroImages);
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
+
+  // Preload first image using native Image constructor
+  React.useEffect(() => {
+    const firstImage = heroCategoryData[0]?.images[0]?.image;
+    if (firstImage) {
+      const preloadImage = new window.Image();
+      preloadImage.src = firstImage.url;
+    }
+  }, [heroCategoryData]);
 
   return (
     <section className="flex flex-wrap justify-between gap-4 relative bg-[url('/blur-bg.jpg')]">
@@ -49,15 +55,17 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
           <div key={item.id} className="image-category w-full">
             <div className="image-list w-full p-4">
               <Carousel {...(carouselProps as CarouselProps)}>
-                {item.images.map((imageItem: any) => (
-                  <div key={imageItem.id} className="h-[550px]">
+                {item.images.map((imageItem: any, index: number) => (
+                  <div key={imageItem.id} className="h-[550px] relative">
                     <Image
-                      priority={true}
+                      priority={index === 0}
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
-                      layout="fill"
-                      objectFit="center"
-                      className="rounded-xl"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 66vw"
+                      quality={85}
+                      className="rounded-xl object-cover"
+                      blurDataURL={`${imageItem.image.url}?w=10&q=10`}
                     />
                   </div>
                 ))}
