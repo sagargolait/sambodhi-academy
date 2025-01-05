@@ -38,8 +38,6 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const Imgs = objectToArray(heroImages);
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
 
-  console.log(Imgs, heroCategoryData)
-
   // Preload first image using native Image constructor
   React.useEffect(() => {
     const firstImage = heroCategoryData[0]?.images[0]?.image;

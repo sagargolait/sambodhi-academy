@@ -56,6 +56,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
               </CardHeader>
             </Card>
           </div>
+
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
@@ -85,6 +86,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 </Link>
               </li>
             </ul>
+
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Products</h3>
@@ -147,6 +149,20 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 <LucideYoutube size={25} />
               </a>
             </div>
+            <div className="mt-4">
+              <Link
+                target="_blank"
+                href="https://play.google.com/store/apps/details?id=co.white.tqqcq"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={"/google-play-logo.svg"}
+                  width={150}
+                  height={75}
+                  alt="google-play-btn"
+                />
+              </Link>
+            </div>
           </div>
         </div>
         <div className="mt-8">
@@ -176,20 +192,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
             ))}
           </div>
         </div>
-        <div>
-          <Link
-            target="_blank"
-            href="https://play.google.com/store/apps/details?id=co.white.tqqcq"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src={"/google-play-logo.svg"}
-              width={120}
-              height={50}
-              alt="google-play-btn"
-            />
-          </Link>
-        </div>
+
         <div className="mt-8 text-center">
           <p>
             &copy; 2024 Sambodhi Academy. All rights reserved. Powered By ITyans
