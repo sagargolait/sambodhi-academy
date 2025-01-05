@@ -26,7 +26,7 @@ export default function Testimonials(testimonials: DataFromCollectionSlug<Collec
     return (
         <div className="relative max-w-4xl mx-auto">
             <SectionHeading>Testimonials</SectionHeading>
-            <Card className="bg-white shadow-lg">
+            <Card className="bg-white shadow-lg m-4">
                 <CardContent className="p-6">
                     <div className="flex flex-col items-center text-center">
                         {objectToArray(testimonials)[currentIndex]?.Image && <Image
@@ -42,7 +42,7 @@ export default function Testimonials(testimonials: DataFromCollectionSlug<Collec
                     </div>
                 </CardContent>
             </Card>
-            <div className="absolute top-1/2 transform -translate-y-1/2 left-0 -ml-4">
+            <div className="absolute top-1/2 transform -translate-y-1/2 left-0 ml-6">
                 <Button
                     variant="outline"
                     size="default"
@@ -52,7 +52,7 @@ export default function Testimonials(testimonials: DataFromCollectionSlug<Collec
                     <ChevronLeft className="h-4 w-4" />
                 </Button>
             </div>
-            <div className="absolute top-1/2 transform -translate-y-1/2 right-0 -mr-4">
+            <div className="absolute top-1/2 transform -translate-y-1/2 right-0 mr-6">
                 <Button
                     variant="outline"
                     size="default"
