@@ -38,6 +38,8 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const Imgs = objectToArray(heroImages);
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
 
+  console.log(Imgs, heroCategoryData)
+
   // Preload first image using native Image constructor
   React.useEffect(() => {
     const firstImage = heroCategoryData[0]?.images[0]?.image;
@@ -59,7 +61,7 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
                     <img
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
-                      className="rounded-xl object-cover w-full h-full"
+                      className="rounded-xl object-fit w-full h-full"
                       loading={index === 0 ? "eager" : "lazy"}
                     />
                   </div>

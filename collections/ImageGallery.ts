@@ -19,7 +19,6 @@ export const ImageGallery: CollectionConfig = {
     {
       name: "location",
       type: "select",
-      required: true,
       options: [
         { label: "Hingoli", value: "hingoli" },
         { label: "Pune", value: "Pune" },
@@ -44,7 +43,8 @@ export const ImageGallery: CollectionConfig = {
       type: "text",
       label: "Custom Category",
       admin: {
-        description: "Add a custom category if the predefined options do not fit.",
+        description:
+          "Add a custom category if the predefined options do not fit.",
       },
     },
     {
@@ -61,11 +61,6 @@ export const ImageGallery: CollectionConfig = {
         {
           name: "caption",
           type: "text",
-        },
-        {
-          name: "altText",
-          type: "text",
-          required: true,
         },
       ],
     },

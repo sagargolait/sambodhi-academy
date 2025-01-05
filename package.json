@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
     "@payloadcms/db-mongodb": "^3.9.0",
     "@payloadcms/next": "^3.9.0",
     "@payloadcms/payload-cloud": "^3.9.0",
@@ -46,7 +47,8 @@
     "slate": "^0.112.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/escape-html": "^1.0.4",

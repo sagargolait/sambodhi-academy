@@ -35,14 +35,14 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <main className="container mx-auto px-4 py-8">
-        <SectionHeading>About GovEduInstitute</SectionHeading>
+        <SectionHeading>About Sambodhi Academy</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div>
             <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
               Our Mission
             </h3>
             <p className="text-gray-600 mb-4">
-              At GovEduInstitute, our mission is to empower aspiring individuals
+              At Sambodhi Academy, our mission is to empower aspiring individuals
               with the knowledge, skills, and confidence needed to excel in
               government service examinations. We are committed to providing
               high-quality education, personalized guidance, and comprehensive
@@ -62,11 +62,9 @@ export default function AboutPage() {
             </p>
           </div>
           <div>
-            <Image
-              src="/placeholder.svg?height=400&width=600"
-              alt="GovEduInstitute Campus"
-              width={600}
-              height={400}
+            <img
+              src="/api/media/file/director.jpg"
+              alt="Sambodhi Director"
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -77,13 +75,7 @@ export default function AboutPage() {
           {teamMembers.map((member, index) => (
             <Card key={index} className="text-center">
               <CardContent className="pt-6">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={150}
-                  height={150}
-                  className="rounded-full mx-auto mb-4"
-                />
+                <img src='/api/media/file/avatars_grey_circles.jpg' alt="Team Member" className="w-24 h-24 rounded-full mx-auto" />
                 <CardHeader>
                   <CardTitle className="text-[#10375C]">
                     {member.name}

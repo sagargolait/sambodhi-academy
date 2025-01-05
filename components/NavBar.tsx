@@ -130,7 +130,7 @@ export default function NavBar() {
                       <DropdownMenuItem
                         key={lang.code}
                       >
-                        <Link href={`/${lang.code}`}>
+                        <Link href={`/${lang.code}`} target="_blank">
                           {lang.name}
                         </Link>
                       </DropdownMenuItem>

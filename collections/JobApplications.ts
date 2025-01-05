@@ -1,60 +1,44 @@
-import { CollectionConfig, CollectionSlug } from "payload";
+import { CollectionConfig } from "payload";
 
 const JobApplications: CollectionConfig = {
   slug: "job-applications",
-  admin: {
-    useAsTitle: "applicantName",
-    defaultColumns: [
-      "applicantName",
-      "email",
-      "appliedPosition",
-      "applicationDate",
-    ],
-  },
-  access: {
-    read: () => true,
+  labels: {
+    singular: "Job Application",
+    plural: "Job Applications",
   },
   fields: [
     {
-      name: "applicantName",
+      name: "name",
       type: "text",
       required: true,
+      label: "Name",
     },
     {
       name: "email",
       type: "email",
       required: true,
-      unique: true,
-    },
-    {
-      name: "phone",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "appliedPosition",
-      type: "relationship",
-      relationTo: "career-openings" as CollectionSlug,
-      required: true,
+      label: "Email",
     },
     {
       name: "resume",
       type: "upload",
       relationTo: "media",
       required: true,
+      label: "Resume",
     },
     {
       name: "coverLetter",
-      type: "richText",
-      required: true,
-    },
-    {
-      name: "applicationDate",
-      type: "date",
-      required: true,
-      defaultValue: new Date(),
+      type: "textarea",
+      label: "Cover Letter",
     },
   ],
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        return { ...data, submittedAt: new Date() };
+      },
+    ],
+  },
 };
 
 export default JobApplications;

@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -41,23 +44,58 @@ const jobOpenings = [
   },
 ];
 
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  resume: yup
+    .mixed<FileList>()
+    .required("Resume is required")
+    .test("fileSize", "File too large", (value) => {
+      return value && value.length > 0 && value[0].size <= 2000000; // 2MB
+    }),
+  coverLetter: yup.string().required("Cover letter is required"),
+});
+
+interface IFormInputs {
+  name: string;
+  email: string;
+  resume: FileList;
+  coverLetter: string;
+}
+
 export default function CareersPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [resume, setResume] = useState<File | null>(null);
-  const [coverLetter, setCoverLetter] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(schema),
+  });
 
-  
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("resume", data.resume[0]);
+    formData.append("coverLetter", data.coverLetter);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send this data to your backend
+    try {
+      const response = await fetch("/api/job-applications", {
+        method: "POST",
+        body: formData,
+      });
 
-    // Reset form
-    setName("");
-    setEmail("");
-    setResume(null);
-    setCoverLetter("");
+      if (response.ok) {
+        alert("Application submitted successfully!");
+        reset();
+      } else {
+        alert("Failed to submit application.");
+      }
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      alert("An error occurred while submitting your application.");
+    }
   };
 
   return (
@@ -167,43 +205,52 @@ export default function CareersPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                   <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
+                    {...register("name")}
+                    className={errors.name ? "border-red-500" : ""}
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">{errors.name.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    {...register("email")}
+                    className={errors.email ? "border-red-500" : ""}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">{errors.email.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="resume">Resume</Label>
                   <Input
                     id="resume"
                     type="file"
-                    onChange={(e) => setResume(e.target.files?.[0] || resume)}
-                    required
+                    {...register("resume")}
+                    className={errors.resume ? "border-red-500" : ""}
                   />
+                  {errors.resume && (
+                    <p className="text-red-500 text-sm">{errors.resume.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="coverLetter">Cover Letter</Label>
                   <Textarea
                     id="coverLetter"
-                    value={coverLetter}
-                    onChange={(e) => setCoverLetter(e.target.value)}
-                    required
+                    {...register("coverLetter")}
+                    className={errors.coverLetter ? "border-red-500" : ""}
                   />
+                  {errors.coverLetter && (
+                    <p className="text-red-500 text-sm">{errors.coverLetter.message}</p>
+                  )}
                 </div>
                 <Button
                   type="submit"

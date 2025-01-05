@@ -14,9 +14,9 @@ type Props = {
 
 const GalleryComponent = ({ galleryImages }: Props) => {
   const images = objectToArray(galleryImages)
-  const [filter, setFilter] = useState('Faculty');
+  const [filter, setFilter] = useState('aurangabad');
 
-  const FilteredImages = images.filter((item: any) => item.category === filter);
+  const FilteredImages = images.filter((item: any) => item.location === filter);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
@@ -33,11 +33,11 @@ const GalleryComponent = ({ galleryImages }: Props) => {
           {galleryImages.map((item: any) => (
             <Button
               key={item.id}
-              onClick={() => setFilter(item.category)}
+              onClick={() => setFilter(item.location)}
               variant={filter === item.category ? "default" : "outline"}
               className="capitalize"
             >
-              {item.category}
+              {item.location}
             </Button>
           ))}
         </div>
