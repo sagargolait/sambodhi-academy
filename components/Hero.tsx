@@ -4,7 +4,6 @@ import React from "react";
 import dynamic from "next/dynamic";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import type { CarouselProps } from "react-responsive-carousel";
-import Image from "next/image";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
 import { WhatsNewSection } from "./whatsNewSection";
@@ -57,15 +56,11 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
               <Carousel {...(carouselProps as CarouselProps)}>
                 {item.images.map((imageItem: any, index: number) => (
                   <div key={imageItem.id} className="h-[550px] relative">
-                    <Image
-                      priority={index === 0}
+                    <img
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 66vw"
-                      quality={85}
-                      className="rounded-xl object-cover"
-                      blurDataURL={`${imageItem.image.url}?w=10&q=10`}
+                      className="rounded-xl object-cover w-full h-full"
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                   </div>
                 ))}
@@ -79,4 +74,4 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   );
 };
 
-export default Hero;
+export default Hero; 
