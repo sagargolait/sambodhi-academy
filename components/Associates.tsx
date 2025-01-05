@@ -16,7 +16,7 @@ const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
         <SectionHeading>
           Our Associates and Facilitators from The Government
         </SectionHeading>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {objectToArray(associates).map((associate: any) => (
             <Card key={associate.id} className="text-center">
               <CardContent className="pt-6">

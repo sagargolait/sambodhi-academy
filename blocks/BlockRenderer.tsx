@@ -2,8 +2,6 @@ import React from 'react';
 import RichText, { Block as BaseBlock } from './RichText';
 import { ElementType } from 'react';
 
-
-
 type Block = BaseBlock & {
   rows?: Row[];
   style?: string;
@@ -35,8 +33,8 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
         const headingClasses = {
           h1: "text-4xl font-bold mb-6 mt-8",
           h2: "text-3xl font-semibold mb-4 mt-6",
-          h3: "text-2xl font-semibold mb-3 mt-5",
-          h4: "text-xl font-semibold mb-2 mt-4"
+          h3: "text-2xl font-semibold mb-4 mt-4",
+          h4: "text-xl font-semibold mb-2 mt-2"
         }[block.level || 'h2'];
 
         return <HeadingTag className={headingClasses}>{block.text}</HeadingTag>;
@@ -103,40 +101,44 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
         return (
           <div className={`table-container ${block.style || 'default'} my-8`}>
             {block.tableCaption && (
-              <div className="w-screen able-caption text-lg font-semibold mb-2">{block.tableCaption}</div>
+              <div className="w-100 table-caption text-lg font-semibold mb-2">{block.tableCaption}</div>
             )}
-            <table className="table-auto w-full border-collapse">
-              <thead>
-                {block.rows?.map((row, rowIndex) => {
-                  if (rowIndex === 0 && row.cells.some(cell => cell.isHeader)) {
-                    // Render the first row as header if any cell in it has isHeader = true
-                    return (
-                      <tr key={rowIndex}>
+            <div style={{
+              overflow: 'scroll'
+            }} className="Fborder border-gray-200 rounded-lg">
+              <table className="table-auto w-full border-collapse">
+                <thead>
+                  {block.rows?.map((row, rowIndex) => {
+                    if (rowIndex === 0 && row.cells.some(cell => cell.isHeader)) {
+                      // Render the first row as header if any cell in it has isHeader = true
+                      return (
+                        <tr key={rowIndex}>
+                          {row.cells.map((cell, cellIndex) => (
+                            <th key={cellIndex} className="px-4 py-2 border text-left">
+                              <RichText content={cell.content || { root: { children: [] } }} />
+                            </th>
+                          ))}
+                        </tr>
+                      );
+                    }
+                    return null;
+                  })}
+                </thead>
+                <tbody>
+                  {block.rows?.map((row, rowIndex) => (
+                    rowIndex !== 0 ? (
+                      <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-gray-100' : ''}>
                         {row.cells.map((cell, cellIndex) => (
-                          <th key={cellIndex} className="px-4 py-2 border text-left">
-                            <RichText content={cell.content || { root: { children: [] } }} />
-                          </th>
+                          <td key={cellIndex} className="px-4 py-2 border">
+                            <RichText type='table' content={cell.content || { root: { children: [] } }} />
+                          </td>
                         ))}
                       </tr>
-                    );
-                  }
-                  return null;
-                })}
-              </thead>
-              <tbody>
-                {block.rows?.map((row, rowIndex) => (
-                  rowIndex !== 0 ? (
-                    <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-gray-100' : ''}>
-                      {row.cells.map((cell, cellIndex) => (
-                        <td key={cellIndex} className="px-4 py-2 border">
-                          <RichText type='table' content={cell.content || { root: { children: [] } }} />
-                        </td>
-                      ))}
-                    </tr>
-                  ) : null
-                ))}
-              </tbody>
-            </table>
+                    ) : null
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         );
 

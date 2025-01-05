@@ -10,7 +10,6 @@ interface RichTextNode {
   children?: RichTextNode[];
   url?: string;
   newTab?: boolean;
-
 }
 
 

@@ -54,7 +54,6 @@ export default async function Home() {
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
             <Hero {...galleryImages.docs} />
-
             <Associates {...associates.docs} />
             {/* <OurStory /> */}
             <ExamExplorer {...exams.docs} />
