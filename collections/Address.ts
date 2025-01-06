@@ -2,6 +2,9 @@ import { CollectionConfig } from "payload";
 
 export const Addresses: CollectionConfig = {
   slug: "addresses",
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: "street",
   },
