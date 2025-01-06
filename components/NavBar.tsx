@@ -7,6 +7,9 @@ import {
   Bell,
   Globe,
   GalleryHorizontal,
+  Book,
+  ChevronDown,
+  GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
 import TopBar from "./TopBar";
@@ -42,11 +45,20 @@ export default function NavBar() {
       href: "/careers",
       icon: <Info className="h-6 w-6" />,
     },
-    // {
-    //   name: "Govt Schemes",
-    //   href: "/schemes",
-    //   icon: <GraduationCap className="h-6 w-6" />,
-    // },
+    {
+      name: 'Govt Schemes',
+      icon: <GraduationCap className="h-5 w-5" />,
+      dropdown: [
+        { name: 'SC Schemes', href: '/govt-schemes/sc' },
+        { name: 'ST Schemes', href: '/govt-schemes/st' },
+        { name: 'OBC Schemes', href: '/govt-schemes/obc' },
+      ]
+    },
+    {
+      name: "Question Papers",
+      href: "/question-papers",
+      icon: <Book className="h-6 w-6" />,
+    },
     {
       name: "Gallery",
       href: "/gallery",
@@ -99,13 +111,26 @@ export default function NavBar() {
               </Link>
               <nav className="hidden md:flex space-x-8">
                 {menuItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="text-[#FFF] hover:text-[#F3C623]"
-                  >
-                    {t(item.name)}
-                  </Link>
+                  item.dropdown ? (
+                    <DropdownMenu key={item.name}>
+                      <DropdownMenuTrigger className="text-[#FFF] hover:text-[#F3C623] flex items-center">
+                        {item.name} <ChevronDown className="ml-1 h-4 w-4" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        {item.dropdown.map((subItem) => (
+                          <DropdownMenuItem key={subItem.name} asChild className="cursor-pointer">
+                            <Link href={subItem.href} className="w-full">
+                              {subItem.name}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    <Link key={item.name} href={item.href} className="text-[#FFF] hover:text-[#F3C623]">
+                      {item.name}
+                    </Link>
+                  )
                 ))}
               </nav>
               <EventCalendar />
@@ -149,15 +174,32 @@ export default function NavBar() {
                 {mobileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                     {menuItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623] hover:text-white"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.icon}
-                        <span className="ml-2">{t(item.name)}</span>
-                      </Link>
+                      item.dropdown ? (
+                        <div key={item.name} className="">
+                          <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {item.name}</span>
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              href={subItem.href}
+                              className="block px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623] "
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="flex items-center px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623]"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.icon}
+                          <span className="ml-2">{t(item.name)}</span>
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}

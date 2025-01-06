@@ -29,6 +29,7 @@ import JobApplications from "./collections/JobApplications";
 import { Announcements } from "./collections/Announcements";
 import { FeatureDescriptions } from "./collections/FeatureDescription";
 import Faculty from "./collections/Faculty";
+import QuestionPapers from "./collections/Pyqs";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -62,6 +63,7 @@ export default buildConfig({
     Announcements,
     FeatureDescriptions,
     Faculty,
+    QuestionPapers,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
