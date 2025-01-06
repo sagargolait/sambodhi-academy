@@ -1,8 +1,8 @@
 {
   "crons": [
     {
-      "path": "/",
-      "schedule": "*/5 * * * *"
+      "path": "/keep-alive",
+      "schedule": "0 10 * * *"
     }
   ]
 }
