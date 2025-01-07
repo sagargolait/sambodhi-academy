@@ -61,11 +61,11 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                   Courses
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/exams" className="hover:text-[#F3C623]">
                   Exams
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/about" className="hover:text-[#F3C623]">
                   About Us

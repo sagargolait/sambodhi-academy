@@ -12,6 +12,11 @@ export const Associates: CollectionConfig = {
       required: true,
     },
     {
+      name: "slug",
+      type: "text",
+      required: true,
+    },
+    {
       name: "Image",
       type: "upload",
       relationTo: "media" as CollectionSlug,

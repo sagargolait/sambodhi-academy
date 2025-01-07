@@ -1,157 +1,157 @@
-import { CollectionConfig } from 'payload';
+import { CollectionConfig } from "payload";
 
 export const ExamPages: CollectionConfig = {
-  slug: 'exam-pages',
+  slug: "exam-pages",
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'status', 'createdAt'],
+    useAsTitle: "title",
+    defaultColumns: ["title", "status", "createdAt"],
   },
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
+      name: "title",
+      type: "text",
       required: true,
     },
     {
-      name: 'slug',
-      type: 'text',
+      name: "slug",
+      type: "text",
       required: true,
       unique: true,
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
     {
-      name: 'status',
-      type: 'select',
+      name: "status",
+      type: "select",
       options: [
         {
-          value: 'draft',
-          label: 'Draft',
+          value: "draft",
+          label: "Draft",
         },
         {
-          value: 'published',
-          label: 'Published',
+          value: "published",
+          label: "Published",
         },
       ],
-      defaultValue: 'draft',
+      defaultValue: "draft",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
     {
-      name: 'content',
-      type: 'blocks',
+      name: "content",
+      type: "blocks",
       blocks: [
         {
-          slug: 'heading',
+          slug: "heading",
           fields: [
             {
-              name: 'text',
-              type: 'text',
+              name: "text",
+              type: "text",
               required: true,
             },
             {
-              name: 'level',
-              type: 'select',
+              name: "level",
+              type: "select",
               options: [
-                { label: 'H1', value: 'h1' },
-                { label: 'H2', value: 'h2' },
-                { label: 'H3', value: 'h3' },
-                { label: 'H4', value: 'h4' },
+                { label: "H1", value: "h1" },
+                { label: "H2", value: "h2" },
+                { label: "H3", value: "h3" },
+                { label: "H4", value: "h4" },
               ],
-              defaultValue: 'h1',
+              defaultValue: "h1",
             },
           ],
         },
         {
-          slug: 'paragraph',
+          slug: "paragraph",
           fields: [
             {
-              name: 'text',
-              type: 'richText',
-              required: true,
-            },
-          ],
-        },
-        {
-          slug: 'image',
-          fields: [
-            {
-              name: 'image',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-            },
-            {
-              name: 'caption',
-              type: 'text',
-            },
-            {
-              name: 'altText',
-              type: 'text',
+              name: "text",
+              type: "richText",
               required: true,
             },
           ],
         },
         {
-          slug: 'examQuestion',
+          slug: "image",
           fields: [
             {
-              name: 'question',
-              type: 'richText',
+              name: "image",
+              type: "upload",
+              relationTo: "media",
               required: true,
             },
             {
-              name: 'options',
-              type: 'array',
+              name: "caption",
+              type: "text",
+            },
+            {
+              name: "altText",
+              type: "text",
+              required: true,
+            },
+          ],
+        },
+        {
+          slug: "examQuestion",
+          fields: [
+            {
+              name: "question",
+              type: "richText",
+              required: true,
+            },
+            {
+              name: "options",
+              type: "array",
               fields: [
                 {
-                  name: 'option',
-                  type: 'text',
+                  name: "option",
+                  type: "text",
                   required: true,
                 },
                 {
-                  name: 'isCorrect',
-                  type: 'checkbox',
+                  name: "isCorrect",
+                  type: "checkbox",
                   defaultValue: false,
                 },
               ],
             },
             {
-              name: 'explanation',
-              type: 'richText',
+              name: "explanation",
+              type: "richText",
             },
           ],
         },
         {
-          slug: 'table',
+          slug: "table",
           fields: [
             {
-              name: 'tableCaption',
-              type: 'text',
-              label: 'Table Caption',
+              name: "tableCaption",
+              type: "text",
+              label: "Table Caption",
             },
             {
-              name: 'rows',
-              type: 'array',
+              name: "rows",
+              type: "array",
               fields: [
                 {
-                  name: 'cells',
-                  type: 'array',
+                  name: "cells",
+                  type: "array",
                   fields: [
                     {
-                      name: 'content',
-                      type: 'richText',
+                      name: "content",
+                      type: "richText",
                       required: true,
                     },
                     {
-                      name: 'isHeader',
-                      type: 'checkbox',
-                      label: 'Is Header Cell',
+                      name: "isHeader",
+                      type: "checkbox",
+                      label: "Is Header Cell",
                       defaultValue: false,
                     },
                   ],
@@ -159,43 +159,43 @@ export const ExamPages: CollectionConfig = {
               ],
             },
             {
-              name: 'style',
-              type: 'select',
+              name: "style",
+              type: "select",
               options: [
                 {
-                  label: 'Default',
-                  value: 'default',
+                  label: "Default",
+                  value: "default",
                 },
                 {
-                  label: 'Striped',
-                  value: 'striped',
+                  label: "Striped",
+                  value: "striped",
                 },
                 {
-                  label: 'Bordered',
-                  value: 'bordered',
+                  label: "Bordered",
+                  value: "bordered",
                 },
               ],
-              defaultValue: 'default',
+              defaultValue: "default",
             },
           ],
         },
       ],
     },
     {
-      name: 'meta',
-      type: 'group',
+      name: "meta",
+      type: "group",
       fields: [
         {
-          name: 'description',
-          type: 'textarea',
+          name: "description",
+          type: "textarea",
         },
         {
-          name: 'keywords',
-          type: 'text',
+          name: "keywords",
+          type: "text",
         },
       ],
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
   ],

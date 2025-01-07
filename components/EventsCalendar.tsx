@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { format, isSameDay } from 'date-fns'
-import { Calendar1 } from 'lucide-react'
+import { Bell } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -68,9 +68,14 @@ export function EventCalendar() {
       <PopoverTrigger asChild>
         <Button
           variant="default"
-          className={`md:w-[120px] w-[40px]  justify-start text-left font-normal ${!date && "text-muted-foreground"}`}
+          className={`justify-start !p-0 bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
         >
-          {date ? <div className='flex gap-4'><Calendar1 size={20} /><span className='hidden lg:block'>Events</span></div> : <span>Pick a date</span>}
+          <div className="relative lg:mr-4">
+            <Bell className="h-6 w-6  text-[#fff] hover:text-[#F3C623] cursor-pointer " />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              3
+            </span>
+          </div>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

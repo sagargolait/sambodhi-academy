@@ -22,6 +22,7 @@ export function WhatsNewSection() {
     fetchAnnouncements()
   }, [])
 
+
   useEffect(() => {
     const scrollInterval = setInterval(() => {
       setScrollPosition((prevPosition) => {

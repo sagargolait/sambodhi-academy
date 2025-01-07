@@ -14,6 +14,7 @@ const buttonStyles = cva(
       size: {
         default: 'h-10 py-2 px-4',
         sm: 'h-9 px-3',
+        xs: 'h-8 px-2',
         lg: 'h-11 px-8',
       },
     },
@@ -26,7 +27,7 @@ const buttonStyles = cva(
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonStyles> {}
+  VariantProps<typeof buttonStyles> { }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {

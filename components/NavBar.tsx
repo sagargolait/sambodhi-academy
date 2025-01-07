@@ -4,7 +4,6 @@ import {
   Phone,
   Info,
   Home,
-  Bell,
   Globe,
   GalleryHorizontal,
   Book,
@@ -52,6 +51,8 @@ export default function NavBar() {
         { name: 'SC Schemes', href: '/' },
         { name: 'ST Schemes', href: '/' },
         { name: 'OBC Schemes', href: '/' },
+        { name: 'EWS', href: '/' },
+
       ]
     },
     {
@@ -105,7 +106,7 @@ export default function NavBar() {
                   alt="logo"
                   className="aspect-w-4 aspect-h-3"
                 />
-                <span>
+                <span className="text-sm lg:text-lg">
                   Sambodhi <br /> Academy
                 </span>
               </Link>
@@ -133,32 +134,25 @@ export default function NavBar() {
                   )
                 ))}
               </nav>
-              <EventCalendar />
-              <div className="md:flex hidden items-center gap-4 ">
-                <div className="relative mr-4">
-                  <Bell className="h-6 w-6 text-[#fff] hover:text-[#F3C623] cursor-pointer" />
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    3
-                  </span>
-                </div>
+              <div className="flex items-center gap-4 ">
+                <EventCalendar />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="outline"
                       className="bg-[#0a0908] text-[#fff] hover:bg-[#EB8317]"
+                      size={"xs"}
                     >
                       Login
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="center">
                     {login.map((lang) => (
-                      <DropdownMenuItem
-                        key={lang.code}
-                      >
-                        <Link href={`/${lang.code}`} target="_blank">
+                      <Link key={lang.code} href={`/${lang.code}`} target="_blank">
+                        <DropdownMenuItem className="cursor-pointer">
                           {lang.name}
-                        </Link>
-                      </DropdownMenuItem>
+                        </DropdownMenuItem>
+                      </Link>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
