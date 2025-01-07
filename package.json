@@ -46,6 +46,7 @@
     "react-responsive-carousel": "^3.2.23",
     "slate": "^0.112.0",
     "sonner": "^1.7.1",
+    "swiper": "^11.2.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "yup": "^1.6.1"
