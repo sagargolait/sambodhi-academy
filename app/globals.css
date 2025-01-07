@@ -10,3 +10,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+.swiper-container {
+  overflow: visible !important;
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+/* Hide default navigation */
+:root {
+  --swiper-navigation-size: 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
+/* Custom button disabled state */
+.custom-prev:disabled,
+.custom-next:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

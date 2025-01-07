@@ -38,28 +38,47 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
             ))}
           </div>
 
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={3}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
-          >
-            {FilteredImages.flatMap(category =>
-              category.images.map((image: any) => (
-                <SwiperSlide key={image.id}>
-                  <img
-                    src={image.image.url}
-                    alt={image.image.alt}
-                    className="rounded-md object-fit mb-4"
-                  />
-                </SwiperSlide>
-              ))
-            )}
-          </Swiper>
+          <div className="swiper-container relative px-10">
+            <Swiper
+              modules={[Navigation, Pagination]}
+              spaceBetween={20}
+              slidesPerView={3}
+              navigation={{
+                enabled: true,
+                nextEl: '.custom-next',
+                prevEl: '.custom-prev'
+              }}
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log('slide change')}
+              className="relative"
+            >
+              {FilteredImages.flatMap(category =>
+                category.images.map((image: any) => (
+                  <SwiperSlide key={image.id}>
+                    <img
+                      src={image.image.url}
+                      alt={image.image.alt}
+                      className="rounded-md object-fit mb-4"
+                    />
+                  </SwiperSlide>
+                ))
+              )}
+            </Swiper>
+
+            <button className="custom-prev absolute left-3 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg z-10 hover:bg-gray-100">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <button className="custom-next absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg z-10 hover:bg-gray-100">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       <div className="mt-8 text-center">
