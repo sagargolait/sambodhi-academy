@@ -34,7 +34,7 @@ const GalleryComponent = ({ galleryImages }: Props) => {
             <Button
               key={item.id}
               onClick={() => setFilter(item.location)}
-              variant={filter === item.category ? "default" : "outline"}
+              variant={filter === item.location ? "default" : "outline"}
               className="capitalize"
             >
               {item.location}

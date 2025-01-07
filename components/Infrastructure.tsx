@@ -30,7 +30,7 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
               <Button
                 key={item.id}
                 onClick={() => setFilter(item.location)}
-                variant={filter === item.category ? "default" : "outline"}
+                variant={filter === item.location ? "default" : "outline"}
                 className="capitalize"
               >
                 {item.location}
