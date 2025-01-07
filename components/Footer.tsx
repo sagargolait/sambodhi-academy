@@ -47,11 +47,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                   Sambodhi Academy
                 </CardTitle>
                 <CardContent className="mt-2">
-                  Founded in 2005, Sambodhi Academy began with a vision to empower
-                  India&apos;s youth with the knowledge and skills needed to excel
-                  in government service examinations. Our journey started with a
-                  small batch of 50 students and has now grown to become one of the
-                  leading institutes in the country.
+                  The Sambodhi Academy was founded by Mr. Bhimrao Hattiambire, on 14th October 1997. It was a turning point in his life and also in the lives of thousands of beneficiaries of his activities in the years that followed. Despite all ups and downs in his personal life, he has been relentlessly working in the social field, solving problems of people, effecting social reforms of various kinds.
                 </CardContent>
               </CardHeader>
             </Card>

@@ -9,7 +9,7 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
 
 const teamMembers = [
   {
-    name: "Dr. Rajesh Kumar",
+    name: "Dr. Bhimrao Hattiambire",
     position: "Founder & Director",
     image: "/placeholder.svg?height=150&width=150",
   },
@@ -51,7 +51,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
               Our Vision
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               We envision a future where every ambitious individual has access
               to top-notch educational resources and mentorship to pursue a
               successful career in government services. Our goal is to be the
@@ -59,10 +59,16 @@ export default function AboutPage() {
               servants who will contribute to the nation&apos;s progress and
               development.
             </p>
+            {/* <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
+              About our Founder and President
+            </h3>
+            <p className="text-gray-600">
+              The Sambodhi Academy was founded by Mr. Bhimrao Hattiambire, on 14th October 1997. It was a turning point in his life and also in the lives of thousands of beneficiaries of his activities in the years that followed. Despite all ups and downs in his personal life, he has been relentlessly working in the social field, solving problems of people, effecting social reforms of various kinds.
+            </p> */}
           </div>
           <div>
             <img
-              src="/api/media/file/director.jpg"
+              src="/api/media/file/director-about.jpg"
               alt="Sambodhi Director"
               className="rounded-lg shadow-lg"
             />

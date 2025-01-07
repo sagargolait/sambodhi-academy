@@ -49,9 +49,9 @@ export default function NavBar() {
       name: 'Govt Schemes',
       icon: <GraduationCap className="h-5 w-5" />,
       dropdown: [
-        { name: 'SC Schemes', href: '/govt-schemes/sc' },
-        { name: 'ST Schemes', href: '/govt-schemes/st' },
-        { name: 'OBC Schemes', href: '/govt-schemes/obc' },
+        { name: 'SC Schemes', href: '/' },
+        { name: 'ST Schemes', href: '/' },
+        { name: 'OBC Schemes', href: '/' },
       ]
     },
     {
