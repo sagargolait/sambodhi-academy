@@ -30,7 +30,7 @@ export function WhatsNewSection() {
         const contentHeight = containerRef.current?.scrollHeight || 0
         return newPosition >= contentHeight ? 0 : newPosition
       })
-    }, 1000)
+    }, 60)
 
     return () => clearInterval(scrollInterval)
   }, [])
