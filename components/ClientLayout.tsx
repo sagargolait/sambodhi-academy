@@ -27,7 +27,7 @@ export default function ClientLayout({
       <Footer addresses={data} setShowFloatingFooter={setShowFloatingFooter} />
       {showFloatingFooter && (
         <a
-          href="https://wa.me/911234567890"
+          href="https://whatsapp.com/channel/0029Vb33ZTU9MF8t5n9Rao0i"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-20 right-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300"

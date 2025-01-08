@@ -121,26 +121,38 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 primaryCenter ? `${primaryCenter.street}, ${primaryCenter.city}, ${primaryCenter.state}, ${primaryCenter.postalCode}` : ""
               }
             </p>
+            <div className="flex gap-4 items-center mt-2">
+              <a href={'tel:7507743322'} className="flex items-center text-sm font-bold">
+                <Phone className="w-5 h-5 mr-1 " />
+                7507743322
+              </a>
+              <a href={'tel:9561234031'} className="flex items-center text-sm font-bold">
+                <Phone className="w-5 h-5 mr-1 " />
+                9561234031
+              </a>
+            </div>
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               <a
-                href="https://www.facebook.com/Sambodhi-Academy-Maharashtra-605121983233081"
+                href="https://www.facebook.com/sambodhiapbn?mibextid=ZbWKwL"
                 className="hover:text-[#F3C623] flex"
+                target="_blank"
               >
                 <LucideFacebook size={25} />
 
               </a>
-              <a href="#" className="hover:text-[#F3C623]">
+              <a href="#" className="hover:text-[#F3C623]" target="_blank">
                 <LucideTwitter size={25} />
               </a>
-              <a href="#" className="hover:text-[#F3C623]">
+              <a href="https://www.instagram.com/sambodhi_academy/?igshid=ZDdkNTZiNTM%3D" target="_blank" className="hover:text-[#F3C623]">
                 <LucideInstagram size={25} />
               </a>
               <a
                 href="https://www.youtube.com/channel/UCOUbtszMJ-3A6TK3fl0ksUQ"
                 className="hover:text-[#F3C623]"
+                target="_blank"
               >
                 <LucideYoutube size={25} />
               </a>
