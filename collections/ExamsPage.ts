@@ -1,4 +1,5 @@
 import { CollectionConfig } from "payload";
+import { slugField } from "./Exams";
 
 export const ExamPages: CollectionConfig = {
   slug: "exam-pages",
@@ -6,6 +7,7 @@ export const ExamPages: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "status", "createdAt"],
   },
+
   access: {
     read: () => true,
   },
@@ -15,15 +17,7 @@ export const ExamPages: CollectionConfig = {
       type: "text",
       required: true,
     },
-    {
-      name: "slug",
-      type: "text",
-      required: true,
-      unique: true,
-      admin: {
-        position: "sidebar",
-      },
-    },
+    slugField,
     {
       name: "status",
       type: "select",

@@ -1,4 +1,4 @@
-import type { CollectionConfig, Field } from 'payload';
+import type { CollectionConfig, Field } from "payload";
 
 // Define the Exam document type
 interface ExamDocument {
@@ -24,22 +24,22 @@ type BeforeValidateHook = (args: {
 }) => string | Promise<string>;
 
 // Slugify utility function
-const slugify = (str: string): string => {
+export const slugify = (str: string): string => {
   return str
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 };
 
 // Slug field configuration with TypeScript
-const slugField: Field = {
-  name: 'slug',
-  type: 'text',
+export const slugField: Field = {
+  name: "slug",
+  type: "text",
   required: true,
   admin: {
-    position: 'sidebar',
+    position: "sidebar",
   },
   hooks: {
     beforeValidate: [
@@ -47,16 +47,16 @@ const slugField: Field = {
         if (!data?.slug && data?.title) {
           return slugify(data.title);
         }
-        return data?.slug || '';
+        return data?.slug || "";
       }) as BeforeValidateHook,
     ],
   },
   validate: (val: any) => {
-    if (typeof val !== 'string') {
-      return 'Slug must be a string';
+    if (typeof val !== "string") {
+      return "Slug must be a string";
     }
     if (!/^[a-zA-Z0-9-]+$/.test(val)) {
-      return 'Slug must contain only letters, numbers, and hyphens';
+      return "Slug must contain only letters, numbers, and hyphens";
     }
     return true;
   },
@@ -64,21 +64,31 @@ const slugField: Field = {
 
 // Main collection configuration
 export const Exams: CollectionConfig = {
-  slug: 'exams',
+  slug: "exams",
   access: {
     read: (): boolean => true,
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
+      name: "title",
+      type: "text",
       required: true,
+    },
+    {
+      name: "order",
+      type: "number",
+      required: true,
+      admin: {
+        position: "sidebar", // Display in the sidebar for easier access in the admin panel
+        description:
+          "Controls the display order of exams. Lower numbers appear first.",
+      },
     },
     slugField,
     {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
+      name: "logo",
+      type: "upload",
+      relationTo: "media",
     },
   ],
 };

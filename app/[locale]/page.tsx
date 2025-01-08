@@ -31,7 +31,8 @@ export default async function Home() {
         }),
         payload.find({
             collection: 'exams' as CollectionSlug,
-            depth: 2
+            depth: 2,
+            sort: 'order'
         }),
         payload.find({
             collection: 'testimonials' as CollectionSlug,
