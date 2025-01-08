@@ -13,11 +13,21 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*{/}?", // Match all paths
+        source: "/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // Cache for 1 year
+            value: "public, s-maxage=10, stale-while-revalidate=300",
+          },
+        ],
+      },
+      {
+        // Different policy for media/uploads
+        source: "/media/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

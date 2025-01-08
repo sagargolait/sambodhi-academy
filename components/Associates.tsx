@@ -19,8 +19,8 @@ const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
         </SectionHeading>
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
           {objectToArray(associates).map((associate: any) => (
-            <Link href={associate.slug} key={associate.id}>
-              <Card className="text-center">
+            <Link href={`/associates/${associate.slug}`} key={associate.id}>
+              <Card className="text-center md:h-[350px]">
                 <CardContent className="pt-6">
                   <Image
                     src={associate.Image.url}

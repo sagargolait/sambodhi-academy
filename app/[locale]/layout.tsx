@@ -8,6 +8,7 @@ import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
 import { Toaster } from "@/components/ui/sonner"
 
+
 type Locale = typeof routing.locales[number];
 
 interface LayoutProps {

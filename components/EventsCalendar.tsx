@@ -68,7 +68,7 @@ export function EventCalendar() {
       <PopoverTrigger asChild>
         <Button
           variant="default"
-          className={`justify-start !p-0 bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
+          className={`justify-start !p-0 hover:bg-transparent bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
         >
           <div className="relative lg:mr-4">
             <Bell className="h-6 w-6  text-[#fff] hover:text-[#F3C623] cursor-pointer " />
