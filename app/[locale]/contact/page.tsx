@@ -174,13 +174,17 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center space-x-4">
-                <a href={'tel:0240297990'} className="flex items-center text-sm font-bold">
+                <a href={'tel:7507743322'} className="flex items-center text-sm font-bold">
                   <Phone className="w-5 h-5 mr-1 " />
-                  (0240) 297 0990
+                  7507743322
                 </a>
-                <a href={'mailto:sambodhipbn@gmail.com'} className="flex items-center text-sm font-bold">
+                <a href={'tel:9561234031'} className="flex items-center text-sm font-bold">
+                  <Phone className="w-5 h-5 mr-1 " />
+                  9561234031
+                </a>
+                <a href={'mailto:sambodhiinquiry@gmail.com'} className="flex items-center text-sm font-bold">
                   <Mail className="w-5 h-5 mr-1" />
-                  sambodhiapbn@gmail.com
+                  sambodhiinquiry@gmail.com
                 </a>
               </div>
               <div className="flex items-center">
