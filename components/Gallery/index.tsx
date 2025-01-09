@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import { objectToArray } from '@/lib/utils'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Props = {
   galleryImages: DataFromCollectionSlug<CollectionSlug>[]
@@ -24,7 +25,7 @@ const GalleryComponent = ({ galleryImages }: Props) => {
         <SectionHeading>Our Videos</SectionHeading>
         <div className="my-12 text-center flex justify-center">
           <Link href="https://www.youtube.com/@sambodhicompetitiveexamtra414/videos" target='_blank'>
-            <img src='/api/media/file/youtubelogo.svg' alt='youtube' width={500} height={50} />
+            <Image src='/api/media/file/youtubelogo.svg' alt='youtube' width={500} height={50} />
           </Link>
         </div>
         <SectionHeading>Our Gallery</SectionHeading>
@@ -46,7 +47,7 @@ const GalleryComponent = ({ galleryImages }: Props) => {
           <div key={item.id} className="grid grid-cols-3 gap-6 justify-items-center w-full">
             <>
               {item.images.map((imageItem: any) => (
-                <img
+                <Image
                   key={imageItem.id}
                   src={imageItem.image.url}
                   alt={imageItem.image.alt}
