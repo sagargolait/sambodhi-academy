@@ -65,11 +65,9 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
           <div className="swiper-container relative px-10">
             <Swiper
               modules={[Navigation, Pagination]}
-              spaceBetween={20}
-              slidesPerView={3}
               breakpoints={{
                 640: {
-                  slidesPerView: 1,
+                  slidesPerView: 2,
                   spaceBetween: 10,
                 },
                 768: {
@@ -86,7 +84,6 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
                 nextEl: '.custom-next',
                 prevEl: '.custom-prev'
               }}
-              pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
               className="relative"
             >

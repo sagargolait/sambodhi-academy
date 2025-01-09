@@ -9,7 +9,7 @@ export default function TopBar() {
 
     <div className="bg-[#F3C623] text-[#10375C] py-2">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center gap-2">
           <a href={'tel:7507743322'} className="flex items-center text-sm font-bold">
             <Phone className="w-5 h-5 mr-1 " />
             7507743322

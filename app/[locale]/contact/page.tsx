@@ -173,7 +173,7 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <a href={'tel:7507743322'} className="flex items-center text-sm font-bold">
                   <Phone className="w-5 h-5 mr-1 " />
                   7507743322

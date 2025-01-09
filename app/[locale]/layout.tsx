@@ -8,6 +8,7 @@ import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
 import { Toaster } from "@/components/ui/sonner"
 
+import '@/styles/globals.css'
 
 type Locale = typeof routing.locales[number];
 
