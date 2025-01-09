@@ -13,7 +13,7 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
   return (
     <div className="container mx-auto px-4 py-10">
       <SectionHeading>
-        Explore by <span className="text-[#F3C623]">Exams</span>
+        Explore by Exams
       </SectionHeading>
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content */}
