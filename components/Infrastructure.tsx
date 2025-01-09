@@ -17,6 +17,7 @@ import SectionHeading from "./SectionHeading";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { Navigation, Pagination } from 'swiper/modules';
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Image from "next/image";
 
 const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const galleryImageByCategory = objectToArray(galleryImages);
@@ -92,10 +93,12 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
               {FilteredImages.flatMap((category, categoryIndex) =>
                 category.images.map((image: any, imageIndex: number) => (
                   <SwiperSlide key={image.id}>
-                    <img
+                    <Image
                       src={image.image.url}
                       alt={image.image.alt}
                       className="rounded-md object-fit mb-4 cursor-pointer h-64 w-full object-cover"
+                      width={400}
+                      height={400}
                       onClick={() => openModal(categoryIndex * category.images.length + imageIndex)}
                     />
                   </SwiperSlide>
@@ -131,9 +134,10 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
             Image Gallery View
           </DialogTitle>
           <div className="relative w-full h-full flex items-center justify-center bg-black/50">
-            <img
+            <Image
               src={allImages[selectedImageIndex]?.image.url}
               alt={allImages[selectedImageIndex]?.image.alt}
+              fill
               className="max-h-full max-w-full object-contain"
             />
 

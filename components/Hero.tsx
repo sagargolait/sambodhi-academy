@@ -7,6 +7,7 @@ import type { CarouselProps } from "react-responsive-carousel";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
 import { WhatsNewSection } from "./whatsNewSection";
+import Image from "next/image";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
@@ -56,9 +57,10 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
               <Carousel {...(carouselProps as CarouselProps)}>
                 {item.images.map((imageItem: any, index: number) => (
                   <div key={imageItem.id} className="h-[550px] relative">
-                    <img
+                    <Image
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
+                      fill
                       className="rounded-xl object-fit w-full h-full"
                       loading={index === 0 ? "eager" : "lazy"}
                     />
