@@ -14,7 +14,7 @@ export default async function StudentAdminPage() {
     let userJson = null;
 
     try {
-        const req = await fetch(`/api/students/me`, {
+        const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/students/me`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
