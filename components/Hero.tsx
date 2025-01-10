@@ -20,7 +20,7 @@ const Carousel = dynamic(
 const carouselProps: Partial<CarouselProps> = {
   showArrows: true,
   showStatus: false,
-  showIndicators: true,
+  showIndicators: false,
   infiniteLoop: true,
   showThumbs: false,
   autoPlay: true,
@@ -38,7 +38,6 @@ const carouselProps: Partial<CarouselProps> = {
 const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const Imgs = objectToArray(heroImages);
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
-
   // Preload first image using native Image constructor
   React.useEffect(() => {
     const firstImage = heroCategoryData[0]?.images[0]?.image;

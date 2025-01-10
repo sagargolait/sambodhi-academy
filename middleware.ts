@@ -8,6 +8,7 @@ export default function middleware(request: NextRequest) {
   // Skip middleware for specific routes and public assets
   if (
     pathname.startsWith("/admin") ||
+    pathname.startsWith("/student-admin") ||
     pathname.startsWith("/my-route") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/public") ||
@@ -43,6 +44,6 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except those starting with specified prefixes
-    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin).*)",
+    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin).*)",
   ],
 };

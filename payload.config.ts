@@ -30,6 +30,7 @@ import { Announcements } from "./collections/Announcements";
 import { FeatureDescriptions } from "./collections/FeatureDescription";
 import Faculty from "./collections/Faculty";
 import QuestionPapers from "./collections/Pyqs";
+import Students from "./collections/Students";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -64,6 +65,7 @@ export default buildConfig({
     FeatureDescriptions,
     Faculty,
     QuestionPapers,
+    Students,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

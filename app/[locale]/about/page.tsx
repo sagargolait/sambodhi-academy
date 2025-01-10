@@ -1,30 +1,21 @@
-import SectionHeading from "@/components/SectionHeading";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+'use client'
 
-const teamMembers = [
-  {
-    name: "Bhimrao Hattiambire",
-    position: "Founder & Director",
-    image: "/placeholder.svg?height=150&width=150",
-  },
-  {
-    name: "Prof. Anita Sharma",
-    position: "Academic Head",
-    image: "/placeholder.svg?height=150&width=150",
-  },
-  {
-    name: "Mr. Vikram Singh",
-    position: "Chief Strategy Officer",
-    image: "/placeholder.svg?height=150&width=150",
-  },
-  {
-    name: "Ms. Priya Patel",
-    position: "Student Success Manager",
-    image: "/placeholder.svg?height=150&width=150",
-  },
-];
+import { FacultyCarousel } from "@/components/FacultyCarousel";
+import SectionHeading from "@/components/SectionHeading";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function AboutPage() {
+  const [facultyMembers, setFacultyMembers] = useState([])
+  useEffect(() => {
+    const fetchFacultyData = async () => {
+      const facultyMembersData = await fetch('/api/faculty')
+      const data = await facultyMembersData.json()
+      setFacultyMembers(data.docs)
+    }
+
+    fetchFacultyData()
+  }, [])
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <main className="container mx-auto px-4 py-8">
@@ -61,30 +52,17 @@ export default function AboutPage() {
             </p> */}
           </div>
           <div>
-            <img
+            <Image
               src="/api/media/file/director-about.jpg"
               alt="Sambodhi Director"
               className="rounded-lg shadow-lg"
+              width={600}
+              height={400}
             />
           </div>
         </div>
 
-        <SectionHeading>Our Team</SectionHeading>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member, index) => (
-            <Card key={index} className="text-center">
-              <CardContent className="pt-6">
-                <img src='/api/media/file/avatars_grey_circles.jpg' alt="Team Member" className="w-24 h-24 rounded-full mx-auto" />
-                <CardHeader>
-                  <CardTitle className="text-[#10375C]">
-                    {member.name}
-                  </CardTitle>
-                </CardHeader>
-                <p className="text-gray-600">{member.position}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <FacultyCarousel faculties={facultyMembers} />
       </main>
     </div>
   );

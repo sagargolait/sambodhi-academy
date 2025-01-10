@@ -5,6 +5,7 @@ import ExamExplorer from "@/components/exploreExams";
 import Testimonials from "@/components/testimonials";
 import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
+import { FacultyCarousel } from "@/components/FacultyCarousel";
 // Dynamic imports for other components
 const CountDown = dynamic(() => import("@/components/CountDown"));
 // const Courses = dynamic(() => import("@/components/Courses"));
@@ -24,7 +25,7 @@ const Associates = dynamic(() => import("@/components/Associates"));
 
 export default async function Home() {
     const payload = await getPayload({ config })
-    const [associates, exams, testimonials, faqs, galleryImages, features] = await Promise.all([
+    const [associates, exams, testimonials, faqs, galleryImages, features, faculties] = await Promise.all([
         payload.find({
             collection: 'associates' as CollectionSlug,
             depth: 2
@@ -49,6 +50,10 @@ export default async function Home() {
         payload.find({
             collection: 'feature-descriptions' as CollectionSlug,
             depth: 2
+        }),
+        payload.find({
+            collection: 'faculty' as CollectionSlug,
+            depth: 2
         })
     ])
 
@@ -65,6 +70,7 @@ export default async function Home() {
             <Infrastructure {...galleryImages.docs} />
             {/* <VideoLectures /> */}
             <Testimonials {...testimonials.docs} />
+            <FacultyCarousel faculties={faculties.docs} />
             <FAQs {...faqs.docs} />
             {/* <RequestCounseling /> */}
         </div>

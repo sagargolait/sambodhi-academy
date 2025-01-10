@@ -14,7 +14,7 @@ const cardStyles = cva("rounded-lg border border-card bg-card p-6 shadow-sm", {
 
 interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardStyles> {}
+  VariantProps<typeof cardStyles> { }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, ...props }, ref) => {
@@ -73,5 +73,6 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
   }
 );
 CardContent.displayName = "CardContent";
+
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent };

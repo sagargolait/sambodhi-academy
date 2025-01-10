@@ -76,7 +76,7 @@ export default function NavBar() {
 
   const login = [
     { code: "admin", name: "Admin" },
-    { code: "user-login", name: "User Login" },
+    { code: "student-login", name: "Student Login" },
   ]
 
   useEffect(() => {
