@@ -7,6 +7,7 @@ import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import { objectToArray } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
+import ImageDialog from '../imageDialog'
 
 type Props = {
   galleryImages: DataFromCollectionSlug<CollectionSlug>[]
@@ -15,10 +16,26 @@ type Props = {
 const GalleryComponent = ({ galleryImages }: Props) => {
   const images = objectToArray(galleryImages)
   const [filter, setFilter] = useState('aurangabad');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const openModal = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsOpen(true);
+  };
 
+  const nextImage = () => {
+    setSelectedImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const previousImage = () => {
+    setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
   const FilteredImages = images.filter((item: any) => item.location === filter);
+  const allImages = FilteredImages.flatMap(category => category.images);
   const FilterByLocationImages = images.filter((item: any) => item.location);
+  const uniqueLocations = new Set(FilterByLocationImages.map((item: any) => item.location));
 
+  const uniqueLocationArray = Array.from(uniqueLocations)
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -31,34 +48,36 @@ const GalleryComponent = ({ galleryImages }: Props) => {
         <SectionHeading>Our Gallery</SectionHeading>
 
         <div className="flex justify-center space-x-2 mb-8">
-          {FilterByLocationImages.map((item: any) => (
+          {uniqueLocationArray.map((item: any, index) => (
             <Button
-              key={item.id}
-              onClick={() => setFilter(item.location)}
-              variant={filter === item.location ? "default" : "outline"}
+              key={index}
+              onClick={() => setFilter(item)}
+              variant={filter === item ? "default" : "outline"}
               className="capitalize"
             >
-              {item.location}
+              {item}
             </Button>
           ))}
         </div>
 
-        {FilteredImages.map((item) => (
+        {FilteredImages.map((item, categoryIndex) => (
           <div key={item.id} className="grid grid-cols-3 gap-6 justify-items-center w-full">
             <>
-              {item.images.map((imageItem: any) => (
+              {item.images.map((imageItem: any, imageIndex: any) => (
                 <Image
                   key={imageItem.id}
                   src={imageItem.image.url}
                   alt={imageItem.image.alt}
                   width={400}
                   height={400}
+                  onClick={() => openModal(categoryIndex * item.images.length + imageIndex)}
                 />
               ))}
             </>
           </div>
         ))}
       </main>
+      <ImageDialog isOpen={isOpen} setIsOpen={setIsOpen} selectedImageIndex={selectedImageIndex} nextImage={nextImage} previousImage={previousImage} allImages={allImages} />
     </div>
   )
 }

@@ -12,7 +12,7 @@ const sidebarItems = [
     label: 'Previous Year Question Papers',
     icon: FileText,
     items: [
-      { year: '2023', url: '/path/to/2023-question-paper.pdf' },
+      { year: '2023', url: '/api/media/file/CGL%202023.pdf' },
       { year: '2022', url: '/path/to/2022-question-paper.pdf' },
       { year: '2021', url: '/path/to/2021-question-paper.pdf' },
     ]
@@ -45,7 +45,7 @@ export default function StudentAdminLayout({ children }: { children: React.React
   }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider >
       <div className="flex w-full h-screen">
         <Sidebar className="w-64 !bg-[#10375C] text-white">
           <SidebarHeader>
@@ -89,7 +89,7 @@ export default function StudentAdminLayout({ children }: { children: React.React
         <main className="flex-1 p-6 overflow-auto bg-white">
           {selectedContent ? (
             selectedContent.type === 'pdf' ? (
-              <PDFViewer url={selectedContent.url} />
+              <PDFViewer url={'/api/media/file/CGL%202023.pdf'} />
             ) : (
               <VideoPlayer url={selectedContent.url} />
             )
