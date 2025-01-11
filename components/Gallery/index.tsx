@@ -15,7 +15,7 @@ type Props = {
 
 const GalleryComponent = ({ galleryImages }: Props) => {
   const images = objectToArray(galleryImages)
-  const [filter, setFilter] = useState('aurangabad');
+  const [filter, setFilter] = useState('Chhatrapati Sambhaji Nagar');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const openModal = (index: number) => {

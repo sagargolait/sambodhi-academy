@@ -16,7 +16,7 @@ import ImageDialog from "./imageDialog";
 
 const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const galleryImageByCategory = objectToArray(galleryImages);
-  const [filter, setFilter] = useState('aurangabad');
+  const [filter, setFilter] = useState('Chhatrapati Sambhaji Nagar');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const FilteredImages = galleryImageByCategory.filter((item: any) => item.location === filter);

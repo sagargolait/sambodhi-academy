@@ -23,7 +23,10 @@ export const ImageGallery: CollectionConfig = {
         { label: "Hingoli", value: "hingoli" },
         { label: "Pune", value: "Pune" },
         { label: "Parbhani", value: "parbhani" },
-        { label: "Chhatrapati Sambhaji Nagar", value: "aurangabad" },
+        {
+          label: "Chhatrapati Sambhaji Nagar",
+          value: "Chhatrapati Sambhaji Nagar",
+        },
       ],
     },
     {
