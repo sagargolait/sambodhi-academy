@@ -89,9 +89,15 @@ export default function StudentAdminLayout({ children }: { children: React.React
         <main className="flex-1 p-6 overflow-auto bg-white">
           {selectedContent ? (
             selectedContent.type === 'pdf' ? (
-              <PDFViewer url={'/api/media/file/CGL%202023.pdf'} />
+              <>
+                {children}
+                <PDFViewer url={'/api/media/file/CGL%202023.pdf'} />
+              </>
             ) : (
-              <VideoPlayer url={selectedContent.url} />
+              <>
+                {children}
+                <VideoPlayer url={selectedContent.url} />
+              </>
             )
           ) : (
             children

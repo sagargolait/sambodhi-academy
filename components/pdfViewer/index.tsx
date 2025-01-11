@@ -3,9 +3,14 @@
 import React, { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react'
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.mjs',
+    import.meta.url,
+).toString();
 
 interface PDFViewerProps {
     url: string
@@ -14,19 +19,28 @@ interface PDFViewerProps {
 export default function PDFViewer({ url }: PDFViewerProps) {
     const [numPages, setNumPages] = useState<number | null>(null)
     const [pageNumber, setPageNumber] = useState(1)
-
+    const [zoomValue, setZoomValue] = useState(1.5)
     function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
         setNumPages(numPages)
     }
 
     return (
         <div className="flex flex-col items-center">
+            <div className='flex justify-end w-full gap-4 items-center'>
+                <span>Zoom</span>
+                <Button size='xs' onClick={() => setZoomValue((prev) => prev + 0.5)}>
+                    <Plus size={15} />
+                </Button>
+                <Button size='xs' onClick={() => setZoomValue((prev) => prev > 1 ? prev - 0.5 : prev)}>
+                    <Minus size={15} />
+                </Button>
+            </div>
             <Document
                 file={url}
                 onLoadSuccess={onDocumentLoadSuccess}
-                className="max-w-full"
+                className="max-w-full overflow-auto"
             >
-                <Page pageNumber={pageNumber} width={600} />
+                <Page pageNumber={pageNumber} scale={zoomValue} renderTextLayer={false} />
             </Document>
             <div className="flex items-center mt-4">
                 <Button
