@@ -160,6 +160,7 @@ export default function NavBar() {
                   <Button
                     variant="ghost"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="!p-0"
                   >
                     <Menu className="h-6 w-6" />
                   </Button>

@@ -5,7 +5,7 @@ import ExamExplorer from "@/components/exploreExams";
 import Testimonials from "@/components/testimonials";
 import { CollectionSlug, getPayload } from 'payload';
 import config from '@payload-config';
-import { FacultyCarousel } from "@/components/FacultyCarousel";
+import FacultyCarousel from "@/components/FacultyCarousel";
 
 const dynamicComponents = {
     CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),
@@ -57,15 +57,15 @@ export default async function Home() {
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
             <Hero heroImages={data.galleryImages} announcements={data.announcements} />
-            <dynamicComponents.Associates {...data.associates} />
-            <ExamExplorer {...data.exams} />
+            <dynamicComponents.Associates associates={data.associates} />
+            <ExamExplorer exams={data.exams} />
             <dynamicComponents.CountDown />
-            <dynamicComponents.Features {...data.features} />
+            <dynamicComponents.Features features={data.features} />
             <dynamicComponents.NotificationsAndArticles />
             <dynamicComponents.Infrastructure {...data.galleryImages} />
-            <Testimonials {...data.testimonials} />
+            <Testimonials testimonials={data.testimonials} />
             <FacultyCarousel faculties={data.faculties} />
-            <dynamicComponents.FAQs {...data.faqs} />
+            <dynamicComponents.FAQs faqs={data.faqs} />
         </div>
     );
 }

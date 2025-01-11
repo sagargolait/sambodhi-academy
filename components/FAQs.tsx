@@ -9,23 +9,19 @@ import {
 } from './ui/accordion'
 import SectionHeading from './SectionHeading'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
-import { objectToArray } from '@/lib/utils'
 
+interface FAQProps {
+  faqs: DataFromCollectionSlug<CollectionSlug>[]
+}
 
-
-const FAQs = (faqs: DataFromCollectionSlug<CollectionSlug>[]) => {
-  const faqItems = objectToArray(faqs).map((faq: any) => ({
-    question: faq.question,
-    answer: faq.answer,
-  }))
-
+const FAQs: React.FC<FAQProps> = ({ faqs }) => {
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
         <SectionHeading>Frequently Asked Questions</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Accordion type="single" collapsible className="w-full">
-            {faqItems.slice(0, Math.ceil(faqItems.length / 2)).map((item, index) => (
+            {faqs.slice(0, Math.ceil(faqs.length / 2)).map((item: any, index) => (
               <AccordionItem value={`item-${index}`} key={index}>
                 <AccordionTrigger className="text-[#10375C] hover:text-[#F3C623]">{item.question}</AccordionTrigger>
                 <AccordionContent className="text-[#10375C]">{item.answer}</AccordionContent>
@@ -33,8 +29,8 @@ const FAQs = (faqs: DataFromCollectionSlug<CollectionSlug>[]) => {
             ))}
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
-            {faqItems.slice(Math.ceil(faqItems.length / 2)).map((item, index) => (
-              <AccordionItem value={`item-${index + Math.ceil(faqItems.length / 2)}`} key={index + Math.ceil(faqItems.length / 2)}>
+            {faqs.slice(Math.ceil(faqs.length / 2)).map((item: any, index) => (
+              <AccordionItem value={`item-${index + Math.ceil(faqs.length / 2)}`} key={index + Math.ceil(faqs.length / 2)}>
                 <AccordionTrigger className="text-[#10375C] hover:text-[#F3C623]">{item.question}</AccordionTrigger>
                 <AccordionContent className="text-[#10375C]">{item.answer}</AccordionContent>
               </AccordionItem>

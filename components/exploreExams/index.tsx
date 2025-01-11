@@ -1,15 +1,14 @@
-'use client'
-
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
-import { objectToArray } from "@/lib/utils";
 
-export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlug>[]) {
+interface ExamProps {
+  exams: DataFromCollectionSlug<CollectionSlug>[]
+}
 
-  const examCards = objectToArray(exams)
+const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
   return (
     <div className="container mx-auto px-4 py-10">
       <SectionHeading>
@@ -19,7 +18,7 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
         {/* Main Content */}
         <div className="container">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto ">
-            {examCards.map((exam) => (
+            {exams.map((exam: any) => (
               <Link key={exam.id} href={`/exams/${exam.slug}`} className="text-center">
                 <Card className="hover:shadow-lg h-[180px] flex justify-center items-center transition-shadow border-[#10375C]">
                   <CardContent className="p-4 md:flex flex-col flex justify-center items-center gap-3">
@@ -43,3 +42,5 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
     </div>
   );
 }
+
+export default ExamExplorer;

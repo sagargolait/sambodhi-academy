@@ -1,6 +1,6 @@
 'use client'
 
-import { FacultyCarousel } from "@/components/FacultyCarousel";
+import FacultyCarousel from "@/components/FacultyCarousel";
 import SectionHeading from "@/components/SectionHeading";
 import Image from "next/image";
 import { useEffect, useState } from "react";

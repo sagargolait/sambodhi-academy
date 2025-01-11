@@ -1,14 +1,15 @@
-'use client'
-
 import React from 'react'
 import Image from 'next/image'
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import SectionHeading from '../SectionHeading'
+import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 
+interface FacultyProps {
+    faculties: DataFromCollectionSlug<CollectionSlug>[]
+}
 
-
-export function FacultyCarousel({ faculties }: any) {
+const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
     return (
         <div className="relative container mx-auto">
             <SectionHeading>Our Faculty</SectionHeading>
@@ -57,3 +58,5 @@ export function FacultyCarousel({ faculties }: any) {
         </div>
     )
 }
+
+export default FacultyCarousel;

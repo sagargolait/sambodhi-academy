@@ -1,16 +1,16 @@
-'use client';
-
 import React from "react";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
-import { objectToArray } from "@/lib/utils";
 import Link from "next/link";
 
+interface AssociatesProps {
+  associates: DataFromCollectionSlug<CollectionSlug>[]
+}
 
-
-const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
+const Associates: React.FC<AssociatesProps> = ({ associates }) => {
+  console.log(associates)
   return (
     <section className="py-20 ">
       <div className="container mx-auto px-4">
@@ -18,7 +18,7 @@ const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
           Empanelment From
         </SectionHeading>
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
-          {objectToArray(associates).map((associate: any) => (
+          {associates.map((associate: any) => (
             <Link href={`/associates/${associate.slug}`} key={associate.id}>
               <Card className="text-center md:h-[350px]">
                 <CardContent className="pt-6">

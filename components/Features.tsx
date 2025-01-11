@@ -7,7 +7,11 @@ import Image from 'next/image'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import { objectToArray } from '@/lib/utils'
 
-const Features = (features: DataFromCollectionSlug<CollectionSlug>[]) => {
+interface FeatureProps {
+  features: DataFromCollectionSlug<CollectionSlug>[]
+}
+
+const Features: React.FC<FeatureProps> = ({ features }) => {
   const featureItems: { id: string; title: string; description: string, Icon: any }[] = objectToArray(features)
   return (
     <section className="py-10">
