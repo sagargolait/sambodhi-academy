@@ -1,12 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 
 export function WhatsNewSection() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
   const [announcements, setAnnouncements] = useState<{ id: string; title: string; link: string }[]>([]);
 
   useEffect(() => {
@@ -23,17 +21,17 @@ export function WhatsNewSection() {
   }, [])
 
 
-  useEffect(() => {
-    const scrollInterval = setInterval(() => {
-      setScrollPosition((prevPosition) => {
-        const newPosition = prevPosition + 1
-        const contentHeight = containerRef.current?.scrollHeight || 0
-        return newPosition >= contentHeight ? 0 : newPosition
-      })
-    }, 60)
+  // useEffect(() => {
+  //   const scrollInterval = setInterval(() => {
+  //     setScrollPosition((prevPosition) => {
+  //       const newPosition = prevPosition + 1
+  //       const contentHeight = containerRef.current?.scrollHeight || 0
+  //       return newPosition >= contentHeight ? 0 : newPosition
+  //     })
+  //   }, 60)
 
-    return () => clearInterval(scrollInterval)
-  }, [])
+  //   return () => clearInterval(scrollInterval)
+  // }, [])
 
   return (
     <div className="bg-[#10375C] h-[550px] text-white p-6 m-4 w-full lg:w-1/4 rounded-lg shadow-lg border border-[#F3C623]">
@@ -41,11 +39,9 @@ export function WhatsNewSection() {
       <div className="mb-2">
         <h3 className="text-xl font-semibold mb-4 text-white">Registrations Open</h3>
       </div>
-      <div className="relative h-[330px] overflow-hidden" ref={containerRef}>
+      <div className="relative h-[330px] overflow-auto">
         <div
-          className="absolute w-full transition-transform duration-1000 ease-linear"
-          style={{ transform: `translateY(-${scrollPosition}px)` }}
-        >
+          className="absolute w-full transition-transform duration-1000 ease-linear">
           {announcements.map((announcement) => (
             <div key={`${announcement.id}`} className="mb-4">
               <Link

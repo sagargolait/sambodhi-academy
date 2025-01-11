@@ -42,6 +42,11 @@ const Faculty: CollectionConfig = {
       ],
     },
     {
+      name: "Years of Experience",
+      type: "number",
+      required: true,
+    },
+    {
       name: "designation",
       type: "select",
       required: true,

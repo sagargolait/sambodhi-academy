@@ -26,8 +26,8 @@ export default function ExamExplorer(exams: DataFromCollectionSlug<CollectionSlu
                     <Image
                       src={exam.logo.url}
                       alt={exam.logo.alt}
-                      width={60}
-                      height={60}
+                      width={100}
+                      height={100}
                       className="rounded-full"
                     />
                     <h3 className="text-sm lg:text-md mt-2 font-medium text-[#10375C]">

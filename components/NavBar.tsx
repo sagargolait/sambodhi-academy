@@ -110,7 +110,7 @@ export default function NavBar() {
                   Sambodhi <br /> Academy
                 </span>
               </Link>
-              <nav className="hidden md:flex space-x-8">
+              <nav className="hidden md:flex md:text-sm gap-6 lg:text-md lg:gap-8">
                 {menuItems.map((item) => (
                   item.dropdown ? (
                     <DropdownMenu key={item.name}>
@@ -156,72 +156,73 @@ export default function NavBar() {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-
-              </div>
-              <div className="md:hidden relative" ref={mobileMenuRef}>
-                <Button
-                  variant="ghost"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                >
-                  <Menu className="h-6 w-6" />
-                </Button>
-                {mobileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                    {menuItems.map((item) => (
-                      item.dropdown ? (
-                        <div key={item.name} className="">
-                          <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {item.name}</span>
-                          {item.dropdown.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623] "
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      ) : (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="flex items-center px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623]"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.icon}
-                          <span className="ml-2">{t(item.name)}</span>
-                        </Link>
-                      )
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <div className="md:hidden relative" ref={mobileMenuRef}>
                   <Button
                     variant="ghost"
-                    size="sm"
-                    className="text-white hover:text-[#F3C623]"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   >
-                    <Globe className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">language</span>
+                    <Menu className="h-6 w-6" />
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {languages.map((lang) => (
-                    <DropdownMenuItem
-                      key={lang.code}
+                  {mobileMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      {menuItems.map((item) => (
+                        item.dropdown ? (
+                          <div key={item.name} className="">
+                            <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {item.name}</span>
+                            {item.dropdown.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623] "
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        ) : (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className="flex items-center px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623]"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.icon}
+                            <span className="ml-2">{t(item.name)}</span>
+                          </Link>
+                        )
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-white hover:text-[#F3C623]"
                     >
-                      <Link href={`/${lang.code}`}>
-                        {lang.name}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                      <Globe className="h-4 w-4 mr-2" />
+                      <span className="hidden md:inline">language</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {languages.map((lang) => (
+                      <DropdownMenuItem
+                        key={lang.code}
+                      >
+                        <Link href={`/${lang.code}`}>
+                          {lang.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+
+
             </nav>
           </div>
         </header>

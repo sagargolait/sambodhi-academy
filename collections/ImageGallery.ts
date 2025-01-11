@@ -27,6 +27,11 @@ export const ImageGallery: CollectionConfig = {
       ],
     },
     {
+      name: "type",
+      type: "text",
+      required: true,
+    },
+    {
       name: "category",
       type: "select",
       options: [

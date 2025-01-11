@@ -37,7 +37,7 @@ export function FacultyCarousel({ faculties }: any) {
                                             />
                                         </div>
                                         <CardTitle className="text-xl text-center font-bold text-[#10375C]">{faculty.name}</CardTitle>
-                                        <CardDescription className="text-[#F3C623] text-center font-semibold">{faculty.designation}, {faculty.department}</CardDescription>
+                                        <CardDescription className="text-[#F3C623] text-center font-semibold capitalize">{faculty.designation}, {faculty.department}</CardDescription>
                                     </CardHeader>
                                     {/* <CardContent className="flex-grow">
                                         <p className="text-sm text-gray-600">{faculty.description}</p>
