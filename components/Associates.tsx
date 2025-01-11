@@ -15,7 +15,7 @@ const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
     <section className="py-20 ">
       <div className="container mx-auto px-4">
         <SectionHeading>
-          Empanalment From
+          Empanelment From
         </SectionHeading>
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
           {objectToArray(associates).map((associate: any) => (
@@ -29,7 +29,7 @@ const Associates = (associates: DataFromCollectionSlug<CollectionSlug>[]) => {
                     height={150}
                     className="mx-auto mb-4"
                   />
-                  <h3 className="text-lg hidden lg:block font-semibold text-[#10375C]">
+                  <h3 className="text-md hidden lg:block font-semibold text-[#10375C]">
                     {associate['Associates Name']}
                   </h3>
                 </CardContent>

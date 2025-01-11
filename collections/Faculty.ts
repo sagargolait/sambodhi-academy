@@ -19,12 +19,6 @@ const Faculty: CollectionConfig = {
       },
     },
     {
-      name: "email",
-      type: "email",
-      required: true,
-      unique: true,
-    },
-    {
       name: "profileImage",
       type: "upload",
       relationTo: "media",

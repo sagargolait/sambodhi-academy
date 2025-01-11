@@ -3,76 +3,69 @@ import dynamic from "next/dynamic";
 import { Hero } from "@/components";
 import ExamExplorer from "@/components/exploreExams";
 import Testimonials from "@/components/testimonials";
-import { CollectionSlug, getPayload } from 'payload'
-import config from '@payload-config'
+import { CollectionSlug, getPayload } from 'payload';
+import config from '@payload-config';
 import { FacultyCarousel } from "@/components/FacultyCarousel";
-// Dynamic imports for other components
-const CountDown = dynamic(() => import("@/components/CountDown"));
-// const Courses = dynamic(() => import("@/components/Courses"));
-const Features = dynamic(() => import("@/components/Features"));
-const Infrastructure = dynamic(() => import("@/components/Infrastructure"));
-// const VideoLectures = dynamic(() => import("@/components/VideoLectures"));
-const NotificationsAndArticles = dynamic(
-    () => import("@/components/NotificationsAndArticles")
-);
-const FAQs = dynamic(() => import("@/components/FAQs"));
-// const RequestCounseling = dynamic(
-//     () => import("@/components/RequestCounseling")
-// );
-const Associates = dynamic(() => import("@/components/Associates"));
 
+const dynamicComponents = {
+    CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),
+    Features: dynamic(() => import("@/components/Features"), { ssr: true }),
+    Infrastructure: dynamic(() => import("@/components/Infrastructure"), { ssr: true }),
+    NotificationsAndArticles: dynamic(() => import("@/components/NotificationsAndArticles"), { ssr: true }),
+    FAQs: dynamic(() => import("@/components/FAQs"), { ssr: true }),
+    Associates: dynamic(() => import("@/components/Associates"), { ssr: true })
+};
 
+async function fetchPageData(payload: any) {
+    const collections = [
+        { name: 'associates', sort: null },
+        { name: 'exams', sort: 'order' },
+        { name: 'testimonials', sort: null },
+        { name: 'faqs', sort: null },
+        { name: 'galleries', sort: null },
+        { name: 'feature-descriptions', sort: null },
+        { name: 'faculty', sort: null },
+        { name: 'announcements', sort: null }
+    ];
+
+    const results = await Promise.all(
+        collections.map(({ name, sort }) =>
+            payload.find({
+                collection: name as CollectionSlug,
+                depth: 2,
+                ...(sort && { sort })
+            })
+        )
+    );
+
+    return {
+        associates: results[0].docs,
+        exams: results[1].docs,
+        testimonials: results[2].docs,
+        faqs: results[3].docs,
+        galleryImages: results[4].docs,
+        features: results[5].docs,
+        faculties: results[6].docs,
+        announcements: results[7].docs
+    };
+}
 
 export default async function Home() {
-    const payload = await getPayload({ config })
-    const [associates, exams, testimonials, faqs, galleryImages, features, faculties] = await Promise.all([
-        payload.find({
-            collection: 'associates' as CollectionSlug,
-            depth: 2
-        }),
-        payload.find({
-            collection: 'exams' as CollectionSlug,
-            depth: 2,
-            sort: 'order'
-        }),
-        payload.find({
-            collection: 'testimonials' as CollectionSlug,
-            depth: 2
-        }),
-        payload.find({
-            collection: 'faqs' as CollectionSlug,
-            depth: 2
-        }),
-        payload.find({
-            collection: 'galleries' as CollectionSlug,
-            depth: 2
-        }),
-        payload.find({
-            collection: 'feature-descriptions' as CollectionSlug,
-            depth: 2
-        }),
-        payload.find({
-            collection: 'faculty' as CollectionSlug,
-            depth: 2
-        })
-    ])
+    const payload = await getPayload({ config });
+    const data = await fetchPageData(payload);
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
-            <Hero {...galleryImages.docs} />
-            <Associates {...associates.docs} />
-            {/* <OurStory /> */}
-            <ExamExplorer {...exams.docs} />
-            <CountDown />
-            <Features {...features.docs} />
-            <NotificationsAndArticles />
-            {/* <SuccessStories /> */}
-            <Infrastructure {...galleryImages.docs} />
-            {/* <VideoLectures /> */}
-            <Testimonials {...testimonials.docs} />
-            <FacultyCarousel faculties={faculties.docs} />
-            <FAQs {...faqs.docs} />
-            {/* <RequestCounseling /> */}
+            <Hero heroImages={data.galleryImages} announcements={data.announcements} />
+            <dynamicComponents.Associates {...data.associates} />
+            <ExamExplorer {...data.exams} />
+            <dynamicComponents.CountDown />
+            <dynamicComponents.Features {...data.features} />
+            <dynamicComponents.NotificationsAndArticles />
+            <dynamicComponents.Infrastructure {...data.galleryImages} />
+            <Testimonials {...data.testimonials} />
+            <FacultyCarousel faculties={data.faculties} />
+            <dynamicComponents.FAQs {...data.faqs} />
         </div>
     );
 }

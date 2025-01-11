@@ -35,10 +35,15 @@ const carouselProps: Partial<CarouselProps> = {
   },
 };
 
-const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
+interface HeroProps {
+  heroImages: DataFromCollectionSlug<CollectionSlug>[];
+  announcements: DataFromCollectionSlug<CollectionSlug>[];
+}
+
+const Hero: React.FC<HeroProps> = ({ heroImages, announcements }) => {
   const Imgs = objectToArray(heroImages);
   const heroCategoryData = Imgs.filter(item => item.category === 'Hero');
-  // Preload first image using native Image constructor
+
   React.useEffect(() => {
     const firstImage = heroCategoryData[0]?.images[0]?.image;
     if (firstImage) {
@@ -70,9 +75,9 @@ const Hero = (heroImages: DataFromCollectionSlug<CollectionSlug>[]) => {
           </div>
         ))}
       </div>
-      <WhatsNewSection />
+      <WhatsNewSection announcements={announcements} />
     </section>
   );
 };
 
-export default Hero; 
+export default Hero;
