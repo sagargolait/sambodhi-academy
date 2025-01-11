@@ -1,7 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ChevronRight, Loader } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 export function WhatsNewSection({ announcements }: any) {
   return (
