@@ -19,12 +19,36 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
   const [filter, setFilter] = useState('Chhatrapati Sambhaji Nagar');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const FilteredImages = galleryImageByCategory.filter((item: any) => item.location === filter);
-  const FilterByLocationImages = galleryImageByCategory.filter((item: any) => item.location);
-  const allImages = FilteredImages.flatMap(category => category.images);
-  const uniqueLocations = new Set(FilterByLocationImages.map((item: any) => item.location));
 
-  const uniqueLocationArray = Array.from(uniqueLocations)
+  // Get all unique types and locations
+  const getFilterOptions = () => {
+    const filterOptions = new Set<string>();
+
+    galleryImageByCategory.forEach((item: any) => {
+      // Add the type
+      if (item.type !== 'Hero' && item.type !== 'Location')
+        filterOptions.add(item.type);
+
+      // If type is Location, also add the location
+      if (item.type === 'Location') {
+        filterOptions.add(item.location);
+      }
+    });
+
+    return Array.from(filterOptions);
+  };
+
+  // Filter images based on selected filter
+  const getFilteredImages = () => {
+    return galleryImageByCategory.filter((item: any) =>
+      item.type === filter || // Match by type
+      (item.type === 'Location' && item.location === filter) // Match by location if it's a Location type
+    );
+  };
+
+  const FilteredImages = getFilteredImages();
+  const allImages = FilteredImages.flatMap(category => category.images);
+  const filterOptions = getFilterOptions();
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
@@ -44,9 +68,9 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
       <div className="container mx-auto px-4">
         <SectionHeading>Gallery</SectionHeading>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center space-x-2 mb-8">
-            {uniqueLocationArray.map((item: any, index) => (
+        <div className="container mx-auto">
+          <div className="flex flex-wrap gap-3 justify-center space-x-2 mb-8">
+            {filterOptions.map((item: any, index) => (
               <Button
                 key={index}
                 onClick={() => setFilter(item)}

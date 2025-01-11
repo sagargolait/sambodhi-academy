@@ -27,6 +27,10 @@ export const ImageGallery: CollectionConfig = {
           label: "Chhatrapati Sambhaji Nagar",
           value: "Chhatrapati Sambhaji Nagar",
         },
+        {
+          label: "none",
+          value: "none",
+        },
       ],
     },
     {

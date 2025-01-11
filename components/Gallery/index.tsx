@@ -14,28 +14,54 @@ type Props = {
 }
 
 const GalleryComponent = ({ galleryImages }: Props) => {
-  const images = objectToArray(galleryImages)
+  const galleryImageByCategory = objectToArray(galleryImages);
   const [filter, setFilter] = useState('Chhatrapati Sambhaji Nagar');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  // Get all unique types and locations
+  const getFilterOptions = () => {
+    const filterOptions = new Set<string>();
+
+    galleryImageByCategory.forEach((item: any) => {
+      // Add the type
+      if (item.type !== 'Hero' && item.type !== 'Location')
+        filterOptions.add(item.type);
+
+      // If type is Location, also add the location
+      if (item.type === 'Location') {
+        filterOptions.add(item.location);
+      }
+    });
+
+    return Array.from(filterOptions);
+  };
+
+  // Filter images based on selected filter
+  const getFilteredImages = () => {
+    return galleryImageByCategory.filter((item: any) =>
+      item.type === filter || // Match by type
+      (item.type === 'Location' && item.location === filter) // Match by location if it's a Location type
+    );
+  };
+
+  const FilteredImages = getFilteredImages();
+  const allImages = FilteredImages.flatMap(category => category.images);
+  const filterOptions = getFilterOptions();
+
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
     setIsOpen(true);
   };
 
   const nextImage = () => {
-    setSelectedImageIndex((prev) => (prev + 1) % images.length);
+    setSelectedImageIndex((prev) => (prev + 1) % allImages.length);
   };
 
   const previousImage = () => {
-    setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setSelectedImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
   };
-  const FilteredImages = images.filter((item: any) => item.location === filter);
-  const allImages = FilteredImages.flatMap(category => category.images);
-  const FilterByLocationImages = images.filter((item: any) => item.location);
-  const uniqueLocations = new Set(FilterByLocationImages.map((item: any) => item.location));
 
-  const uniqueLocationArray = Array.from(uniqueLocations)
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -47,8 +73,8 @@ const GalleryComponent = ({ galleryImages }: Props) => {
         </div>
         <SectionHeading>Our Gallery</SectionHeading>
 
-        <div className="flex justify-center space-x-2 mb-8">
-          {uniqueLocationArray.map((item: any, index) => (
+        <div className="flex flex-wrap gap-3 justify-center space-x-2 mb-8">
+          {filterOptions.map((item: any, index) => (
             <Button
               key={index}
               onClick={() => setFilter(item)}
