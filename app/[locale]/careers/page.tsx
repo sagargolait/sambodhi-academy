@@ -3,6 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,13 +16,8 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Briefcase, GraduationCap, Users, CheckCircle } from "lucide-react";
-
-const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-3xl font-bold text-center mb-12 text-[#10375C] relative pb-4">
-    {children}
-    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#F3C623]"></span>
-  </h2>
-);
+import SectionHeading from "@/components/SectionHeading";
+import { toast } from 'sonner'
 
 const jobOpenings = [
   {
@@ -63,6 +59,12 @@ interface IFormInputs {
 }
 
 export default function CareersPage() {
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  };
+
   const {
     register,
     handleSubmit,
@@ -73,27 +75,52 @@ export default function CareersPage() {
   });
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("resume", data.resume[0]);
-    formData.append("coverLetter", data.coverLetter);
-
     try {
-      const response = await fetch("/api/job-applications", {
-        method: "POST",
-        body: formData,
+      // First, upload the resume file
+      const resumeFormData = new FormData();
+      const fileName = `${data.name}'s Resume - ${data.resume[0].name}`;
+
+      resumeFormData.append('file', data.resume[0]);
+      resumeFormData.append('fileName', fileName);
+
+      const uploadResponse = await fetch('/api/media', {
+        method: 'POST',
+        body: resumeFormData,
       });
 
-      if (response.ok) {
-        alert("Application submitted successfully!");
-        reset();
-      } else {
-        alert("Failed to submit application.");
+      if (!uploadResponse.ok) {
+        const errorData = await uploadResponse.json();
+        throw new Error(errorData.errors?.[0]?.message || 'Failed to upload resume');
       }
+
+      const uploadedFile = await uploadResponse.json();
+
+      // Then, create the job application with the file reference
+      const applicationData = {
+        name: data.name,
+        email: data.email,
+        resume: uploadedFile.doc.id,
+        coverLetter: data.coverLetter,
+      };
+
+      const applicationResponse = await fetch('/api/job-applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(applicationData),
+      });
+
+      if (!applicationResponse.ok) {
+        const errorData = await applicationResponse.json();
+        throw new Error(errorData.message || 'Failed to submit application');
+      }
+
+      toast.success('Application submitted successfully!');
+      reset();
     } catch (error) {
-      console.error("Error submitting application:", error);
-      alert("An error occurred while submitting your application.");
+      console.error('Error submitting application:', error);
+      toast.error(error instanceof Error ? error.message : 'An error occurred while submitting your application.');
     }
   };
 
@@ -179,7 +206,10 @@ export default function CareersPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]">
+                  <Button
+                    className="w-full bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]"
+                    onClick={scrollToForm}
+                  >
                     Apply Now
                   </Button>
                 </CardContent>
@@ -188,7 +218,7 @@ export default function CareersPage() {
           </div>
         </div>
 
-        <div>
+        <div ref={formRef}>
           <h3 className="text-2xl font-semibold mb-6 text-[#10375C]">
             General Application
           </h3>

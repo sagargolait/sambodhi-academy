@@ -6,6 +6,10 @@ const JobApplications: CollectionConfig = {
     singular: "Job Application",
     plural: "Job Applications",
   },
+  access: {
+    read: () => true,
+    create: () => true,
+  },
   fields: [
     {
       name: "name",
