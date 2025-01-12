@@ -81,7 +81,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <main className="container mx-auto px-4 py-8">
-        <SectionHeading>Contact Us</SectionHeading>
+        <SectionHeading>ContactUs</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card>
             <CardHeader>

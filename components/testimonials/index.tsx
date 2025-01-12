@@ -9,9 +9,8 @@ interface TestimonialProps {
 }
 
 const Testimonials: React.FC<TestimonialProps> = ({ testimonials }) => {
-
     return (
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative container mx-auto">
             <SectionHeading>Testimonials</SectionHeading>
             <Carousel
                 opts={{
@@ -48,10 +47,10 @@ const Testimonials: React.FC<TestimonialProps> = ({ testimonials }) => {
                     }
 
                 </CarouselContent>
-                <div className="absolute md:left-0 left-[35px] top-1/2 -translate-y-1/2">
+                <div className="absolute md:left-0 left-0 top-1/2 -translate-y-1/2">
                     <CarouselPrevious className='!rounded-full' />
                 </div>
-                <div className="absolute md:right-0 right-[35px] top-1/2 -translate-y-1/2">
+                <div className="absolute md:right-0 right-0 top-1/2 -translate-y-1/2">
                     <CarouselNext className='!rounded-full' />
                 </div>
             </Carousel>

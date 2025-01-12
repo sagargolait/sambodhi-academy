@@ -6,7 +6,7 @@ const OurStory: React.FC = () => {
   return (
     <section className="py-10 bg-[#F4F6FF]">
       <div className="container mx-auto px-4">
-        <SectionHeading>Our Story</SectionHeading>
+        <SectionHeading>OurStory</SectionHeading>
         <div className="md:flex gap-8 items-center">
           <Image
             src="/director.jpg"

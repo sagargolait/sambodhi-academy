@@ -99,7 +99,7 @@ export default function CoursesPage({
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <main className="container mx-auto px-4 py-8">
-        <SectionHeading>Our Courses</SectionHeading>
+        <SectionHeading>OurCourses</SectionHeading>
         <div dangerouslySetInnerHTML={{ __html: courses[0]?.Course_Description_html }}></div>
         {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (

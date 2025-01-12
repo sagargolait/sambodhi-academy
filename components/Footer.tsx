@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                   Mock Tests
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/" className="hover:text-[#F3C623]">
                   Live Classes
                 </Link>
@@ -106,7 +106,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 <Link href="/" className="hover:text-[#F3C623]">
                   Ebooks
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/contact" className="hover:text-[#F3C623]">
                   Books

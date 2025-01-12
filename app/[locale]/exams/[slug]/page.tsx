@@ -16,7 +16,6 @@ export default async function ExamsPage({ params }: { params: Promise<{ slug: st
     },
   }) as unknown as { docs: { content: any }[] };
 
-
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <BlockRenderer blocks={blocks.docs[0]?.content} />

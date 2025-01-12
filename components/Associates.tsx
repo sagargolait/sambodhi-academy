@@ -10,12 +10,11 @@ interface AssociatesProps {
 }
 
 const Associates: React.FC<AssociatesProps> = ({ associates }) => {
-  console.log(associates)
   return (
     <section className="py-20 ">
       <div className="container mx-auto px-4">
         <SectionHeading>
-          Empanelment From
+          EmpanelmentFrom
         </SectionHeading>
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
           {associates.map((associate: any) => (

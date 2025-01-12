@@ -22,8 +22,7 @@ export const Articles: CollectionConfig = {
     },
     {
       name: "author",
-      type: "relationship",
-      relationTo: "users",
+      type: "text",
       required: true,
     },
     {

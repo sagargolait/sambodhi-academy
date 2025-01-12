@@ -11,7 +11,7 @@ const dynamicComponents = {
     CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),
     Features: dynamic(() => import("@/components/Features"), { ssr: true }),
     Infrastructure: dynamic(() => import("@/components/Infrastructure"), { ssr: true }),
-    NotificationsAndArticles: dynamic(() => import("@/components/NotificationsAndArticles"), { ssr: true }),
+    Articles: dynamic(() => import("@/components/Articles"), { ssr: true }),
     FAQs: dynamic(() => import("@/components/FAQs"), { ssr: true }),
     Associates: dynamic(() => import("@/components/Associates"), { ssr: true })
 };
@@ -25,7 +25,9 @@ async function fetchPageData(payload: any) {
         { name: 'galleries', sort: null },
         { name: 'feature-descriptions', sort: null },
         { name: 'faculty', sort: null },
-        { name: 'announcements', sort: null }
+        { name: 'announcements', sort: null },
+        { name: 'articles', sort: null }
+
     ];
 
     const results = await Promise.all(
@@ -46,7 +48,8 @@ async function fetchPageData(payload: any) {
         galleryImages: results[4].docs,
         features: results[5].docs,
         faculties: results[6].docs,
-        announcements: results[7].docs
+        announcements: results[7].docs,
+        articles: results[8].docs
     };
 }
 
@@ -61,7 +64,7 @@ export default async function Home() {
             <ExamExplorer exams={data.exams} />
             <dynamicComponents.CountDown />
             <dynamicComponents.Features features={data.features} />
-            <dynamicComponents.NotificationsAndArticles />
+            <dynamicComponents.Articles articles={data.articles} />
             <dynamicComponents.Infrastructure {...data.galleryImages} />
             <Testimonials testimonials={data.testimonials} />
             <FacultyCarousel faculties={data.faculties} />

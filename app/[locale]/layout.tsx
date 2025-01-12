@@ -33,7 +33,6 @@ export default async function LocaleLayout({
         depth: 2,
     })])
 
-
     return (
         <html lang={locale}>
             <body>

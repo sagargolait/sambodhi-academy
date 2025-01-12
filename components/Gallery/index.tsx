@@ -65,13 +65,13 @@ const GalleryComponent = ({ galleryImages }: Props) => {
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
       <main className="flex-grow container mx-auto px-4 py-8">
-        <SectionHeading>Our Videos</SectionHeading>
+        <SectionHeading>OurVideos</SectionHeading>
         <div className="my-12 text-center flex justify-center">
           <Link href="https://www.youtube.com/@sambodhicompetitiveexamtra414/videos" target='_blank'>
             <Image src='/api/media/file/youtubelogo.svg' alt='youtube' width={500} height={50} />
           </Link>
         </div>
-        <SectionHeading>Our Gallery</SectionHeading>
+        <SectionHeading>OurGallery</SectionHeading>
 
         <div className="flex flex-wrap gap-3 justify-center space-x-2 mb-8">
           {filterOptions.map((item: any, index) => (

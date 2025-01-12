@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
@@ -20,25 +20,58 @@ export default function middleware(request: NextRequest) {
   const defaultLocale = routing.defaultLocale;
   const locales = routing.locales;
 
-  // Check if pathname already starts with a locale
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  // Get locale from cookie or pathname
+  let locale = request.cookies.get("NEXT_LOCALE")?.value;
+
+  // Check if pathname has a locale
+  const pathnameLocale = locales.find(
+    (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
   );
 
-  // If no locale is present, redirect to default locale
-  if (!pathnameHasLocale) {
-    const newUrl = new URL(
-      `/${defaultLocale}${pathname === "/" ? "" : pathname}`,
-      request.url
-    );
-    return Response.redirect(newUrl);
+  if (pathnameLocale) {
+    locale = pathnameLocale;
   }
 
-  // Use next-intl middleware for internationalization
-  return createMiddleware({
+  // If no locale is found, use default
+  if (!locale || !locales.includes(locale as any)) {
+    locale = defaultLocale;
+  }
+
+  // If pathname doesn't have locale, redirect
+  if (!pathnameLocale) {
+    const newUrl = new URL(
+      `/${locale}${pathname === "/" ? "" : pathname}`,
+      request.url
+    );
+    newUrl.search = request.nextUrl.search; // Preserve query parameters
+
+    const response = NextResponse.redirect(newUrl);
+
+    // Set locale cookie
+    response.cookies.set("NEXT_LOCALE", locale, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+
+    return response;
+  }
+
+  // Use next-intl middleware with the determined locale
+  const response = createMiddleware({
     locales,
     defaultLocale,
+    localePrefix: "always",
   })(request);
+
+  // Ensure cookie is set/updated
+  if (response) {
+    response.cookies.set("NEXT_LOCALE", locale, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+  }
+
+  return response;
 }
 
 export const config = {

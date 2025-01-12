@@ -26,7 +26,7 @@ export default function QuestionPapersPage() {
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
             <main className="flex-grow container mx-auto px-4 py-8">
-                <SectionHeading>Previous Year Question Papers</SectionHeading>
+                <SectionHeading>PYQS</SectionHeading>
 
                 <div className="mb-8 flex justify-center">
                     <div className="relative w-full max-w-xl">

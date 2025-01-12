@@ -34,7 +34,7 @@ const RequestCounseling: React.FC = () => {
   return (
     <section className="py-10 bg-[#F4F6FF]">
       <div className="container mx-auto px-4">
-        <SectionHeading>Request Counseling & How to Enroll</SectionHeading>
+        <SectionHeading>RequestCounseling&HowtoEnroll</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="bg-white">
             <CardHeader>

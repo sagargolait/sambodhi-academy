@@ -12,7 +12,7 @@ interface FacultyProps {
 const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
     return (
         <div className="relative container mx-auto">
-            <SectionHeading>Our Faculty</SectionHeading>
+            <SectionHeading>OurFaculty</SectionHeading>
             <Carousel
                 opts={{
                     align: "start",

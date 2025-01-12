@@ -18,7 +18,7 @@ const FAQs: React.FC<FAQProps> = ({ faqs }) => {
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
-        <SectionHeading>Frequently Asked Questions</SectionHeading>
+        <SectionHeading>FrequentlyAskedQuestions</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Accordion type="single" collapsible className="w-full">
             {faqs.slice(0, Math.ceil(faqs.length / 2)).map((item: any, index) => (

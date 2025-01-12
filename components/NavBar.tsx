@@ -70,7 +70,6 @@ export default function NavBar() {
 
   const languages = [
     { code: "en", name: "English" },
-    { code: "hi", name: "हिंदी" },
     { code: "mr", name: "मराठी" },
   ];
 
@@ -115,7 +114,7 @@ export default function NavBar() {
                   item.dropdown ? (
                     <DropdownMenu key={item.name}>
                       <DropdownMenuTrigger className="text-[#FFF] hover:text-[#F3C623] flex items-center">
-                        {item.name} <ChevronDown className="ml-1 h-4 w-4" />
+                        {t(item.name)} <ChevronDown className="ml-1 h-4 w-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         {item.dropdown.map((subItem) => (
@@ -129,7 +128,7 @@ export default function NavBar() {
                     </DropdownMenu>
                   ) : (
                     <Link key={item.name} href={item.href} className="text-[#FFF] hover:text-[#F3C623]">
-                      {item.name}
+                      {t(item.name)}
                     </Link>
                   )
                 ))}

@@ -30,10 +30,10 @@ const carouselProps: Partial<CarouselProps> = {
     rightArrow: "Next slide",
     item: "slide item",
   },
-  onClickItem: () => {},
-  onClickThumb: () => {},
-  onChange: () => {},
-  onSwipeStart: () => {},
+  onClickItem: () => { },
+  onClickThumb: () => { },
+  onChange: () => { },
+  onSwipeStart: () => { },
   onSwipeEnd: () => true,
   onSwipeMove: () => true,
 };
@@ -77,7 +77,7 @@ const VideoLectures: React.FC = () => {
   return (
     <section className="py-10 bg-[#F4F6FF]">
       <div className="container mx-auto px-4">
-        <SectionHeading>Video Lectures</SectionHeading>
+        <SectionHeading>VideoLectures</SectionHeading>
 
         <div className="max-w-6xl mx-auto">
           <Carousel {...(carouselProps as CarouselProps)}>
