@@ -53,6 +53,7 @@ export default function middleware(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 365,
       httpOnly: false, // Ensure it's accessible from the browser
       sameSite: "lax", // Lax to allow navigation links
+      secure: process.env.node === "production" ? true : false,
     });
 
     return response;
@@ -72,6 +73,7 @@ export default function middleware(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 365, // 1 year
       httpOnly: false, // Ensure it's accessible from the browser
       sameSite: "lax", // Lax to allow navigation links
+      secure: process.env.node === "production" ? true : false,
     });
   }
 
