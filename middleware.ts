@@ -50,7 +50,9 @@ export default function middleware(request: NextRequest) {
     // Set locale cookie
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
+      maxAge: 60 * 60 * 24 * 365,
+      httpOnly: false, // Ensure it's accessible from the browser
+      sameSite: "lax", // Lax to allow navigation links
     });
 
     return response;
@@ -68,6 +70,8 @@ export default function middleware(request: NextRequest) {
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365, // 1 year
+      httpOnly: false, // Ensure it's accessible from the browser
+      sameSite: "lax", // Lax to allow navigation links
     });
   }
 
