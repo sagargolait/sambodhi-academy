@@ -20,11 +20,42 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*{/}?", // Match all paths
+        // Cache images
+        source: "/:path*.(jpg|jpeg|png|gif|ico|svg|webp)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // Cache for 1 year
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        // Cache static files
+        source: "/:path*.(css|js|woff|woff2|ttf|eot)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        // Cache API routes
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60, stale-while-revalidate=300",
+          },
+        ],
+      },
+      {
+        // Default caching
+        source: "/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, must-revalidate",
           },
         ],
       },

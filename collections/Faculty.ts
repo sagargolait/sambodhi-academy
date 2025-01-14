@@ -26,14 +26,8 @@ const Faculty: CollectionConfig = {
     },
     {
       name: "department",
-      type: "select",
+      type: "text",
       required: true,
-      options: [
-        { label: "MPSC", value: "mpsc" },
-        { label: "SSC", value: "ssc" },
-        { label: "Police Bharti", value: "police-bharti" },
-        // Add more departments as needed
-      ],
     },
     {
       name: "Years of Experience",

@@ -35,10 +35,13 @@ async function fetchPageData(payload: any) {
             payload.find({
                 collection: name as CollectionSlug,
                 depth: 2,
+                limit: 30,
                 ...(sort && { sort })
             })
         )
     );
+
+
 
     return {
         associates: results[0].docs,
@@ -52,6 +55,8 @@ async function fetchPageData(payload: any) {
         articles: results[8].docs
     };
 }
+
+
 
 export default async function Home() {
     const payload = await getPayload({ config });
