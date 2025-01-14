@@ -29,6 +29,10 @@ export default function middleware(request: NextRequest) {
   // Determine the locale to use
   let locale = pathnameLocale || localeFromCookie || defaultLocale;
 
+  console.log("Resolved locale:", locale);
+  console.log("Pathname:", pathname);
+  console.log("NEXT_LOCALE cookie:", localeFromCookie);
+
   // If locale is invalid, fallback to defaultLocale
   if (!locales.includes(locale as any)) {
     locale = defaultLocale;
@@ -47,7 +51,7 @@ export default function middleware(request: NextRequest) {
       httpOnly: false, // Accessible from the browser
       sameSite: "lax", // Avoid issues with navigation
       maxAge: 60 * 60 * 24 * 365, // 1 year
-      secure: process.env.node === "production" ? true : false,
+      secure: process.env.NODE_ENV === "production" ? true : false,
     });
 
     return response;
@@ -66,7 +70,7 @@ export default function middleware(request: NextRequest) {
       path: "/",
       httpOnly: false, // Accessible from the browser
       sameSite: "lax",
-      secure: process.env.node === "production" ? true : false,
+      secure: process.env.NODE_ENV === "production" ? true : false,
       maxAge: 60 * 60 * 24 * 365, // 1 year
     });
   }
