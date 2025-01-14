@@ -3,7 +3,8 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 export default function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const { pathname, search } = request.nextUrl;
+  const { defaultLocale, locales } = routing;
 
   // Skip middleware for specific routes and public assets
   if (
@@ -12,47 +13,40 @@ export default function middleware(request: NextRequest) {
     pathname.startsWith("/my-route") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/public") ||
-    pathname.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)
+    pathname.match(/\.(jpg|jpeg|png|gif|svg|ico|webp|css|js|map|txt)$/)
   ) {
-    return;
+    return NextResponse.next();
   }
 
-  const defaultLocale = routing.defaultLocale;
-  const locales = routing.locales;
+  // Retrieve locale from the cookie
+  const localeFromCookie = request.cookies.get("NEXT_LOCALE")?.value;
 
-  // Get locale from cookie or pathname
-  let locale = request.cookies.get("NEXT_LOCALE")?.value;
-
-  // Check if pathname has a locale
+  // Determine if the pathname contains a locale
   const pathnameLocale = locales.find(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
   );
 
-  if (pathnameLocale) {
-    locale = pathnameLocale;
-  }
+  // Determine the locale to use
+  let locale = pathnameLocale || localeFromCookie || defaultLocale;
 
-  // If no locale is found, use default
-  if (!locale || !locales.includes(locale as any)) {
+  // If locale is invalid, fallback to defaultLocale
+  if (!locales.includes(locale as any)) {
     locale = defaultLocale;
   }
 
-  // If pathname doesn't have locale, redirect
+  // Redirect to include the locale in the pathname if not already present
   if (!pathnameLocale) {
-    const newUrl = new URL(
-      `/${locale}${pathname === "/" ? "" : pathname}`,
-      request.url
-    );
-    newUrl.search = request.nextUrl.search; // Preserve query parameters
+    const newUrl = new URL(`/${locale}${pathname}`, request.url);
+    newUrl.search = search; // Preserve query parameters
 
     const response = NextResponse.redirect(newUrl);
 
-    // Set locale cookie
+    // Set the locale cookie
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365,
-      httpOnly: false, // Ensure it's accessible from the browser
-      sameSite: "lax", // Lax to allow navigation links
+      httpOnly: false, // Accessible from the browser
+      sameSite: "lax", // Avoid issues with navigation
+      maxAge: 60 * 60 * 24 * 365, // 1 year
       secure: process.env.node === "production" ? true : false,
     });
 
@@ -66,14 +60,14 @@ export default function middleware(request: NextRequest) {
     localePrefix: "always",
   })(request);
 
-  // Ensure cookie is set/updated
+  // Ensure the locale cookie is consistent
   if (response) {
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-      httpOnly: false, // Ensure it's accessible from the browser
-      sameSite: "lax", // Lax to allow navigation links
+      httpOnly: false, // Accessible from the browser
+      sameSite: "lax",
       secure: process.env.node === "production" ? true : false,
+      maxAge: 60 * 60 * 24 * 365, // 1 year
     });
   }
 
