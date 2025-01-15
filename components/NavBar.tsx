@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
+import { usePathname, useRouter } from 'next/navigation';
 
 
 
@@ -31,6 +32,27 @@ export default function NavBar() {
   const t = useTranslations('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // ... other code remains the same
+
+  const handleLocaleChange = (newLocale: string) => {
+    // Get the current path segments
+    const segments = pathname.split('/');
+
+    // Replace the locale segment (index 1) with the new locale
+    segments[1] = newLocale;
+
+    // Construct new path
+    const newPath = segments.join('/');
+
+    // Set cookie first
+    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=${365 * 24 * 60 * 60};secure;samesite=strict`;
+
+    // Then navigate
+    router.push(newPath);
+  };
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
     // {
@@ -211,10 +233,10 @@ export default function NavBar() {
                     {languages.map((lang) => (
                       <DropdownMenuItem
                         key={lang.code}
+                        onClick={() => handleLocaleChange(lang.code)}
+                        className="cursor-pointer"
                       >
-                        <Link href={`/${lang.code}`}>
-                          {lang.name}
-                        </Link>
+                        {lang.name}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
