@@ -18,59 +18,63 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Retrieve locale from the cookie
+  // Get locale from cookie
   const localeFromCookie = request.cookies.get("NEXT_LOCALE")?.value;
 
-  // Determine if the pathname contains a locale
+  // Check if the current pathname contains a locale
   const pathnameLocale = locales.find(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
   );
 
-  // Determine the locale to use
-  let locale = pathnameLocale || localeFromCookie || defaultLocale;
+  // Determine which locale to use
+  let locale: string;
 
-  console.log("Resolved locale:", locale);
-  console.log("Pathname:", pathname);
-  console.log("NEXT_LOCALE cookie:", localeFromCookie);
-
-  // If locale is invalid, fallback to defaultLocale
-  if (!locales.includes(locale as any)) {
+  if (pathnameLocale) {
+    // If pathname has a locale, use it and update cookie
+    locale = pathnameLocale;
+  } else if (localeFromCookie && locales.includes(localeFromCookie as any)) {
+    // If valid cookie exists, use it
+    locale = localeFromCookie;
+  } else {
+    // Fallback to default locale
     locale = defaultLocale;
   }
 
-  // Redirect to include the locale in the pathname if not already present
+  // If no locale in pathname, redirect to include locale
   if (!pathnameLocale) {
     const newUrl = new URL(`/${locale}${pathname}`, request.url);
-    newUrl.search = search; // Preserve query parameters
+    newUrl.search = search;
 
     const response = NextResponse.redirect(newUrl);
 
-    // Set the locale cookie
-    response.cookies.set("NEXT_LOCALE", locale, {
-      path: "/",
-      httpOnly: false, // Accessible from the browser
-      sameSite: "lax", // Avoid issues with navigation
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-      secure: process.env.NODE_ENV === "production" ? true : false,
-    });
+    // Only set cookie if it's different from current cookie
+    if (locale !== localeFromCookie) {
+      response.cookies.set("NEXT_LOCALE", locale, {
+        path: "/",
+        httpOnly: false,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+      });
+    }
 
     return response;
   }
 
-  // Use next-intl middleware with the determined locale
+  // Use next-intl middleware
   const response = createMiddleware({
     locales,
     defaultLocale,
     localePrefix: "always",
   })(request);
 
-  // Ensure the locale cookie is consistent
-  if (response) {
+  // Only update cookie if locale has changed
+  if (response && locale !== localeFromCookie) {
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
-      httpOnly: false, // Accessible from the browser
+      httpOnly: false,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production" ? true : false,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24 * 365, // 1 year
     });
   }
@@ -80,7 +84,6 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except those starting with specified prefixes
     "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin).*)",
   ],
 };
