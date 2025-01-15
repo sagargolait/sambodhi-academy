@@ -21,31 +21,45 @@ export default function middleware(request: NextRequest) {
   // Get locale from cookie
   const localeFromCookie = request.cookies.get("NEXT_LOCALE")?.value;
 
+  console.log("localeFromCookie", localeFromCookie);
+
   // Check if the current pathname contains a locale
   const pathnameLocale = locales.find(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
   );
+
+  console.log("pathnameLocale", pathnameLocale);
 
   // Determine which locale to use
   let locale: string;
 
   if (pathnameLocale) {
     // If pathname has a locale, use it and update cookie
+    console.log("inside if pathnameLocale", pathnameLocale);
     locale = pathnameLocale;
   } else if (localeFromCookie && locales.includes(localeFromCookie as any)) {
     // If valid cookie exists, use it
+    console.log(
+      "localeFromCookie",
+      localeFromCookie,
+      locales.includes(localeFromCookie as any)
+    );
     locale = localeFromCookie;
   } else {
     // Fallback to default locale
+    console.log("Fallback", defaultLocale);
     locale = defaultLocale;
   }
 
   // If no locale in pathname, redirect to include locale
   if (!pathnameLocale) {
+    console.log("!pathname", pathnameLocale);
     const newUrl = new URL(`/${locale}${pathname}`, request.url);
     newUrl.search = search;
 
     const response = NextResponse.redirect(newUrl);
+
+    console.log("inside pathnameLocale check", locale);
 
     // Only set cookie if it's different from current cookie
     if (locale !== localeFromCookie) {
@@ -70,6 +84,7 @@ export default function middleware(request: NextRequest) {
 
   // Only update cookie if locale has changed
   if (response && locale !== localeFromCookie) {
+    console.log("response", locale);
     response.cookies.set("NEXT_LOCALE", locale, {
       path: "/",
       httpOnly: false,
