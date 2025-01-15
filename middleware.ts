@@ -24,9 +24,10 @@ export default function middleware(request: NextRequest) {
   console.log("localeFromCookie", localeFromCookie);
 
   // Check if the current pathname contains a locale
-  const pathnameLocale = locales.find(
-    (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
-  );
+  const pathnameLocale =
+    locales.find(
+      (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
+    ) || localeFromCookie;
 
   console.log("pathnameLocale", pathnameLocale);
 
