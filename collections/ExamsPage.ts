@@ -92,6 +92,32 @@ export const ExamPages: CollectionConfig = {
           ],
         },
         {
+          slug: "pdf-viewer", // unique identifier for the block
+          labels: {
+            singular: "PDF Viewer",
+            plural: "PDF Viewers",
+          },
+          fields: [
+            {
+              name: "pdf",
+              type: "upload", // Use the 'upload' field type for file uploads
+              relationTo: "media", // Assuming you have a 'media' collection for uploads
+              required: true,
+            },
+            {
+              name: "title",
+              type: "text",
+              label: "Title",
+              required: true,
+            },
+            {
+              name: "description",
+              type: "textarea",
+              label: "Description",
+            },
+          ],
+        },
+        {
           slug: "examQuestion",
           fields: [
             {

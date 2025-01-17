@@ -6,6 +6,12 @@ type Block = BaseBlock & {
   rows?: Row[];
   style?: string;
   tableCaption?: string;
+  pdf?: {
+    url: string;
+    alt: string;
+  };
+  title?: string;
+  blockType: 'heading' | 'paragraph' | 'image' | 'examQuestion' | 'table' | 'pdf-viewer';
 };
 
 interface BlockRendererProps {
@@ -141,6 +147,26 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
             </div>
           </div>
         );
+      case 'pdf-viewer':
+        return (
+          <div className="my-8">
+            <h3 className="text-xl font-semibold mb-4">{block.title || 'PDF Viewer'}</h3>
+            <iframe
+              src={block.pdf?.url || ''}
+              width="100%"
+              height="600px"
+              className="border rounded-lg"
+              title="PDF Viewer"
+            >
+              Your browser does not support embedding PDFs. Please{' '}
+              <a href={block.pdf?.url || ''} target="_blank" rel="noopener noreferrer">
+                download the file
+              </a>
+              .
+            </iframe>
+          </div>
+        );
+
 
       default:
         return null;

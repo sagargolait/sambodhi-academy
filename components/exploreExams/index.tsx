@@ -22,13 +22,13 @@ const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
               <Link key={exam.id} href={`/exams/${exam.slug}`} className="text-center">
                 <Card className="hover:shadow-lg h-[180px] flex justify-center items-center transition-shadow border-[#10375C]">
                   <CardContent className="p-4 md:flex flex-col flex justify-center items-center gap-3">
-                    <Image
+                    {exam?.logo && <Image
                       src={exam.logo.url}
                       alt={exam.logo.alt || exam.title}
                       width={100}
                       height={100}
                       className="rounded-full"
-                    />
+                    />}
                     <h3 className="text-sm lg:text-md mt-2 font-medium text-[#10375C]">
                       {exam.title}
                     </h3>

@@ -41,7 +41,7 @@ const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
                                             />
                                         </div>
                                     </div>
-                                    <h3 className="text-xl font-bold text-[#10375C] mb-2 z-10">{faculty.name}</h3>
+                                    <h3 className="text-xl text-center font-bold text-[#10375C] mb-2 z-10">{faculty.name}</h3>
                                     <p className="text-[#1E4E6F] font-semibold mb-1 z-10 capitalize">{faculty.department}</p>
                                     <p className="text-gray-600 z-10">{faculty['Years of Experience']} Years of Experience</p>
                                 </CardContent>

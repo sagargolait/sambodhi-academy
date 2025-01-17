@@ -52,15 +52,13 @@ const CountDown: React.FC<StatisticsProps> = ({ statistics }) => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {statistics.map((item: any) => (
-            <>
-              <div className="text-center">
-                <Users className="h-8 w-8 md:h-12 md:w-12 mx-auto mb-2 md:mb-4 text-[#F3C623]" />
-                <h3 className="text-xl md:text-3xl font-bold text-[#10375C]">
-                  <CountUpAnimation end={item.value} />{item.suffix}
-                </h3>
-                <p>{item.label}</p>
-              </div>
-            </>
+            <div key={item.id} className="text-center">
+              <Users className="h-8 w-8 md:h-12 md:w-12 mx-auto mb-2 md:mb-4 text-[#F3C623]" />
+              <h3 className="text-xl md:text-3xl font-bold text-[#10375C]">
+                <CountUpAnimation end={item.value} />{item.suffix}
+              </h3>
+              <p>{item.label}</p>
+            </div>
           ))}
         </div>
       </div>
