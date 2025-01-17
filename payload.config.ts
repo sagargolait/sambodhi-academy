@@ -31,6 +31,7 @@ import { FeatureDescriptions } from "./collections/FeatureDescription";
 import Faculty from "./collections/Faculty";
 import QuestionPapers from "./collections/Pyqs";
 import Students from "./collections/Students";
+import Statistics from "./collections/Statistics";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -66,6 +67,7 @@ export default buildConfig({
     Faculty,
     QuestionPapers,
     Students,
+    Statistics,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

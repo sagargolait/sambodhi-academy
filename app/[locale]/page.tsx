@@ -22,11 +22,12 @@ async function fetchPageData(payload: any) {
         { name: 'exams', sort: 'order' },
         { name: 'testimonials', sort: null },
         { name: 'faqs', sort: null },
-        { name: 'galleries', sort: null },
+        { name: 'galleries', sort: 'displayOrder' },
         { name: 'feature-descriptions', sort: null },
         { name: 'faculty', sort: null },
         { name: 'announcements', sort: null },
-        { name: 'articles', sort: null }
+        { name: 'articles', sort: null },
+        { name: 'statistics', sort: null }
 
     ];
 
@@ -52,7 +53,8 @@ async function fetchPageData(payload: any) {
         features: results[5].docs,
         faculties: results[6].docs,
         announcements: results[7].docs,
-        articles: results[8].docs
+        articles: results[8].docs,
+        statistics: results[9].docs
     };
 }
 
@@ -67,7 +69,7 @@ export default async function Home() {
             <Hero heroImages={data.galleryImages} announcements={data.announcements} />
             <dynamicComponents.Associates associates={data.associates} />
             <ExamExplorer exams={data.exams} />
-            <dynamicComponents.CountDown />
+            <dynamicComponents.CountDown statistics={data.statistics} />
             <dynamicComponents.Features features={data.features} />
             <dynamicComponents.Articles articles={data.articles} />
             <dynamicComponents.Infrastructure {...data.galleryImages} />
