@@ -22,6 +22,7 @@ interface Event {
   title: string
   date: string
   description?: string
+  isStale?: boolean
 }
 
 export function EventCalendar() {
@@ -46,7 +47,7 @@ export function EventCalendar() {
         <Tooltip>
           <TooltipTrigger asChild>
 
-            <button className={`rdp-button_reset rdp-button h-8 w-8 p-0 font-normal aria-selected:opacity-100 ${event ? 'bg-[#F3C623] text-[#10375C] font-bold' : ''}`}>
+            <button className={`rdp-button_reset rdp-button h-8 w-8 p-0 font-normal aria-selected:opacity-100 ${event ? (event.isStale ? 'bg-[#d8d7d4] text-[#181819] font-bold' : 'bg-[#F3C623] text-[#10375C] font-bold') : ''}`}>
               {format(day, 'd')}
             </button>
           </TooltipTrigger>
@@ -70,10 +71,10 @@ export function EventCalendar() {
           variant="default"
           className={`justify-start !p-0 hover:bg-transparent bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
         >
-          <div className="relative lg:mr-4">
+          <div title='Upcoming Events' className="relative lg:mr-4">
             <Bell className="h-6 w-6  text-[#fff] hover:text-[#F3C623] cursor-pointer " />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              3
+              {events.length}
             </span>
           </div>
         </Button>

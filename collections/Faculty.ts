@@ -4,7 +4,7 @@ const Faculty: CollectionConfig = {
   slug: "faculty",
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["name", "department", "designation", "email"],
+    defaultColumns: ["name", "department", "designation"],
   },
   access: {
     read: () => true,
