@@ -68,7 +68,7 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
       <div className="container mx-auto px-4">
         <SectionHeading>Gallery</SectionHeading>
 
-        <div className="container mx-auto">
+        <div className="container p-0">
           <div className="flex flex-wrap gap-3 justify-center space-x-2 mb-8">
             {filterOptions.map((item: any, index) => (
               <Button

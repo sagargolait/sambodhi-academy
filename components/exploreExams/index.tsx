@@ -16,11 +16,11 @@ const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
       </SectionHeading>
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content */}
-        <div className="container">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto ">
+        <div className="container p-0">
+          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4  ">
             {exams.map((exam: any) => (
               <Link key={exam.id} href={`/exams/${exam.slug}`} className="text-center">
-                <Card className="hover:shadow-lg h-[180px] flex justify-center items-center transition-shadow border-[#10375C]">
+                <Card className="hover:shadow-lg h-[180px] !p-0 flex justify-center items-center transition-shadow border-[#10375C]">
                   <CardContent className="p-4 md:flex flex-col flex justify-center items-center gap-3">
                     {exam?.logo && <Image
                       src={exam.logo.url}

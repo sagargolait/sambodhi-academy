@@ -11,7 +11,7 @@ interface AssociatesProps {
 
 const Associates: React.FC<AssociatesProps> = ({ associates }) => {
   return (
-    <section className="py-20 ">
+    <section className="py-10">
       <div className="container mx-auto px-4">
         <SectionHeading>
           EmpanelmentFrom
@@ -19,7 +19,7 @@ const Associates: React.FC<AssociatesProps> = ({ associates }) => {
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
           {associates.map((associate: any) => (
             <Link href={`/associates/${associate.slug}`} key={associate.id}>
-              <Card className="text-center md:h-[350px]">
+              <Card className="text-center !p-4 md:h-[300px]">
                 <CardContent className="pt-6">
                   <Image
                     src={associate.Image.url}

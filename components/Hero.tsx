@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, announcements }) => {
             <div className="image-list w-full p-4">
               <Carousel {...(carouselProps as CarouselProps)}>
                 {item.images.map((imageItem: any, index: number) => (
-                  <div key={imageItem.id} className="h-[550px] relative">
+                  <div key={imageItem.id} className="h-[500px] relative">
                     <Image
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}

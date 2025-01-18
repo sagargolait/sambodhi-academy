@@ -24,7 +24,7 @@ async function fetchPageData(payload: any) {
         { name: 'faqs', sort: null },
         { name: 'galleries', sort: 'displayOrder' },
         { name: 'feature-descriptions', sort: null },
-        { name: 'faculty', sort: null },
+        { name: 'faculty', sort: 'order' },
         { name: 'announcements', sort: null },
         { name: 'articles', sort: null },
         { name: 'statistics', sort: null }

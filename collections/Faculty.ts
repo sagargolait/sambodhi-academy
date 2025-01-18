@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig, CollectionSlug } from "payload";
 
 const Faculty: CollectionConfig = {
   slug: "faculty",
@@ -148,6 +148,40 @@ const Faculty: CollectionConfig = {
         { label: "On Leave", value: "on-leave" },
         { label: "Retired", value: "retired" },
       ],
+    },
+    {
+      name: "order",
+      type: "number",
+      admin: {
+        position: "sidebar", // Display in the sidebar for easier access in the admin panel
+        description:
+          "Controls the display order of Faculty. Lower numbers appear first.",
+      },
+      hooks: {
+        beforeChange: [
+          async ({ req, operation, value }) => {
+            if (operation === "create") {
+              const payload = req.payload;
+              // Find the highest order value in existing documents
+              const existingFaculties: any = await payload.find({
+                collection: "faculty" as CollectionSlug,
+                sort: "-order",
+                limit: 1,
+              });
+
+              // If there are existing faculty, set the order to highest + 1
+              // If no faculties exist, start with 1
+              const nextOrder =
+                existingFaculties.docs.length > 0
+                  ? existingFaculties.docs[0]?.order + 1
+                  : 1;
+
+              return nextOrder;
+            }
+            return value;
+          },
+        ],
+      },
     },
   ],
 };

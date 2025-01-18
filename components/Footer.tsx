@@ -203,7 +203,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
 
         <div className="mt-8 text-center">
           <p>
-            &copy; 2024 Sambodhi Academy. All rights reserved. Powered By ITyans
+            &copy; 2024 Sambodhi Academy. All rights reserved.
           </p>
         </div>
       </div>

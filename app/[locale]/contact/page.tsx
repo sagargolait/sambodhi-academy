@@ -36,7 +36,7 @@ export default function ContactPage() {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const response = await fetch("/api/addresses", {
+        const response = await fetch("/api/addresses?sort=order", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

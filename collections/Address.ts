@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig, CollectionSlug } from "payload";
 
 export const Addresses: CollectionConfig = {
   slug: "addresses",
@@ -63,6 +63,41 @@ export const Addresses: CollectionConfig = {
       name: "isPrimary",
       type: "checkbox",
       defaultValue: false,
+    },
+    {
+      name: "order",
+      type: "number",
+      required: true,
+      admin: {
+        position: "sidebar", // Display in the sidebar for easier access in the admin panel
+        description:
+          "Controls the display order of Addresses. Lower numbers appear first.",
+      },
+      hooks: {
+        beforeChange: [
+          async ({ req, operation, value }) => {
+            if (operation === "create") {
+              const payload = req.payload;
+              // Find the highest order value in existing documents
+              const existingAddresses: any = await payload.find({
+                collection: "addresses" as CollectionSlug,
+                sort: "-order",
+                limit: 1,
+              });
+
+              // If there are existing addresses, set the order to highest + 1
+              // If no addresses exist, start with 1
+              const nextOrder =
+                existingAddresses.docs.length > 0
+                  ? existingAddresses.docs[0]?.order + 1
+                  : 1;
+
+              return nextOrder;
+            }
+            return value;
+          },
+        ],
+      },
     },
   ],
 };

@@ -31,6 +31,7 @@ export default async function LocaleLayout({
     const [addresses] = await Promise.all([payload.find({
         collection: 'addresses' as CollectionSlug,
         depth: 2,
+        sort: 'order'
     })])
 
     return (
