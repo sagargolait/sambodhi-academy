@@ -10,6 +10,16 @@ const nextConfig = {
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
   },
+  images: {
+    domains: ["sambodhiacademy.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "sambodhiacademy.com",
+        pathname: "/api/media/file/**",
+      },
+    ],
+  },
   experimental: {
     turbo: {
       resolveAlias: {

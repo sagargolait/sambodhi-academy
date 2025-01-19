@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { format, isSameDay } from 'date-fns'
 import { Bell } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -28,6 +29,19 @@ interface Event {
 export function EventCalendar() {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [events, setEvents] = useState<Event[]>([])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     fetch('/api/events')
@@ -40,18 +54,35 @@ export function EventCalendar() {
     return events.find(event => isSameDay(new Date(event.date), date))
   }
 
+  const handleDateClick = (event: Event) => {
+    if (isMobile) {
+      toast(event.title, {
+        description: event.description,
+        duration: 3000,
+        position: 'bottom-center',
+      })
+    }
+  }
+
   const renderDay = (day: Date) => {
     const event = getEventForDate(day)
     return (
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-
-            <button className={`rdp-button_reset rdp-button h-8 w-8 p-0 font-normal aria-selected:opacity-100 ${event ? (event.isStale ? 'bg-[#d8d7d4] text-[#181819] font-bold' : 'bg-[#F3C623] text-[#10375C] font-bold') : ''}`}>
+            <button
+              className={`rdp-button_reset rdp-button h-8 w-8 p-0 font-normal aria-selected:opacity-100 ${event
+                  ? (event.isStale
+                    ? 'bg-[#d8d7d4] text-[#181819] font-bold'
+                    : 'bg-[#F3C623] text-[#10375C] font-bold')
+                  : ''
+                }`}
+              onClick={() => event && handleDateClick(event)}
+            >
               {format(day, 'd')}
             </button>
           </TooltipTrigger>
-          {event && (
+          {!isMobile && event && (
             <TooltipContent side="bottom">
               <div className="max-w-xs">
                 <h3 className="font-bold">{event.title}</h3>
@@ -65,31 +96,33 @@ export function EventCalendar() {
   }
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="default"
-          className={`justify-start !p-0 hover:bg-transparent bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
-        >
-          <div title='Upcoming Events' className="relative lg:mr-4">
-            <Bell className="h-6 w-6  text-[#fff] hover:text-[#F3C623] cursor-pointer " />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              {events.length}
-            </span>
-          </div>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-          components={{
-            Day: ({ date }) => renderDay(date),
-          }}
-        />
-      </PopoverContent>
-    </Popover>
+    <>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant="default"
+            className={`justify-start !p-0 hover:bg-transparent bg-transparent text-left font-normal ${!date && "text-muted-foreground"}`}
+          >
+            <div title='Upcoming Events' className="relative lg:mr-4">
+              <Bell className="h-6 w-6 text-[#fff] hover:text-[#F3C623] cursor-pointer " />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {events.length}
+              </span>
+            </div>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            initialFocus
+            components={{
+              Day: ({ date }) => renderDay(date),
+            }}
+          />
+        </PopoverContent>
+      </Popover>
+    </>
   )
 }

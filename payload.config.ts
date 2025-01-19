@@ -32,6 +32,7 @@ import Faculty from "./collections/Faculty";
 import QuestionPapers from "./collections/Pyqs";
 import Students from "./collections/Students";
 import Statistics from "./collections/Statistics";
+import { Products } from "./collections/Products";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -68,6 +69,7 @@ export default buildConfig({
     QuestionPapers,
     Students,
     Statistics,
+    Products,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

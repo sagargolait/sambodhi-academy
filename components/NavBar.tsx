@@ -9,6 +9,7 @@ import {
   Book,
   ChevronDown,
   GraduationCap,
+  BookOpen,
 } from "lucide-react";
 import Link from "next/link";
 import TopBar from "./TopBar";
@@ -25,8 +26,6 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 
-
-
 export default function NavBar() {
   const t = useTranslations('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,11 +33,11 @@ export default function NavBar() {
 
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
-    // {
-    //   name: "Courses",
-    //   href: "/courses",
-    //   icon: <BookOpen className="h-6 w-6" />,
-    // },
+    {
+      name: "Courses",
+      href: "/courses",
+      icon: <BookOpen className="h-6 w-6" />,
+    },
     { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
     {
       name: "Careers",

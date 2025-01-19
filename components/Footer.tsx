@@ -88,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
             <h3 className="text-lg font-semibold mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="hover:text-[#F3C623]">
+                <Link href="/products" className="hover:text-[#F3C623]">
                   Mock Tests
                 </Link>
               </li>
@@ -108,7 +108,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 </Link>
               </li> */}
               <li>
-                <Link href="/contact" className="hover:text-[#F3C623]">
+                <Link href="/products" className="hover:text-[#F3C623]">
                   Books
                 </Link>
               </li>
