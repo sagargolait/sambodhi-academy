@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import SectionHeading from '../SectionHeading'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
+import CustomImage from '@/utilities/CustomImage'
 
 interface FacultyProps {
     faculties: DataFromCollectionSlug<CollectionSlug>[]
@@ -32,10 +32,10 @@ const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
                                     <div className="relative w-48 h-48 mb-4 z-10">
                                         <div className="absolute inset-0 bg-[#F3C623] rounded-full transform -skew-y-6"></div>
                                         <div className="absolute inset-0 overflow-hidden rounded-full border-4 border-white">
-                                            <Image
+                                            <CustomImage
                                                 src={faculty.profileImage.url}
                                                 alt={faculty.profileImage.alt || `alt${faculty.id}`}
-                                                layout="fill"
+                                                fill
                                                 objectFit="cover"
                                                 className="rounded-full"
                                             />

@@ -16,7 +16,6 @@ import TopBar from "./TopBar";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
+import CustomImage from "@/utilities/CustomImage";
 
 export default function NavBar() {
   const t = useTranslations('');
@@ -74,7 +74,7 @@ export default function NavBar() {
   ];
 
   const login = [
-    { code: "admin", name: "Admin" },
+    { code: "admin", name: "Admin Login" },
     { code: "student-login", name: "Student Login" },
   ]
 
@@ -97,7 +97,7 @@ export default function NavBar() {
                 href="/"
                 className="flex items-center gap-4 text-xl font-bold"
               >
-                <Image
+                <CustomImage
                   src={"/sambodhi-logo.png"}
                   priority={true}
                   width={50}

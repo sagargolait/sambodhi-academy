@@ -3,9 +3,9 @@
 import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from './ui/card'
 import SectionHeading from './SectionHeading'
-import Image from 'next/image'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import { objectToArray } from '@/lib/utils'
+import CustomImage from '@/utilities/CustomImage'
 
 interface FeatureProps {
   features: DataFromCollectionSlug<CollectionSlug>[]
@@ -22,7 +22,7 @@ const Features: React.FC<FeatureProps> = ({ features }) => {
           {featureItems.map((feature, index) => (
             <Card key={index} className="bg-white">
               <CardHeader>
-                <Image src={feature.Icon.url} alt={feature.Icon.alt} width={25} height={25} className='text-[#F3C623] mb-2' />
+                <CustomImage src={feature.Icon.url} alt={feature.Icon.alt} width={25} height={25} className='text-[#F3C623] mb-2' />
                 <CardTitle className="text-[#10375C]">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>

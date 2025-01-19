@@ -11,8 +11,8 @@ import Link from "next/link";
 import SectionHeading from "./SectionHeading";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { Navigation, Pagination } from 'swiper/modules';
-import Image from "next/image";
 import ImageDialog from "./imageDialog";
+import CustomImage from "@/utilities/CustomImage";
 
 const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[]) => {
   const galleryImageByCategory = objectToArray(galleryImages);
@@ -110,7 +110,7 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
               {FilteredImages.flatMap((category, categoryIndex) =>
                 category.images.map((image: any, imageIndex: number) => (
                   <SwiperSlide key={image.id}>
-                    <Image
+                    <CustomImage
                       src={image.image.url}
                       alt={image.image.alt}
                       className="rounded-md object-fit mb-4 cursor-pointer h-64 w-full object-cover"

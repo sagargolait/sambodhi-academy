@@ -7,7 +7,7 @@ import type { CarouselProps } from "react-responsive-carousel";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
 import { WhatsNewSection } from "./whatsNewSection";
-import Image from "next/image";
+import CustomImage from "@/utilities/CustomImage";
 
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
@@ -61,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, announcements }) => {
               <Carousel {...(carouselProps as CarouselProps)}>
                 {item.images.map((imageItem: any, index: number) => (
                   <div key={imageItem.id} className="h-[500px] relative">
-                    <Image
+                    <CustomImage
                       src={imageItem.image.url}
                       alt={imageItem.image.alt}
                       fill

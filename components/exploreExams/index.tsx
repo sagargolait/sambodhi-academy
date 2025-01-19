@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
+import CustomImage from "@/utilities/CustomImage";
 
 interface ExamProps {
   exams: DataFromCollectionSlug<CollectionSlug>[]
@@ -22,7 +22,7 @@ const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
               <Link key={exam.id} href={`/exams/${exam.slug}`} className="text-center">
                 <Card className="hover:shadow-lg h-[180px] !p-0 flex justify-center items-center transition-shadow border-[#10375C]">
                   <CardContent className="p-4 md:flex flex-col flex justify-center items-center gap-3">
-                    {exam?.logo && <Image
+                    {exam?.logo && <CustomImage
                       src={exam.logo.url}
                       alt={exam.logo.alt || exam.title}
                       width={100}

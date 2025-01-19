@@ -2,7 +2,7 @@
 
 import FacultyCarousel from "@/components/FacultyCarousel";
 import SectionHeading from "@/components/SectionHeading";
-import Image from "next/image";
+import CustomImage from "@/utilities/CustomImage";
 import { useEffect, useState } from "react";
 
 export default function AboutPage() {
@@ -52,7 +52,7 @@ export default function AboutPage() {
             </p> */}
           </div>
           <div>
-            <Image
+            <CustomImage
               src="/api/media/file/director-about.jpg"
               alt="Sambodhi Director"
               className="rounded-lg shadow-lg"

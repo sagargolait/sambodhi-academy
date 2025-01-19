@@ -4,8 +4,8 @@ import {
     DialogContent,
     DialogTitle
 } from "@/components/ui/dialog";
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import CustomImage from '@/utilities/CustomImage';
 
 type Props = {
     isOpen: boolean,
@@ -24,7 +24,7 @@ const ImageDialog = (props: Props) => {
                     Image Gallery View
                 </DialogTitle>
                 <div className="relative w-full h-full flex items-center justify-center bg-black/50">
-                    <Image
+                    <CustomImage
                         src={props.allImages[props.selectedImageIndex]?.image.url}
                         alt={props.allImages[props.selectedImageIndex]?.image.alt}
                         fill

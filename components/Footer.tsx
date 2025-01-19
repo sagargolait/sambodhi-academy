@@ -2,11 +2,11 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { LucideFacebook, LucideInstagram, LucideTwitter, LucideYoutube, Phone } from "lucide-react";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
+import CustomImage from "@/utilities/CustomImage";
 
 // Define the props type
 interface FooterProps {
@@ -37,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
             <Card>
               <CardHeader>
                 <CardTitle className="text-[#10375C] text-4xl flex items-center gap-4">
-                  <Image
+                  <CustomImage
                     src={"/api/media/file/sambodhi-logo.png"}
                     width={25}
                     height={25}
@@ -163,7 +163,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                 href="https://play.google.com/store/apps/details?id=co.white.tqqcq"
                 rel="noopener noreferrer"
               >
-                <Image
+                <CustomImage
                   src={"/google-play-logo.svg"}
                   width={150}
                   height={75}

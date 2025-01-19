@@ -1,9 +1,9 @@
 import React from "react";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "./ui/card";
-import Image from "next/image";
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import Link from "next/link";
+import CustomImage from "@/utilities/CustomImage";
 
 interface AssociatesProps {
   associates: DataFromCollectionSlug<CollectionSlug>[]
@@ -21,7 +21,7 @@ const Associates: React.FC<AssociatesProps> = ({ associates }) => {
             <Link href={`/associates/${associate.slug}`} key={associate.id}>
               <Card className="text-center !p-4 md:h-[300px]">
                 <CardContent className="pt-6">
-                  <Image
+                  <CustomImage
                     src={associate.Image.url}
                     alt={associate.Image.alt}
                     width={150}

@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
 import SectionHeading from '../SectionHeading'
 import { CollectionSlug, DataFromCollectionSlug } from 'payload'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
+import CustomImage from '@/utilities/CustomImage'
 
 interface TestimonialProps {
     testimonials: DataFromCollectionSlug<CollectionSlug>[]
@@ -28,7 +28,7 @@ const Testimonials: React.FC<TestimonialProps> = ({ testimonials }) => {
                                 <Card className="bg-white shadow-lg m-4">
                                     <CardContent className="p-6">
                                         <div className="flex flex-col items-center text-center">
-                                            {<Image
+                                            {<CustomImage
                                                 src={testimonial.Image?.url}
                                                 alt={testimonial.Image?.alt}
                                                 width={140}

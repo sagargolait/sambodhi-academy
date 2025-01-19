@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import SectionHeading from "./SectionHeading";
+import CustomImage from "@/utilities/CustomImage";
 
 const OurStory: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const OurStory: React.FC = () => {
       <div className="container mx-auto px-4">
         <SectionHeading>OurStory</SectionHeading>
         <div className="md:flex gap-8 items-center">
-          <Image
+          <CustomImage
             src="/director.jpg"
             alt="CEO of Sambodhi Academy"
             width={800}

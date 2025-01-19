@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,25 +19,25 @@ import { Briefcase, GraduationCap, Users, CheckCircle } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { toast } from 'sonner'
 
-const jobOpenings = [
-  {
-    title: "Senior UPSC Faculty",
-    department: "Academic",
-    location: "New Delhi",
-  },
-  { title: "SSC Exam Specialist", department: "Academic", location: "Mumbai" },
-  {
-    title: "Student Counselor",
-    department: "Student Services",
-    location: "Bangalore",
-  },
-  { title: "Content Developer", department: "Curriculum", location: "Chennai" },
-  {
-    title: "Digital Marketing Manager",
-    department: "Marketing",
-    location: "Kolkata",
-  },
-];
+// const jobOpenings = [
+//   {
+//     title: "Senior UPSC Faculty",
+//     department: "Academic",
+//     location: "New Delhi",
+//   },
+//   { title: "SSC Exam Specialist", department: "Academic", location: "Mumbai" },
+//   {
+//     title: "Student Counselor",
+//     department: "Student Services",
+//     location: "Bangalore",
+//   },
+//   { title: "Content Developer", department: "Curriculum", location: "Chennai" },
+//   {
+//     title: "Digital Marketing Manager",
+//     department: "Marketing",
+//     location: "Kolkata",
+//   },
+// ];
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -60,10 +60,23 @@ interface IFormInputs {
 
 export default function CareersPage() {
   const formRef = useRef<HTMLDivElement>(null);
+  const [jobOpenings, setJobOpenings] = useState([])
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   };
+  useEffect(() => {
+    const fetchCareers = async () => {
+      try {
+        const results = await fetch(`/api/career-openings`).then((res) => res.json())
+        setJobOpenings(results.docs)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchCareers()
+  }, [])
 
   const {
     register,
@@ -197,11 +210,11 @@ export default function CareersPage() {
             Current Openings
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {jobOpenings.map((job, index) => (
+            {jobOpenings.map((job: any, index) => (
               <Card key={index}>
                 <CardHeader>
-                  <CardTitle className="text-[#10375C]">{job.title}</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-[#10375C]">{job.jobTitle}</CardTitle>
+                  <CardDescription className="capitalize">
                     {job.department} | {job.location}
                   </CardDescription>
                 </CardHeader>

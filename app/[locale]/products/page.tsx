@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SectionHeading from '@/components/SectionHeading'
 import Link from 'next/link'
+import CustomImage from '@/utilities/CustomImage'
 
 interface Products {
     id: string;
@@ -56,7 +56,7 @@ export default function ProductsPage() {
                                         {mockTests.map((test: any) => (
                                             <Card key={test.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
                                                 <CardHeader className='flex items-center justify-center'>
-                                                    <Image src={test.thumbnailImage.url || "/api/media/file/placeholder.webp"} alt={test.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
+                                                    <CustomImage src={test.thumbnailImage.url} alt={test.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
                                                 </CardHeader>
                                                 <CardContent className="flex-grow">
                                                     <CardTitle className="text-lg font-bold text-[#10375C] mb-2">{test.title}</CardTitle>
@@ -85,7 +85,7 @@ export default function ProductsPage() {
                                         {books.map((book: any) => (
                                             <Card key={book.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
                                                 <CardHeader className='flex items-center justify-center'>
-                                                    <Image src={book.thumbnailImage.url || "/api/media/file/placeholder.webp"} alt={book.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
+                                                    <CustomImage src={book.thumbnailImage.url} alt={book.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
                                                 </CardHeader>
                                                 <CardContent className="flex-grow">
                                                     <CardTitle className="text-lg text-center font-bold text-[#10375C] mb-2">{book.title}</CardTitle>

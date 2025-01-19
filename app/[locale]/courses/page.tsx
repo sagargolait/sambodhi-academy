@@ -3,7 +3,7 @@
 import SectionHeading from "@/components/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
+import CustomImage from "@/utilities/CustomImage";
 import Link from "next/link";
 import { use } from "react";
 // import Image from "next/image";
@@ -48,9 +48,9 @@ export default function CoursesPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course: any) => (
             <Card key={course.id} className="flex flex-col">
-              <Image
-                src={course.image || '/api/media/file/placeholder.webp'}
-                alt={course.title || ""}
+              <CustomImage
+                src={course.image}
+                alt={course.title}
                 width={300}
                 height={200}
                 className="w-full h-48 object-cover rounded-t-lg"
