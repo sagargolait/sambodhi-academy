@@ -199,6 +199,59 @@ export const ExamPages: CollectionConfig = {
             },
           ],
         },
+        {
+          slug: "link",
+          labels: {
+            singular: "Link Block",
+            plural: "Link Blocks",
+          },
+          fields: [
+            {
+              name: "text",
+              type: "text",
+              required: true,
+              label: "Link Text",
+              admin: {
+                description: "The text that will be displayed",
+              },
+            },
+            {
+              name: "pdfFile",
+              type: "upload",
+              relationTo: "media",
+              required: true,
+              label: "PDF File",
+              filterOptions: {
+                mimeType: { contains: "pdf" },
+              },
+            },
+            {
+              name: "openInNewTab",
+              type: "checkbox",
+              label: "Open in New Tab",
+              defaultValue: true,
+            },
+            {
+              name: "style",
+              type: "select",
+              options: [
+                {
+                  label: "Default",
+                  value: "default",
+                },
+                {
+                  label: "Button",
+                  value: "button",
+                },
+                {
+                  label: "Underlined",
+                  value: "underlined",
+                },
+              ],
+              defaultValue: "default",
+            },
+          ],
+        },
       ],
     },
     {

@@ -14,7 +14,7 @@ interface RichTextNode {
 
 
 export interface Block {
-  blockType: 'heading' | 'paragraph' | 'image' | 'examQuestion' | 'table' | 'pdf-viewer';
+  blockType: 'heading' | 'paragraph' | 'image' | 'examQuestion' | 'table' | 'pdf-viewer' | 'link';
   id: string;
   text?: RichTextNode[];
   level?: 'h1' | 'h2' | 'h3' | 'h4';

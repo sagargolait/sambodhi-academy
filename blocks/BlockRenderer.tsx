@@ -1,6 +1,8 @@
 import React from 'react';
 import RichText, { Block as BaseBlock } from './RichText';
 import { ElementType } from 'react';
+import { FileIcon } from 'lucide-react';
+import '../styles/globals.css';
 
 type Block = BaseBlock & {
   rows?: Row[];
@@ -10,8 +12,11 @@ type Block = BaseBlock & {
     url: string;
     alt: string;
   };
+
+  pdfFile?: any;
+  openInNewTab?: boolean;
   title?: string;
-  blockType: 'heading' | 'paragraph' | 'image' | 'examQuestion' | 'table' | 'pdf-viewer';
+  blockType: 'heading' | 'paragraph' | 'image' | 'examQuestion' | 'table' | 'pdf-viewer' | 'link';
 };
 
 interface BlockRendererProps {
@@ -167,7 +172,27 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
           </div>
         );
 
-
+      case 'link':
+        return (
+          <div className="my-4">
+            <a
+              href={block.pdfFile?.url}
+              target={block.openInNewTab ? '_blank' : '_self'}
+              rel={block.openInNewTab ? 'noopener noreferrer' : ''}
+              className={`inline-block ${block.style === 'button'
+                ? 'px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg'
+                : block.style === 'underlined'
+                  ? 'text-blue-600 hover:text-blue-800 underline'
+                  : 'text-blue-600 hover:text-blue-800 hover:underline'
+                }`}
+            >
+              <span className="flex text-lg font-bold items-center">
+                <FileIcon size={16} className="mr-2" />
+                {block.text || block.pdfFile?.filename}
+              </span>
+            </a>
+          </div >
+        );
       default:
         return null;
     }
