@@ -6,6 +6,7 @@ import Testimonials from "@/components/testimonials";
 import { CollectionSlug, getPayload } from 'payload';
 import config from '@payload-config';
 import FacultyCarousel from "@/components/FacultyCarousel";
+import ErrorBoundary from "./ErrorBoundary";
 
 const dynamicComponents = {
     CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),
@@ -65,17 +66,19 @@ export default async function Home() {
     const data = await fetchPageData(payload);
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
-            <Hero heroImages={data.galleryImages} announcements={data.announcements} />
-            <dynamicComponents.Associates associates={data.associates} />
-            <ExamExplorer exams={data.exams} />
-            <dynamicComponents.CountDown statistics={data.statistics} />
-            <FacultyCarousel faculties={data.faculties} />
-            {/* <dynamicComponents.Features features={data.features} /> */}
-            {/* <dynamicComponents.Articles articles={data.articles} /> */}
-            <dynamicComponents.Infrastructure {...data.galleryImages} />
-            <Testimonials testimonials={data.testimonials} />
-            <dynamicComponents.FAQs faqs={data.faqs} />
-        </div>
+        <ErrorBoundary>
+            <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
+                <Hero heroImages={data.galleryImages} announcements={data.announcements} />
+                <dynamicComponents.Associates associates={data.associates} />
+                <ExamExplorer exams={data.exams} />
+                <dynamicComponents.CountDown statistics={data.statistics} />
+                <FacultyCarousel faculties={data.faculties} />
+                {/* <dynamicComponents.Features features={data.features} /> */}
+                {/* <dynamicComponents.Articles articles={data.articles} /> */}
+                <dynamicComponents.Infrastructure {...data.galleryImages} />
+                <Testimonials testimonials={data.testimonials} />
+                <dynamicComponents.FAQs faqs={data.faqs} />
+            </div>
+        </ErrorBoundary>
     );
 }
