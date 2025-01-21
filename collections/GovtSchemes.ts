@@ -1,61 +1,271 @@
-import { CollectionConfig } from 'payload';
+import { CollectionConfig } from "payload";
+import { slugField } from "./Exams";
 
 export const GovernmentSchemes: CollectionConfig = {
-  slug: 'government-schemes', // The slug for the collection (URL path)
+  slug: "government-schemes", // The slug for the collection (URL path)
   admin: {
-    useAsTitle: 'schemeName', // Field to display in the admin UI list
-    defaultColumns: ['schemeName', 'status', 'createdAt'], // Columns to display in the admin UI
+    useAsTitle: "schemeName", // Field to display in the admin UI list
+    defaultColumns: ["schemeName", "status", "createdAt"], // Columns to display in the admin UI
+  },
+  access: {
+    read: () => true,
   },
   fields: [
     {
-      name: 'schemeName',
-      type: 'text',
+      name: "schemeName",
+      type: "text",
       required: true, // Scheme name is required
-      label: 'Scheme Name',
+      label: "Scheme Name",
     },
+    slugField,
     {
-      name: 'description',
-      type: 'textarea',
-      label: 'Description',
-      required: true,
-      admin: {
-        rows: 5, // A large text area for a description
-      },
-    },
-    {
-      name: 'schemeFile', // Field for uploading PDF
-      type: 'upload',
-      relationTo: 'media', // Media relation (ensure you have a media collection set up)
-      required: true, // PDF upload is required
-      label: 'Upload Scheme PDF',
-      admin: {
-        // Define any specific properties here if needed
-        description: 'Upload the official PDF for the government scheme.',
-      },
-    },
-    {
-      name: 'publishDate',
-      type: 'date',
-      label: 'Date of Publication',
-      required: true,
-      admin: {
-        position: 'sidebar', // Place this field in the sidebar
-      },
-    },
-    {
-      name: 'status',
-      type: 'select',
-      options: [
-        { value: 'draft', label: 'Draft' },
-        { value: 'published', label: 'Published' },
+      name: "content",
+      type: "blocks",
+      blocks: [
+        {
+          slug: "heading",
+          fields: [
+            {
+              name: "text",
+              type: "text",
+              required: true,
+            },
+            {
+              name: "level",
+              type: "select",
+              options: [
+                { label: "H1", value: "h1" },
+                { label: "H2", value: "h2" },
+                { label: "H3", value: "h3" },
+                { label: "H4", value: "h4" },
+              ],
+              defaultValue: "h1",
+            },
+          ],
+        },
+        {
+          slug: "paragraph",
+          fields: [
+            {
+              name: "text",
+              type: "richText",
+              required: true,
+            },
+          ],
+        },
+        {
+          slug: "image",
+          fields: [
+            {
+              name: "image",
+              type: "upload",
+              relationTo: "media",
+              required: true,
+            },
+            {
+              name: "caption",
+              type: "text",
+            },
+            {
+              name: "altText",
+              type: "text",
+              required: true,
+            },
+          ],
+        },
+        {
+          slug: "pdf-viewer", // unique identifier for the block
+          labels: {
+            singular: "PDF Viewer",
+            plural: "PDF Viewers",
+          },
+          fields: [
+            {
+              name: "pdf",
+              type: "upload", // Use the 'upload' field type for file uploads
+              relationTo: "media", // Assuming you have a 'media' collection for uploads
+              required: true,
+            },
+            {
+              name: "title",
+              type: "text",
+              label: "Title",
+              required: true,
+            },
+            {
+              name: "description",
+              type: "textarea",
+              label: "Description",
+            },
+          ],
+        },
+        {
+          slug: "examQuestion",
+          fields: [
+            {
+              name: "question",
+              type: "richText",
+              required: true,
+            },
+            {
+              name: "options",
+              type: "array",
+              fields: [
+                {
+                  name: "option",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: "isCorrect",
+                  type: "checkbox",
+                  defaultValue: false,
+                },
+              ],
+            },
+            {
+              name: "explanation",
+              type: "richText",
+            },
+          ],
+        },
+        {
+          slug: "table",
+          fields: [
+            {
+              name: "tableCaption",
+              type: "text",
+              label: "Table Caption",
+            },
+            {
+              name: "rows",
+              type: "array",
+              fields: [
+                {
+                  name: "cells",
+                  type: "array",
+                  fields: [
+                    {
+                      name: "content",
+                      type: "richText",
+                      required: true,
+                    },
+                    {
+                      name: "isHeader",
+                      type: "checkbox",
+                      label: "Is Header Cell",
+                      defaultValue: false,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: "style",
+              type: "select",
+              options: [
+                {
+                  label: "Default",
+                  value: "default",
+                },
+                {
+                  label: "Striped",
+                  value: "striped",
+                },
+                {
+                  label: "Bordered",
+                  value: "bordered",
+                },
+              ],
+              defaultValue: "default",
+            },
+          ],
+        },
+        {
+          slug: "link",
+          labels: {
+            singular: "Link Block",
+            plural: "Link Blocks",
+          },
+          fields: [
+            {
+              name: "text",
+              type: "text",
+              required: true,
+              label: "Link Text",
+              admin: {
+                description: "The text that will be displayed",
+              },
+            },
+            {
+              name: "pdfFile",
+              type: "upload",
+              relationTo: "media",
+              required: true,
+              label: "PDF File",
+              filterOptions: {
+                mimeType: { contains: "pdf" },
+              },
+            },
+            {
+              name: "openInNewTab",
+              type: "checkbox",
+              label: "Open in New Tab",
+              defaultValue: true,
+            },
+            {
+              name: "style",
+              type: "select",
+              options: [
+                {
+                  label: "Default",
+                  value: "default",
+                },
+                {
+                  label: "Button",
+                  value: "button",
+                },
+                {
+                  label: "Underlined",
+                  value: "underlined",
+                },
+              ],
+              defaultValue: "default",
+            },
+          ],
+        },
       ],
-      defaultValue: 'draft', // Default to 'draft' status
-      label: 'Status',
+    },
+    {
+      name: "status",
+      type: "select",
+      options: [
+        { value: "draft", label: "Draft" },
+        { value: "published", label: "Published" },
+      ],
+      defaultValue: "draft", // Default to 'draft' status
+      label: "Status",
       admin: {
-        position: 'sidebar', // Place this field in the sidebar
+        position: "sidebar", // Place this field in the sidebar
+      },
+    },
+    {
+      name: "meta",
+      type: "group",
+      fields: [
+        {
+          name: "description",
+          type: "textarea",
+        },
+        {
+          name: "keywords",
+          type: "text",
+        },
+      ],
+      admin: {
+        position: "sidebar",
       },
     },
   ],
   timestamps: true, // Auto-manage createdAt and updatedAt timestamps
 };
-

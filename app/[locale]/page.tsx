@@ -70,11 +70,11 @@ export default async function Home() {
             <dynamicComponents.Associates associates={data.associates} />
             <ExamExplorer exams={data.exams} />
             <dynamicComponents.CountDown statistics={data.statistics} />
-            <dynamicComponents.Features features={data.features} />
-            <dynamicComponents.Articles articles={data.articles} />
+            <FacultyCarousel faculties={data.faculties} />
+            {/* <dynamicComponents.Features features={data.features} /> */}
+            {/* <dynamicComponents.Articles articles={data.articles} /> */}
             <dynamicComponents.Infrastructure {...data.galleryImages} />
             <Testimonials testimonials={data.testimonials} />
-            <FacultyCarousel faculties={data.faculties} />
             <dynamicComponents.FAQs faqs={data.faqs} />
         </div>
     );

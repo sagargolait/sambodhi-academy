@@ -38,6 +38,11 @@ export default function NavBar() {
       href: "/courses",
       icon: <BookOpen className="h-6 w-6" />,
     },
+    {
+      name: "PYQ",
+      href: "/question-papers",
+      icon: <Book className="h-6 w-6" />,
+    },
     { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
     {
       name: "Careers",
@@ -54,11 +59,6 @@ export default function NavBar() {
         { name: 'EWS', href: '/' },
 
       ]
-    },
-    {
-      name: "Question Papers",
-      href: "/question-papers",
-      icon: <Book className="h-6 w-6" />,
     },
     {
       name: "Gallery",
@@ -110,14 +110,14 @@ export default function NavBar() {
                 </span>
               </Link>
               <nav className="hidden md:flex md:text-sm gap-6 lg:text-md lg:gap-8">
-                {menuItems.map((item) => (
-                  item.dropdown ? (
+                {menuItems.map((item: any) => (
+                  item?.dropdown ? (
                     <DropdownMenu key={item.name}>
                       <DropdownMenuTrigger className="text-[#FFF] hover:text-[#F3C623] flex items-center">
                         {t(item.name)} <ChevronDown className="ml-1 h-4 w-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
-                        {item.dropdown.map((subItem) => (
+                        {item.dropdown.map((subItem: any) => (
                           <DropdownMenuItem key={subItem.name} asChild className="cursor-pointer">
                             <Link href={subItem.href} className="w-full">
                               {subItem.name}
@@ -165,11 +165,11 @@ export default function NavBar() {
                   </Button>
                   {mobileMenuOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                      {menuItems.map((item) => (
+                      {menuItems.map((item: any) => (
                         item.dropdown ? (
                           <div key={item.name} className="">
                             <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {item.name}</span>
-                            {item.dropdown.map((subItem) => (
+                            {item.dropdown.map((subItem: any) => (
                               <Link
                                 key={subItem.name}
                                 href={subItem.href}

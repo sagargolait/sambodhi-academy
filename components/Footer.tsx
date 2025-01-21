@@ -47,7 +47,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                   Sambodhi Academy
                 </CardTitle>
                 <CardContent className="mt-2">
-                  The Sambodhi Academy was founded by Mr. Bhimrao Hattiambire, on 14th October 1997. It was a turning point in his life and also in the lives of thousands of beneficiaries of his activities in the years that followed. Despite all ups and downs in his personal life, he has been relentlessly working in the social field, solving problems of people, effecting social reforms of various kinds.
+                  Sambodhi Academy operates competitive exam training centers across various cities in Maharashtra offering special concession to aspirants from backward classes and economically weaker sections. It is empaneled by autonomous government institutes like SARTHI, BARTI, TRTI and MAHAJYOTI. It’s state of the art infrastructure and focus on over all development has helped hundreds of aspirants secure positions in government and semi-government services including top ranks since 2010.
                 </CardContent>
               </CardHeader>
             </Card>

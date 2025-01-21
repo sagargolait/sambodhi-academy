@@ -14,7 +14,7 @@ interface FacultyProps {
 const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
     return (
 
-        <div className="relative container mx-auto">
+        <div className="relative container mx-auto mt-12">
             <SectionHeading>OurFaculty</SectionHeading>
             <Carousel
                 opts={{
