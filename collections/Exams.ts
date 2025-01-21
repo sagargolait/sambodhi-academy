@@ -68,11 +68,15 @@ export const Exams: CollectionConfig = {
   access: {
     read: (): boolean => true,
   },
+  admin: {
+    useAsTitle: "title",
+  },
   fields: [
     {
       name: "title",
       type: "text",
       required: true,
+      label: "Exam Name",
     },
     {
       name: "order",

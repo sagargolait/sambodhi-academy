@@ -33,6 +33,7 @@ import QuestionPapers from "./collections/Pyqs";
 import Students from "./collections/Students";
 import Statistics from "./collections/Statistics";
 import { Products } from "./collections/Products";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -101,6 +102,9 @@ export default buildConfig({
         endpoint: process.env.NEXT_PUBLIC_S3_ENDPOINT,
       },
     }),
-    // storage-adapter-placeholder
+    seoPlugin({
+      generateTitle: ({ doc }) => `sambodhiacademy.com — ${doc?.title}`,
+      generateDescription: ({ doc }) => doc.excerpt,
+    }),
   ],
 });

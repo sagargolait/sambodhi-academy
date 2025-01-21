@@ -66,9 +66,11 @@ interface RichTextProps {
 
 
 const RichText: React.FC<RichTextProps> = ({ content, type }) => {
+  console.log(content)
   if (!content?.root?.children) {
     return null;
   }
+
 
   const renderNode = (node: any): React.ReactNode => {
     switch (node.type) {

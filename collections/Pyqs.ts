@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig, CollectionSlug } from "payload";
 
 const QuestionPapers: CollectionConfig = {
   slug: "question-papers",
@@ -9,7 +9,18 @@ const QuestionPapers: CollectionConfig = {
     singular: "Question Paper",
     plural: "Question Papers",
   },
+  admin: {
+    defaultColumns: ["title", "exam", "subject", "year"],
+  },
   fields: [
+    {
+      name: "exam",
+      type: "relationship",
+      relationTo: "exams" as CollectionSlug,
+      required: true,
+      label: "Exam Type",
+      hasMany: false,
+    },
     {
       name: "title",
       type: "text",

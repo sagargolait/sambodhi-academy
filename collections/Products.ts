@@ -5,6 +5,9 @@ export const Products: CollectionConfig = {
   admin: {
     useAsTitle: "title",
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: "title",

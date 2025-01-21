@@ -29,8 +29,8 @@ export default function ProductsPage() {
         fetchProducts()
     }, [])
 
-    const mockTests = products.filter((product) => product?.productType === 'mock-test')
-    const books = products.filter((product) => product?.productType === 'book')
+    const mockTests = products?.filter((product) => product?.productType === 'mock-test')
+    const books = products?.filter((product) => product?.productType === 'book')
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F4F6FF]">
@@ -42,7 +42,7 @@ export default function ProductsPage() {
                     </div>
                 </section>
 
-                <section>
+                <section className='container mx-auto'>
                     <div className="container mx-auto px-4">
                         <Tabs defaultValue="mock-tests" className="w-full">
                             <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -81,7 +81,7 @@ export default function ProductsPage() {
                             <TabsContent value="books">
                                 <SectionHeading>Books</SectionHeading>
                                 {books.length > 0 ? (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
                                         {books.map((book: any) => (
                                             <Card key={book.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
                                                 <CardHeader className='flex items-center justify-center'>

@@ -37,7 +37,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
       case 'heading': {
         const HeadingTag = block.level as ElementType;
         const headingClasses = {
-          h1: "text-4xl font-bold mb-6 mt-8",
+          h1: "text-4xl font-bold mb-6 mt-8 first:!mt-0",
           h2: "text-3xl font-semibold mb-4 mt-6",
           h3: "text-2xl font-semibold mb-4 mt-4",
           h4: "text-xl font-semibold mb-2 mt-2"
