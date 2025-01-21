@@ -18,7 +18,6 @@ export const Products: CollectionConfig = {
       name: "productType",
       type: "select",
       required: true,
-      defaultValue: { label: "Mock Test", value: "mock-test" },
       options: [
         { label: "Mock Test", value: "mock-test" },
         { label: "Book", value: "book" },
@@ -26,7 +25,7 @@ export const Products: CollectionConfig = {
     },
     {
       name: "description",
-      type: "textarea",
+      type: "richText",
     },
     {
       name: "price",

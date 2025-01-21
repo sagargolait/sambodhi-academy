@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SectionHeading from '@/components/SectionHeading'
 import Link from 'next/link'
 import CustomImage from '@/utilities/CustomImage'
+import RichText from '@/blocks/RichText'
 
 interface Products {
     id: string;
@@ -42,7 +43,7 @@ export default function ProductsPage() {
                     </div>
                 </section>
 
-                <section className='container mx-auto'>
+                <section className='container mx-auto mb-6'>
                     <div className="container mx-auto px-4">
                         <Tabs defaultValue="mock-tests" className="w-full">
                             <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -61,12 +62,12 @@ export default function ProductsPage() {
                                                 <CardContent className="flex-grow">
                                                     <CardTitle className="text-lg font-bold text-[#10375C] mb-2">{test.title}</CardTitle>
                                                     <CardDescription className="text-[#1E4E6F]">
-                                                        {test.description}
+                                                        <RichText content={test.description} />
                                                     </CardDescription>
                                                 </CardContent>
                                                 <CardContent className="flex justify-center items-center">
                                                     <Link href={test.metadata.link} target='_blank'>
-                                                        <Button className="bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]">Link</Button>
+                                                        <Button className="w-full bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]">Link</Button>
                                                     </Link>
                                                 </CardContent>
                                             </Card>
