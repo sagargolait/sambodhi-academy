@@ -1,5 +1,6 @@
 'use client'
 
+import { Features } from "@/components";
 import FacultyCarousel from "@/components/FacultyCarousel";
 import SectionHeading from "@/components/SectionHeading";
 import CustomImage from "@/utilities/CustomImage";
@@ -7,14 +8,27 @@ import { useEffect, useState } from "react";
 
 export default function AboutPage() {
   const [facultyMembers, setFacultyMembers] = useState([])
+  const [featureData, setFeatureData] = useState([])
+
   useEffect(() => {
     const fetchFacultyData = async () => {
-      const facultyMembersData = await fetch('/api/faculty')
-      const data = await facultyMembersData.json()
-      setFacultyMembers(data.docs)
+      try {
+        const [facultyMembersData, featuresData] = await Promise.all([
+          fetch('/api/faculty'),
+          fetch('/api/feature-descriptions')
+        ]);
+
+        const facultyResp = await facultyMembersData.json();
+        const featureResp = await featuresData.json();
+
+        setFacultyMembers(facultyResp.docs);
+        setFeatureData(featureResp.docs);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
 
-    fetchFacultyData()
+    fetchFacultyData();
   }, [])
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
@@ -61,7 +75,7 @@ export default function AboutPage() {
             />
           </div>
         </div>
-
+        <Features features={featureData} />
         <FacultyCarousel faculties={facultyMembers} />
       </main>
     </div>
