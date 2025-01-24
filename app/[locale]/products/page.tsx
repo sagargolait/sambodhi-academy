@@ -57,7 +57,7 @@ export default function ProductsPage() {
                                         {mockTests.map((test: any) => (
                                             <Card key={test.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
                                                 <CardHeader className='flex items-center justify-center'>
-                                                    <CustomImage src={test.thumbnailImage.url} alt={test.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
+                                                    <CustomImage src={test?.thumbnailImage?.url} alt={test?.thumbnailImage?.alt} width={200} height={200} className="rounded-full" />
                                                 </CardHeader>
                                                 <CardContent className="flex-grow">
                                                     <CardTitle className="text-lg font-bold text-[#10375C] mb-2">{test.title}</CardTitle>
@@ -86,7 +86,7 @@ export default function ProductsPage() {
                                         {books.map((book: any) => (
                                             <Card key={book.id} className="flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
                                                 <CardHeader className='flex items-center justify-center'>
-                                                    <CustomImage src={book.thumbnailImage.url} alt={book.thumbnailImage.alt} width={200} height={200} className="rounded-t-lg" />
+                                                    <CustomImage src={book?.thumbnailImage?.url} alt={book?.thumbnailImage?.alt} width={200} height={200} className="rounded-t-lg" />
                                                 </CardHeader>
                                                 <CardContent className="flex-grow">
                                                     <CardTitle className="text-lg text-center font-bold text-[#10375C] mb-2">{book.title}</CardTitle>
