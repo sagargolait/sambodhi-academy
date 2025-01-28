@@ -77,6 +77,19 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
+  localization: {
+    locales: [
+      {
+        label: "English",
+        code: "en",
+      },
+      {
+        label: "Marathi",
+        code: "mr",
+      },
+    ],
+    defaultLocale: "en",
+  },
   // database-adapter-config-start
   db: mongooseAdapter({
     url: process.env.NEXT_PUBLIC_MONGODB_URI || "",

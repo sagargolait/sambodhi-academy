@@ -20,7 +20,7 @@ export default function ProductsPage() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const results = await fetch(`/api/products`).then((res) => res.json())
+                const results = await fetch(`/api/products?locale=en`).then((res) => res.json())
                 setProducts(results.docs)
             } catch (err) {
                 console.log(err)
@@ -65,9 +65,12 @@ export default function ProductsPage() {
                                                         <RichText content={test.description} />
                                                     </CardDescription>
                                                 </CardContent>
-                                                <CardContent className="flex justify-center items-center">
-                                                    <Link href={test.metadata.link} target='_blank'>
-                                                        <Button className="w-full bg-[#F3C623] text-[#10375C] hover:bg-[#EB8317]">Link</Button>
+                                                <CardContent className="flex flex-col w-full gap-4 justify-center items-center">
+                                                    {test?.metadata?.mock_test_pdf && <Link href={test?.metadata?.mock_test_pdf?.url} target='_blank' className='w-full'>
+                                                        <Button className="w-full !bg-[#10375C] text-[#10375C] hover:bg-[#EB8317]">Download MockTest PDF</Button>
+                                                    </Link>}
+                                                    <Link href={test.metadata.link} target='_blank' className='w-full'>
+                                                        <Button className="w-full !items-baseline !bg-[#10375C] text-[#10375C] hover:bg-[#EB8317]">Subscribe</Button>
                                                     </Link>
                                                 </CardContent>
                                             </Card>

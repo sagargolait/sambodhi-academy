@@ -59,6 +59,12 @@ export const Products: CollectionConfig = {
           type: "textarea",
         },
         {
+          label: "Upload MockTest PDF",
+          name: "mock_test_pdf",
+          type: "upload",
+          relationTo: "media",
+        },
+        {
           name: "link",
           type: "text",
           required: true,
