@@ -12,6 +12,7 @@ export const Products: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
@@ -26,6 +27,7 @@ export const Products: CollectionConfig = {
     {
       name: "description",
       type: "richText",
+      localized: true,
     },
     {
       name: "price",

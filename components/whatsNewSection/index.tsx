@@ -8,8 +8,7 @@ export function WhatsNewSection({ announcements }: any) {
       <div className="mb-2">
         <h3 className="text-xl font-semibold mb-4 text-white">Registrations Open</h3>
       </div>
-      <div className="relative !max-h-[330px] min-h-[150px] w-full overflow-auto">
-
+      <div className="relative !max-h-[330px] min-h-[150px] w-full overflow-auto md:min-h-full">
         <div className="absolute w-full transition-transform duration-1000 ease-linear">
           {announcements.map((announcement: any) => (
             <div key={`${announcement.id}`} className="mb-4">

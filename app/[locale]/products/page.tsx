@@ -8,6 +8,8 @@ import SectionHeading from '@/components/SectionHeading'
 import Link from 'next/link'
 import CustomImage from '@/utilities/CustomImage'
 import RichText from '@/blocks/RichText'
+import { usePathname } from 'next/navigation'
+import { extractLocaleFromPath } from '@/lib/utils'
 
 interface Products {
     id: string;
@@ -16,11 +18,13 @@ interface Products {
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<Products[]>([])
+    const pathname = usePathname()
+    const locale = extractLocaleFromPath(pathname)
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const results = await fetch(`/api/products?locale=en`).then((res) => res.json())
+                const results = await fetch(`/api/products?locale=${locale}`).then((res) => res.json())
                 setProducts(results.docs)
             } catch (err) {
                 console.log(err)

@@ -17,3 +17,10 @@ export const isValidURL = (string: string) => {
     return false;
   }
 };
+
+export const extractLocaleFromPath = (pathname: string) => {
+  const pathSegments = pathname.split("/");
+  const potentialLocale = pathSegments[1];
+
+  return potentialLocale;
+};
