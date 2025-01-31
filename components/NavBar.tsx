@@ -97,12 +97,12 @@ export default function NavBar() {
     const currentPath = window.location.pathname;
 
     // Extract current locale from the pathname
-    const localeRegex = /^\/(en|mr)\//; // Adjust this regex based on supported locales
+    const localeRegex = /^\/(en|mr)(\/|$)/; // Matches `/en` or `/mr` at the start
     const newPath = currentPath.replace(localeRegex, "/"); // Remove existing locale
 
-    router.replace(`/${locale}${newPath}`);
+    // Ensure no double slashes when replacing locale
+    router.replace(`/${locale}${newPath === "/" ? "" : newPath}`);
   };
-
   return (
     <>
       <div className="sticky top-0 z-50 flex flex-col bg-[#F4F6FF]">
