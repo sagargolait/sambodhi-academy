@@ -38,8 +38,6 @@ async function fetchPageData(payload: any) {
                 collection: name as CollectionSlug,
                 depth: 2,
                 limit: 30,
-                locale: 'en',
-                fallbackLocale: true,
                 ...(sort && { sort })
             })
         )
