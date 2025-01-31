@@ -25,7 +25,6 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
-import { m } from "framer-motion";
 
 export default function NavBar() {
   const t = useTranslations('');
