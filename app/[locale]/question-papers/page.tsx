@@ -58,7 +58,7 @@ export default function QuestionPapersPage() {
         const fetchQuestionPapers = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('/api/question-papers?limit=100')
+                const response = await fetch('/api/question-papers?limit=300')
                 if (!response.ok) {
                     throw new Error('Failed to fetch question papers');
                 }
