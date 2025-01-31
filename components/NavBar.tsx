@@ -25,6 +25,7 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
+import { m } from "framer-motion";
 
 export default function NavBar() {
   const t = useTranslations('');
@@ -41,6 +42,11 @@ export default function NavBar() {
     {
       name: "PYQ",
       href: "/question-papers",
+      icon: <Book className="h-6 w-6" />,
+    },
+    {
+      name: "MockTests",
+      href: "/products",
       icon: <Book className="h-6 w-6" />,
     },
     { name: "About", href: "/about", icon: <Info className="h-6 w-6" /> },
