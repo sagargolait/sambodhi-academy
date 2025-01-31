@@ -24,12 +24,14 @@ const QuestionPapers: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
       label: "Title",
     },
     {
       name: "description",
       type: "textarea",
+      localized: true,
       required: true,
       label: "Description",
     },

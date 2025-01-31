@@ -9,11 +9,13 @@ export const Faqs: CollectionConfig = {
     {
       name: "question",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "answer",
       type: "text",
+      localized: true,
       required: true,
     },
   ],

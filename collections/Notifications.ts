@@ -12,10 +12,12 @@ export const Notifications: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "message",
+      localized: true,
       type: "textarea",
       required: true,
     },

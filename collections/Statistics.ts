@@ -9,6 +9,7 @@ const Statistics: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {

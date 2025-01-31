@@ -12,6 +12,7 @@ export const Announcements: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
