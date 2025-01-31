@@ -2,13 +2,15 @@ import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
 import BlockRenderer from '@/blocks/BlockRenderer';
 
-export default async function ExamsPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function ExamsPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
+  const { slug, locale } = await params;
   const payload = await getPayload({ config })
+
 
   const blocks = await payload.find({
     collection: 'exam-pages' as CollectionSlug,
     depth: 2,
+    locale: locale as any,
     where: {
       'slug': {
         equals: slug,
