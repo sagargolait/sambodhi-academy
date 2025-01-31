@@ -125,7 +125,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks }) => {
                       return (
                         <tr key={rowIndex}>
                           {row.cells.map((cell, cellIndex) => (
-                            <th key={cellIndex} className="px-4 py-2 border text-left">
+                            <th key={cellIndex} className="px-4 py-2 border text-center">
                               <RichText content={cell.content || { root: { children: [] } }} />
                             </th>
                           ))}

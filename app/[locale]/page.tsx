@@ -20,7 +20,7 @@ const dynamicComponents = {
 async function fetchPageData(payload: any) {
     const collections = [
         { name: 'associates', sort: null },
-        { name: 'exams', sort: 'order' },
+        { name: 'exams', sort: 'order', locale: 'en' },
         { name: 'testimonials', sort: null },
         { name: 'faqs', sort: null },
         { name: 'galleries', sort: 'displayOrder' },

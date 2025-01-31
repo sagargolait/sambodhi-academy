@@ -75,6 +75,7 @@ export const Exams: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
       label: "Exam Name",
     },

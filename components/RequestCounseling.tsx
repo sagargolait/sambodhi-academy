@@ -24,7 +24,6 @@ const RequestCounseling: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send this data to your backend
-    console.log({ name, email, phone, counselingType });
     toast({
       title: "Counseling Request Submitted",
       description: "We'll get back to you soon!",
