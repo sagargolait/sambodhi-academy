@@ -25,11 +25,13 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
+import { useRouter } from 'next/navigation'
 
 export default function NavBar() {
   const t = useTranslations('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
+  const router = useRouter();
 
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
@@ -90,6 +92,16 @@ export default function NavBar() {
       document.body.style.overflow = "unset";
     }
   }, [mobileMenuOpen]);
+
+  const handleLocaleChange = (locale: string) => {
+    const currentPath = window.location.pathname;
+
+    // Extract current locale from the pathname
+    const localeRegex = /^\/(en|mr)\//; // Adjust this regex based on supported locales
+    const newPath = currentPath.replace(localeRegex, "/"); // Remove existing locale
+
+    router.replace(`/${locale}${newPath}`);
+  };
 
   return (
     <>
@@ -216,10 +228,9 @@ export default function NavBar() {
                     {languages.map((lang) => (
                       <DropdownMenuItem
                         key={lang.code}
+                        onClick={() => handleLocaleChange(lang.code)}
                       >
-                        <Link href={`/${lang.code}`} locale={lang.code}>
-                          {lang.name}
-                        </Link>
+                        {lang.name}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
