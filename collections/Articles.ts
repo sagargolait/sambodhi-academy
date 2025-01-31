@@ -9,6 +9,7 @@ export const Articles: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
@@ -23,6 +24,7 @@ export const Articles: CollectionConfig = {
     {
       name: "author",
       type: "text",
+      localized: true,
       required: true,
     },
     {
@@ -64,11 +66,13 @@ export const Articles: CollectionConfig = {
     {
       name: "content",
       type: "richText",
+      localized: true,
       required: true,
     },
     {
       name: "excerpt",
       type: "textarea",
+      localized: true,
       required: true,
     },
     {
@@ -87,6 +91,7 @@ export const Articles: CollectionConfig = {
       fields: [
         {
           name: "title",
+          localized: true,
           type: "text",
         },
         {

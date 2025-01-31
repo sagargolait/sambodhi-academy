@@ -9,13 +9,14 @@ export default async function AsscoiatesPage({ params }: { params: Promise<{ slu
     const blocks = await payload.find({
         collection: 'exam-pages' as CollectionSlug,
         depth: 2,
+        locale: 'en' as any,
+        fallbackLocale: false,
         where: {
             'slug': {
                 equals: slug,
             },
         },
     }) as unknown as { docs: { content: any }[] };
-
 
     return (
         <div className="min-h-screen bg-[#F4F6FF]">

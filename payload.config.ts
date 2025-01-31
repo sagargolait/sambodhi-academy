@@ -89,6 +89,7 @@ export default buildConfig({
       },
     ],
     defaultLocale: "en",
+    fallback: true,
   },
   // database-adapter-config-start
   db: mongooseAdapter({

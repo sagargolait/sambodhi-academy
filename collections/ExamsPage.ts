@@ -15,6 +15,7 @@ export const ExamPages: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     slugField,
@@ -39,6 +40,7 @@ export const ExamPages: CollectionConfig = {
     {
       name: "content",
       type: "blocks",
+      localized: true,
       blocks: [
         {
           slug: "heading",
