@@ -6,7 +6,7 @@ import Testimonials from "@/components/testimonials";
 import { CollectionSlug, getPayload } from 'payload';
 import config from '@payload-config';
 import FacultyCarousel from "@/components/FacultyCarousel";
-import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundary from "./error";
 
 const dynamicComponents = {
     CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { Component, ReactNode } from 'react';
-import NotFound from '../404';
+import Custom404 from './not-found';
 
 interface ErrorBoundaryProps {
     children: ReactNode;
@@ -30,7 +30,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     render() {
         if (this.state.hasError) {
             // You can render any custom fallback UI
-            return <NotFound />;
+            return <Custom404 />;
         }
 
         return this.props.children;

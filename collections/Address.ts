@@ -12,21 +12,25 @@ export const Addresses: CollectionConfig = {
     {
       name: "street",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "city",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "state",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "country",
       type: "text",
+      localized: true,
       required: true,
     },
     {

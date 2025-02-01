@@ -13,6 +13,7 @@ const Faculty: CollectionConfig = {
     {
       name: "name",
       type: "text",
+      localized: true,
       required: true,
       admin: {
         description: "Full name of the faculty member",
@@ -27,6 +28,7 @@ const Faculty: CollectionConfig = {
     {
       name: "department",
       type: "text",
+      localized: true,
       required: true,
     },
     {

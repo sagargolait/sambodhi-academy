@@ -7,7 +7,7 @@ import { Search } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export default function NotFound() {
+export default function Custom404() {
     const [searchQuery, setSearchQuery] = useState('')
 
     const handleSearch = (e: React.FormEvent) => {

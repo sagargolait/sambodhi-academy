@@ -21,6 +21,7 @@ export const GovernmentSchemes: CollectionConfig = {
     {
       name: "content",
       type: "blocks",
+      localized: true,
       blocks: [
         {
           slug: "heading",

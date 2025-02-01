@@ -2,7 +2,7 @@ import { CollectionSlug, getPayload } from 'payload';
 import BlockRenderer from '@/blocks/BlockRenderer'
 import React from 'react'
 import config from '@payload-config';
-import NotFound from '../../../404';
+import Custom404 from '../../../not-found';
 
 
 const SchemesPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -19,7 +19,7 @@ const SchemesPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
     }) as unknown as { docs: { content: any }[] }
 
     if (SchemesContent.docs.length === 0) {
-        return <div><NotFound /></div>
+        return <div><Custom404 /></div>
     }
 
     return (
