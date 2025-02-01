@@ -12,11 +12,13 @@ export const FeatureDescriptions: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
       name: "description",
       type: "text",
+      localized: true,
       required: true,
     },
     {

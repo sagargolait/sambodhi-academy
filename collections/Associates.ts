@@ -9,6 +9,7 @@ export const Associates: CollectionConfig = {
     {
       name: "Associates Name",
       type: "text",
+      localized: true,
       required: true,
     },
     {
