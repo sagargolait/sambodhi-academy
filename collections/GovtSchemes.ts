@@ -14,6 +14,7 @@ export const GovernmentSchemes: CollectionConfig = {
     {
       name: "schemeName",
       type: "text",
+      localized: true,
       required: true, // Scheme name is required
       label: "Scheme Name",
     },

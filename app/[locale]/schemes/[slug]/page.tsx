@@ -2,7 +2,7 @@ import { CollectionSlug, getPayload } from 'payload';
 import BlockRenderer from '@/blocks/BlockRenderer'
 import React from 'react'
 import config from '@payload-config';
-import Custom404 from '../../../not-found';
+import Custom404 from '../../not-found';
 
 
 const SchemesPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
