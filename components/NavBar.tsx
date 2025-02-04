@@ -229,6 +229,7 @@ export default function NavBar() {
                       <DropdownMenuItem
                         key={lang.code}
                         onClick={() => handleLocaleChange(lang.code)}
+                        className="cursor-pointer"
                       >
                         {lang.name}
                       </DropdownMenuItem>

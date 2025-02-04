@@ -8,6 +8,7 @@ import config from '@payload-config';
 import FacultyCarousel from "@/components/FacultyCarousel";
 import ErrorBoundary from "./error";
 
+
 const dynamicComponents = {
     CountDown: dynamic(() => import("@/components/CountDown"), { ssr: true }),
     Features: dynamic(() => import("@/components/Features"), { ssr: true }),
@@ -57,8 +58,6 @@ async function fetchPageData(payload: any) {
         statistics: results[9].docs
     };
 }
-
-
 
 export default async function Home() {
     const payload = await getPayload({ config });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Head } from 'react-day-picker';
 
 interface RichTextNode {
   text?: string;
@@ -122,18 +123,17 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
         );
 
       case 'heading':
-        const HeadingTag = `h${node.fields?.level || 1}` as keyof JSX.IntrinsicElements;
+        const HeadingTag = `${node.tag}` as keyof JSX.IntrinsicElements;
         const headingClasses = {
-          1: 'text-4xl',
-          2: 'text-3xl',
-          3: 'text-2xl',
-          4: 'text-xl',
-          5: 'text-lg',
-          6: 'text-base'
+          h1: 'text-4xl',
+          h2: 'text-3xl',
+          h3: 'text-2xl',
+          h4: 'text-xl',
+          h5: 'text-lg',
+          h6: 'text-base'
         } as any;
-        const headingLevel: number = node.fields?.level || 1;
         return (
-          <HeadingTag className={`font-bold mb-4 ${headingClasses[headingLevel]}`}>
+          <HeadingTag className={`font-bold mb-4 ${headingClasses[HeadingTag]}`}>
             {node.children?.map((child: any, index: number) => (
               <React.Fragment key={index}>
                 {renderNode(child)}

@@ -9,8 +9,13 @@ import config from '@payload-config'
 import { Toaster } from "@/components/ui/sonner"
 
 import '@/styles/globals.css'
+import { generateMetadataFromPayload } from '@/utilities/generateMetatDataPayload';
 
 type Locale = typeof routing.locales[number];
+
+export async function generateMetadata() {
+    return generateMetadataFromPayload(null);
+}
 
 interface LayoutProps {
     children: React.ReactNode;
