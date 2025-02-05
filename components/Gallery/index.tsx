@@ -8,14 +8,17 @@ import { objectToArray } from '@/lib/utils'
 import Link from 'next/link'
 import ImageDialog from '../imageDialog'
 import CustomImage from '@/utilities/CustomImage'
+import { usePathname } from 'next/navigation'
 
 type Props = {
   galleryImages: DataFromCollectionSlug<CollectionSlug>[]
 }
 
 const GalleryComponent = ({ galleryImages }: Props) => {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1];
   const galleryImageByCategory = objectToArray(galleryImages);
-  const [filter, setFilter] = useState('Chhatrapati Sambhaji Nagar');
+  const [filter, setFilter] = useState(locale == 'en' ? 'Chhatrapati Sambhaji Nagar' : 'छत्रपती संभाजी नगर');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 

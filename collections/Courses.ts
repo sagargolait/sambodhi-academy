@@ -10,9 +10,18 @@ export const Courses: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     slugField,
+    {
+      name: "CourseImage",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        position: "sidebar",
+      },
+    },
     {
       name: "content",
       type: "blocks",

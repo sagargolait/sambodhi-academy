@@ -5,17 +5,22 @@ import FacultyCarousel from "@/components/FacultyCarousel";
 import SectionHeading from "@/components/SectionHeading";
 import CustomImage from "@/utilities/CustomImage";
 import { useEffect, useState } from "react";
+import { usePathname } from 'next/navigation';
+import { useTranslations } from "next-intl";
 
 export default function AboutPage() {
   const [facultyMembers, setFacultyMembers] = useState([])
   const [featureData, setFeatureData] = useState([])
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1];
 
+  const t = useTranslations();
   useEffect(() => {
     const fetchFacultyData = async () => {
       try {
         const [facultyMembersData, featuresData] = await Promise.all([
-          fetch('/api/faculty'),
-          fetch('/api/feature-descriptions')
+          fetch('/api/faculty?locale=' + locale),
+          fetch('/api/feature-descriptions?locale=' + locale)
         ]);
 
         const facultyResp = await facultyMembersData.json();
@@ -37,26 +42,16 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div>
             <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
-              Our Mission
+              {t('OurMission')}
             </h3>
             <p className="text-gray-600 mb-4">
-              At Sambodhi Academy, our mission is to empower aspiring individuals
-              with the knowledge, skills, and confidence needed to excel in
-              government service examinations. We are committed to providing
-              high-quality education, personalized guidance, and comprehensive
-              support to help our students achieve their career goals in public
-              service.
+              {t("MissionDescription")}
             </p>
             <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
-              Our Vision
+              {t('OurVision')}
             </h3>
             <p className="text-gray-600 mb-4">
-              We envision a future where every ambitious individual has access
-              to top-notch educational resources and mentorship to pursue a
-              successful career in government services. Our goal is to be the
-              leading institute in preparing competent and ethical civil
-              servants who will contribute to the nation&apos;s progress and
-              development.
+              {t("VisionDescription")}
             </p>
             {/* <h3 className="text-2xl font-semibold mb-4 text-[#10375C]">
               About our Founder and President

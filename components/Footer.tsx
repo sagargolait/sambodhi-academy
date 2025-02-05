@@ -49,7 +49,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
                   Sambodhi Academy
                 </CardTitle>
                 <CardContent className="mt-2">
-                  Sambodhi Academy operates competitive exam training centers across various cities in Maharashtra offering special concession to aspirants from backward classes and economically weaker sections. It is empaneled by autonomous government institutes like SARTHI, BARTI, TRTI and MAHAJYOTI. It’s state of the art infrastructure and focus on over all development has helped hundreds of aspirants secure positions in government and semi-government services including top ranks since 2010.
+                  {t('AboutDescription')}
                 </CardContent>
               </CardHeader>
             </Card>

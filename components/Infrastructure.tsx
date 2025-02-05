@@ -13,10 +13,13 @@ import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { Navigation, Pagination } from 'swiper/modules';
 import ImageDialog from "./imageDialog";
 import CustomImage from "@/utilities/CustomImage";
+import { usePathname } from "next/navigation";
 
 const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[]) => {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1];
   const galleryImageByCategory = objectToArray(galleryImages);
-  const [filter, setFilter] = useState('Pune');
+  const [filter, setFilter] = useState(locale == 'en' ? 'Pune' : 'पुणे');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 

@@ -10,6 +10,7 @@ export const ImageGallery: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
       required: true,
     },
     {
@@ -19,23 +20,42 @@ export const ImageGallery: CollectionConfig = {
     {
       name: "location",
       type: "select",
+      localized: true, // Ensure the field itself is localized
       options: [
         { label: "Hingoli", value: "hingoli" },
-        { label: "Pune", value: "Pune" },
+        { label: "Pune", value: "pune" },
         { label: "Parbhani", value: "parbhani" },
         {
           label: "Chhatrapati Sambhaji Nagar",
           value: "Chhatrapati Sambhaji Nagar",
         },
-        {
-          label: "none",
-          value: "none",
-        },
+        { label: "None", value: "none" },
       ],
+      hooks: {
+        afterRead: [
+          ({ value, req }) => {
+            const locale: string = req?.locale || "en"; // ✅ Get the locale
+
+            if (locale === "mr") {
+              const translations = {
+                hingoli: "हिंगोली",
+                pune: "पुणे",
+                parbhani: "परभणी",
+                "Chhatrapati Sambhaji Nagar": "छत्रपती संभाजी नगर",
+                none: "कोणतेही नाही",
+              };
+              return translations[value as keyof typeof translations] || value; // ✅ Translate only on read
+            }
+
+            return value; // ✅ Keep original value in database
+          },
+        ],
+      },
     },
     {
       name: "type",
       type: "text",
+      localized: true,
       required: true,
     },
     {
