@@ -7,6 +7,7 @@ import { LucideFacebook, LucideInstagram, LucideTwitter, LucideYoutube, Phone } 
 import { CollectionSlug, DataFromCollectionSlug } from "payload";
 import { objectToArray } from "@/lib/utils";
 import CustomImage from "@/utilities/CustomImage";
+import { useTranslations } from "next-intl";
 
 // Define the props type
 interface FooterProps {
@@ -18,6 +19,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
   const centers = addresses ? objectToArray(addresses) : []
   const primaryCenter = centers.filter((center) => center.isPrimary)[0];
   const footerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
             <ul className="space-y-2">
               <li>
                 <Link href="/courses" className="hover:text-[#F3C623]">
-                  Courses
+                  {t('Courses')}
                 </Link>
               </li>
               {/* <li>
@@ -68,17 +70,17 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
               </li> */}
               <li>
                 <Link href="/about" className="hover:text-[#F3C623]">
-                  About Us
+                  {t('About')}
                 </Link>
               </li>
               <li>
                 <Link href="/careers" className="hover:text-[#F3C623]">
-                  Careers
+                  {t('Careers')}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-[#F3C623]">
-                  Contact
+                  {t('Contact')}
                 </Link>
               </li>
             </ul>
@@ -89,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
             <ul className="space-y-2">
               <li>
                 <Link href="/products" className="hover:text-[#F3C623]">
-                  Mock Tests
+                  {t('MockTests')}
                 </Link>
               </li>
               {/* <li>
@@ -109,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ setShowFloatingFooter, addresses }) => 
               </li> */}
               <li>
                 <Link href="/products" className="hover:text-[#F3C623]">
-                  Books
+                  {t('Books')}
                 </Link>
               </li>
             </ul>

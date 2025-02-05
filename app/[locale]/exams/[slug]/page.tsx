@@ -45,6 +45,8 @@ export default async function ExamsPage({ params }: Props) {
     },
   }) as unknown as { docs: { content: any }[] };
 
+  console.log(docs[0]?.content);
+
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
       <BlockRenderer blocks={docs[0]?.content} />

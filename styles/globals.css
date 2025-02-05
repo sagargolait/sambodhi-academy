@@ -141,6 +141,10 @@
   margin: 2rem 0;
 }
 
+.rich-text-table-row:nth-child(odd) {
+  /* background-color: var(--primary); */
+}
+
 .custom-carousel .carousel .control-dots {
   position: relative;
   bottom: 0;

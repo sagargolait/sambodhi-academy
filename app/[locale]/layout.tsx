@@ -35,6 +35,7 @@ export default async function LocaleLayout({
     const messages = await getMessages();
     const [addresses] = await Promise.all([payload.find({
         collection: 'addresses' as CollectionSlug,
+        locale: locale as any,
         depth: 2,
         sort: 'order'
     })])

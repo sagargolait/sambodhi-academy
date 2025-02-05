@@ -153,6 +153,43 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
           </p>
         );
 
+      case 'table':
+        return (
+          <table className="table-auto w-full mb-4">
+            <thead>
+              <tr className='bg-gray-100'>
+                {node.children[0].children?.map((child: any, index: number) => (
+                  <th key={index} className="px-4 py-2 border text-gray-800 font-semibold">
+                    {renderNode(child)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {node.children.slice(1).map((row: any, rowIndex: number) => (
+                <tr key={rowIndex} className='rich-text-table-row'>
+                  {row.children?.map((cell: any, cellIndex: number) => (
+                    <td key={cellIndex} className="border px-4 py-2">
+                      {renderNode(cell)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+
+      case 'tablecell':
+        return (
+          <>
+            {node.children?.map((child: any, index: number) => (
+              <React.Fragment key={index}>
+                {renderNode(child)}
+              </React.Fragment>
+            ))}
+          </>
+        );
+
 
       case 'list':
         const ListTag = node.style === 'ordered' ? 'ol' : 'ul'; // Dynamically choose `ul` or `ol`

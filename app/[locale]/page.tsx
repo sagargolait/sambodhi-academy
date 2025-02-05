@@ -18,7 +18,7 @@ const dynamicComponents = {
     Associates: dynamic(() => import("@/components/Associates"), { ssr: true })
 };
 
-async function fetchPageData(payload: any) {
+async function fetchPageData(payload: any, locale: any) {
     const collections = [
         { name: 'associates', sort: null },
         { name: 'exams', sort: 'order', locale: 'en' },
@@ -38,6 +38,7 @@ async function fetchPageData(payload: any) {
             payload.find({
                 collection: name as CollectionSlug,
                 depth: 2,
+                locale: locale as any,
                 limit: 30,
                 ...(sort && { sort })
             })
@@ -59,9 +60,10 @@ async function fetchPageData(payload: any) {
     };
 }
 
-export default async function Home() {
+export default async function Home({ params }: any): Promise<React.ReactNode> {
+    const { locale } = await params;
     const payload = await getPayload({ config });
-    const data = await fetchPageData(payload);
+    const data = await fetchPageData(payload, locale);
 
     return (
         <ErrorBoundary>
