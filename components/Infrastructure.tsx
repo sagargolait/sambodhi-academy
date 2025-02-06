@@ -19,7 +19,7 @@ const Infrastructure = (galleryImages: DataFromCollectionSlug<CollectionSlug>[])
   const pathname = usePathname();
   const locale = pathname.split('/')[1];
   const galleryImageByCategory = objectToArray(galleryImages);
-  const [filter, setFilter] = useState(locale == 'en' ? 'Pune' : 'पुणे');
+  const [filter, setFilter] = useState(locale == 'en' ? 'pune' : 'पुणे');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
