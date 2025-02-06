@@ -18,26 +18,8 @@ import { Label } from "@/components/ui/label";
 import { Briefcase, GraduationCap, Users, CheckCircle } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { toast } from 'sonner'
-
-// const jobOpenings = [
-//   {
-//     title: "Senior UPSC Faculty",
-//     department: "Academic",
-//     location: "New Delhi",
-//   },
-//   { title: "SSC Exam Specialist", department: "Academic", location: "Mumbai" },
-//   {
-//     title: "Student Counselor",
-//     department: "Student Services",
-//     location: "Bangalore",
-//   },
-//   { title: "Content Developer", department: "Curriculum", location: "Chennai" },
-//   {
-//     title: "Digital Marketing Manager",
-//     department: "Marketing",
-//     location: "Kolkata",
-//   },
-// ];
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -61,14 +43,16 @@ interface IFormInputs {
 export default function CareersPage() {
   const formRef = useRef<HTMLDivElement>(null);
   const [jobOpenings, setJobOpenings] = useState([])
-
+  const pathname = usePathname()
+  const locale = pathname.split('/')[1]
+  const t = useTranslations()
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   };
   useEffect(() => {
     const fetchCareers = async () => {
       try {
-        const results = await fetch(`/api/career-openings`).then((res) => res.json())
+        const results = await fetch(`/api/career-openings?locale=${locale}`).then((res) => res.json())
         setJobOpenings(results.docs)
       } catch (err) {
         console.log(err)
@@ -144,20 +128,19 @@ export default function CareersPage() {
 
         <div className="mb-16">
           <h3 className="text-2xl font-semibold mb-6 text-[#10375C]">
-            Why Work With Us?
+            {t('WhyWorkWithUs')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center text-[#10375C]">
                   <Briefcase className="mr-2" />
-                  Career Growth
+                  {t("CareerGrowth")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  Opportunities for professional development and advancement
-                  within the organization.
+                  {t('CareerDescription')}
                 </p>
               </CardContent>
             </Card>
@@ -165,13 +148,12 @@ export default function CareersPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-[#10375C]">
                   <GraduationCap className="mr-2" />
-                  Continuous Learning
+                  {t("ContinuousLearning")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  Access to resources and workshops to enhance your skills and
-                  knowledge.
+                  {t('ContinuousLearningDescription')}
                 </p>
               </CardContent>
             </Card>
@@ -179,12 +161,12 @@ export default function CareersPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-[#10375C]">
                   <Users className="mr-2" />
-                  Collaborative Environment
+                  {t('CollaborativeEnvironment')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  Work with a team of passionate educators and professionals.
+                  {t('CollaborativeEnvironmentDescription')}
                 </p>
               </CardContent>
             </Card>
@@ -192,13 +174,12 @@ export default function CareersPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-[#10375C]">
                   <CheckCircle className="mr-2" />
-                  Make an Impact
+                  {t('MakeAnImpact')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  Help shape the future of education and empower students to
-                  achieve their goals.
+                  {t('MakeAnImpactDescription')}
                 </p>
               </CardContent>
             </Card>
