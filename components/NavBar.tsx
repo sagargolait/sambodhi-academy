@@ -60,10 +60,10 @@ export default function NavBar() {
       name: 'Govt Schemes',
       icon: <GraduationCap className="h-5 w-5" />,
       dropdown: [
-        { name: 'Schemes for SC', href: '/schemes/sc-schemes' },
-        { name: 'Schemes for ST', href: '/schemes/st-schemes' },
-        { name: 'Schemes for OBC', href: '/schemes/obc-schemes' },
-        { name: 'Schemes for EWS', href: '/schemes/ews-schemes' },
+        { name: 'SchemesforSC', href: '/schemes/sc-schemes' },
+        { name: 'SchemesforST', href: '/schemes/st-schemes' },
+        { name: 'SchemesforOBC', href: '/schemes/obc-schemes' },
+        { name: 'SchemesforEWS', href: '/schemes/ews-schemes' },
 
       ]
     },
@@ -137,7 +137,7 @@ export default function NavBar() {
                         {item.dropdown.map((subItem: any) => (
                           <DropdownMenuItem key={subItem.name} asChild className="cursor-pointer">
                             <Link href={subItem.href} className="w-full">
-                              {subItem.name}
+                              {t(subItem.name)}
                             </Link>
                           </DropdownMenuItem>
                         ))}
