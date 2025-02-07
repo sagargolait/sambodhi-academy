@@ -29,7 +29,7 @@ const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
                       height={100}
                       className="rounded-full"
                     />}
-                    <h3 className="text-sm lg:text-md mt-2 font-medium text-[#10375C]">
+                    <h3 className="text-sm lg:text-md mt-2 font-semibold text-[#10375C]">
                       {exam.title}
                     </h3>
                   </CardContent>

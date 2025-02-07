@@ -4,7 +4,6 @@ import {
   Phone,
   Info,
   Home,
-  Globe,
   GalleryHorizontal,
   Book,
   ChevronDown,
@@ -26,12 +25,14 @@ import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
 import { useRouter } from 'next/navigation'
+import { Switch } from "./ui/switch";
 
 export default function NavBar() {
   const t = useTranslations('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const router = useRouter();
+  const [isMarathi, setIsMarathi] = useState(false);
 
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
@@ -75,11 +76,6 @@ export default function NavBar() {
     { name: "Contact", href: "/contact", icon: <Phone className="h-6 w-6" /> },
   ];
 
-  const languages = [
-    { code: "en", name: "English" },
-    { code: "mr", name: "मराठी" },
-  ];
-
   const login = [
     { code: "admin", name: "Admin Login" },
     { code: "student-login", name: "Student Login" },
@@ -93,6 +89,11 @@ export default function NavBar() {
     }
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    const currentLocale = window.location.pathname.startsWith('/mr');
+    setIsMarathi(currentLocale);
+  }, []);
+
   const handleLocaleChange = (locale: string) => {
     const currentPath = window.location.pathname;
 
@@ -103,6 +104,13 @@ export default function NavBar() {
     // Ensure no double slashes when replacing locale
     router.replace(`/${locale}${newPath === "/" ? "" : newPath}`);
   };
+
+  const handleLocaleToggle = () => {
+    const newLocale = isMarathi ? 'en' : 'mr';
+    handleLocaleChange(newLocale);
+    setIsMarathi(!isMarathi);
+  };
+
   return (
     <>
       <div className="sticky top-0 z-50 flex flex-col bg-[#F4F6FF]">
@@ -172,6 +180,16 @@ export default function NavBar() {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
+                <div className="flex items-center">
+                  <Switch
+                    checked={isMarathi}
+                    onCheckedChange={handleLocaleToggle}
+                    className="!bg-[#F3C623] border-2 border-gray-400 rounded-full w-10 h-6 relative"
+                  >
+                    <span className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform ${isMarathi ? 'translate-x-6' : ''}`}></span>
+                  </Switch>
+                  <span className="ml-2 text-white">{isMarathi ? 'मराठी' : 'English'}</span>
+                </div>
                 <div className="md:hidden relative" ref={mobileMenuRef}>
                   <Button
                     variant="ghost"
@@ -213,33 +231,7 @@ export default function NavBar() {
                     </div>
                   )}
                 </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-white hover:text-[#F3C623]"
-                    >
-                      <Globe className="h-4 w-4 mr-2" />
-                      <span className="hidden md:inline">language</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    {languages.map((lang) => (
-                      <DropdownMenuItem
-                        key={lang.code}
-                        onClick={() => handleLocaleChange(lang.code)}
-                        className="cursor-pointer"
-                      >
-                        {lang.name}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
               </div>
-
-
-
             </nav>
           </div>
         </header>

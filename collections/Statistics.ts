@@ -26,6 +26,7 @@ const Statistics: CollectionConfig = {
     {
       name: "label",
       type: "text",
+      localized: true,
       required: true,
     },
     {

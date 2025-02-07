@@ -28,7 +28,7 @@ const Testimonials: React.FC<TestimonialProps> = ({ testimonials }) => {
                                 <CardContent className="p-6 flex flex-col justify-between h-full">
                                     <div>
                                         <div className="flex items-center mb-4">
-                                            <Avatar className="h-12 w-12 mr-4">
+                                            <Avatar className="h-14 w-14 mr-4">
                                                 <AvatarImage src={testimonial.Image?.url} alt={testimonial.Image?.alt} />
                                                 <AvatarFallback>{testimonial.name.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
                                             </Avatar>
