@@ -24,7 +24,7 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Switch } from "./ui/switch";
 
 export default function NavBar() {
@@ -33,6 +33,9 @@ export default function NavBar() {
   const mobileMenuRef = useRef(null);
   const router = useRouter();
   const [isMarathi, setIsMarathi] = useState(false);
+
+  const pathName = usePathname();
+  const locale = pathName.split('/')[1];
 
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
@@ -185,10 +188,9 @@ export default function NavBar() {
                     checked={isMarathi}
                     onCheckedChange={handleLocaleToggle}
                     className="!bg-[#F3C623] border-2 border-gray-400 rounded-full w-10 h-6 relative"
-                  >
-                    <span className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform ${isMarathi ? 'translate-x-6' : ''}`}></span>
-                  </Switch>
-                  <span className="ml-2 text-white">{isMarathi ? 'मराठी' : 'English'}</span>
+                    locale={locale}
+                  />
+                  <label className="ml-2 text-white text-sm hidden md:inline">{isMarathi ? 'मराठी' : 'English'}</label>
                 </div>
                 <div className="md:hidden relative" ref={mobileMenuRef}>
                   <Button
