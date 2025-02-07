@@ -75,7 +75,11 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
   const renderNode = (node: any): React.ReactNode => {
     switch (node.type) {
       case 'text':
-        return node.text;
+        return (
+          <span style={{ textDecoration: node.format === 4 ? 'line-through' : 'none' }}>
+            {node.text}
+          </span>
+        );
 
       case 'link':
         return (
@@ -83,7 +87,7 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
             href={node.fields?.url}
             target={node.fields?.newTab ? '_blank' : '_self'}
             rel={node.fields?.newTab ? 'noopener noreferrer' : undefined}
-            className="text-blue-600 hover:text-blue-800 underline"
+            className="text-blue-600 hover:text-blue-800 underline break-all"
           >
             {node.children?.map((child: any, index: number) => (
               <React.Fragment key={index}>
@@ -112,7 +116,7 @@ const RichText: React.FC<RichTextProps> = ({ content, type }) => {
             href={node.fields?.url}
             target={node.fields?.newTab ? '_blank' : '_self'}
             rel={node.fields?.newTab ? 'noopener noreferrer' : undefined}
-            className="text-blue-600 hover:text-blue-800 underline"
+            className="text-blue-600 hover:text-blue-800 underline break-all"
           >
             {node.children?.map((child: any, index: number) => (
               <React.Fragment key={index}>
