@@ -107,11 +107,6 @@ export default function NavBar() {
     router.replace(`/${locale}${newPath === "/" ? "" : newPath}`);
   };
 
-  const handleLocaleToggle = () => {
-    const newLocale = isMarathi ? 'en' : 'mr';
-    handleLocaleChange(newLocale);
-    setIsMarathi(!isMarathi);
-  };
 
   return (
     <>
