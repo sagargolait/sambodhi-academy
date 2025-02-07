@@ -185,7 +185,7 @@ export default function NavBar() {
                       {menuItems.map((item: any) => (
                         item.dropdown ? (
                           <div key={item.name} className="">
-                            <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {item.name}</span>
+                            <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {t(item.name)}</span>
                             {item.dropdown.map((subItem: any) => (
                               <Link
                                 key={subItem.name}
@@ -194,7 +194,7 @@ export default function NavBar() {
                                 onClick={() => setMobileMenuOpen(false)}
                               >
 
-                                {subItem.name}
+                                {t(subItem.name)}
                               </Link>
                             ))}
                           </div>
