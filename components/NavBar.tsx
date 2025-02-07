@@ -31,7 +31,6 @@ export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const router = useRouter();
-  const [isMarathi, setIsMarathi] = useState(false);
 
   const pathName = usePathname();
   const locale = pathName.split('/')[1];
@@ -91,10 +90,6 @@ export default function NavBar() {
     }
   }, [mobileMenuOpen]);
 
-  useEffect(() => {
-    const currentLocale = window.location.pathname.startsWith('/mr');
-    setIsMarathi(currentLocale);
-  }, []);
 
   const handleLocaleChange = (locale: string) => {
     const currentPath = window.location.pathname;
