@@ -25,7 +25,6 @@ import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
 import { usePathname, useRouter } from 'next/navigation'
-import { Switch } from "./ui/switch";
 
 export default function NavBar() {
   const t = useTranslations('');
