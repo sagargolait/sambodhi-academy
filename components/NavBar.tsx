@@ -184,13 +184,22 @@ export default function NavBar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <div className="flex items-center">
-                  <Switch
-                    checked={isMarathi}
-                    onCheckedChange={handleLocaleToggle}
-                    className="!bg-[#F3C623] border-2 border-gray-400 rounded-full w-10 h-6 relative"
-                    locale={locale}
-                  />
-                  <label className="ml-2 text-white text-sm hidden md:inline">{isMarathi ? 'मराठी' : 'English'}</label>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size={"xs"} className="w-[3.5rem]">
+                        <span className="sr-only">Toggle language</span>
+                        {locale === "en" ? "EN" : "MR"}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="center">
+                      <DropdownMenuItem onClick={() => handleLocaleChange('en')}>
+                        English
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleLocaleChange('mr')}>
+                        मराठी
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
                 <div className="md:hidden relative" ref={mobileMenuRef}>
                   <Button
