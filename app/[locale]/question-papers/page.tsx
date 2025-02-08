@@ -11,6 +11,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
+import Link from 'next/link'
 
 interface Paper {
     id: string;
@@ -163,7 +164,13 @@ export default function QuestionPapersPage() {
                         Check out our comprehensive study materials and mock tests.
                     </p>
                     <Button className="!bg-[#F3C623] text-white hover:bg-[#EB8317] transition-all duration-300 hover:scale-105">
-                        Explore Study Materials
+                        <Link
+                            target="_blank"
+                            href="https://play.google.com/store/apps/details?id=co.white.tqqcq"
+                            rel="noopener noreferrer"
+                        >
+                            Explore Study Materials
+                        </Link>
                     </Button>
                 </div>
             </section>
