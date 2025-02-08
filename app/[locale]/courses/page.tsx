@@ -6,19 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CustomImage from "@/utilities/CustomImage";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-// import Image from "next/image";
-// import { Button } from "@/components/ui/button";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
+
 import { useEffect, useState } from "react";
-
-
-
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState([])
@@ -36,6 +25,8 @@ export default function CoursesPage() {
     fetchCourses()
   }, [])
 
+  console.log(courses)
+
 
   return (
     <div className="min-h-screen bg-[#F4F6FF]">
@@ -43,13 +34,13 @@ export default function CoursesPage() {
         <SectionHeading>OurCourses</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {courses.map((course: any) => (
-            <Card key={course.id} className="flex flex-col">
+            <Card key={course.id} className="flex justify-center items-center  flex-col">
               <CustomImage
-                src={course.image}
-                alt={course.title}
-                width={300}
-                height={200}
-                className="w-full h-40 object-cover rounded-t-lg"
+                src={course.CourseImage.url}
+                alt={course.CourseImage.alt}
+                width={140}
+                height={140}
+                className="rounded-t-lg"
               />
               <CardHeader>
                 <CardTitle className="text-[#10375C] my-2 text-center">{course.title}</CardTitle>
