@@ -7,7 +7,7 @@ import ClientLayout from '@/components/ClientLayout';
 import { CollectionSlug, getPayload } from 'payload'
 import config from '@payload-config'
 import { Toaster } from "@/components/ui/sonner"
-
+import { Analytics } from "@vercel/analytics/react"
 import '@/styles/globals.css'
 import { generateMetadataFromPayload } from '@/utilities/generateMetatDataPayload';
 
@@ -46,6 +46,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider messages={messages}>
                     <NotificationProvider>
                         <Toaster position='top-right' />
+                        <Analytics />
                         <ClientLayout data={{ ...addresses.docs }}>{children}</ClientLayout>
                     </NotificationProvider>
                 </NextIntlClientProvider>
