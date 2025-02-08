@@ -59,7 +59,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, announcements }) => {
           <div key={item.id} className="image-category w-full">
             <div className="image-list w-full p-4">
               <Carousel {...(carouselProps as CarouselProps)}>
-                {item.images.map((imageItem: any, index: number) => (
+                {item.images.map((imageItem: any) => (
                   <div key={imageItem.id} className="h-[500px] relative">
                     <CustomImage
                       src={imageItem.image.url}
