@@ -66,7 +66,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, announcements }) => {
                       alt={imageItem.image.alt}
                       fill
                       className="rounded-xl object-fit w-full h-full"
-                      loading={index === 0 ? "eager" : "lazy"}
+                      priority
                     />
                   </div>
                 ))}
