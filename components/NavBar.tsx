@@ -23,18 +23,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
-import CustomImage from "@/utilities/CustomImage"
 import Image from "next/image";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
-  const t = useTranslations('');
+  const t = useTranslations("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const router = useRouter();
 
   const pathName = usePathname();
-  const locale = pathName.split('/')[1];
+  const locale = pathName.split("/")[1];
 
   const menuItems = [
     { name: "Home", href: "/", icon: <Home className="h-6 w-6" /> },
@@ -60,15 +59,14 @@ export default function NavBar() {
       icon: <Info className="h-6 w-6" />,
     },
     {
-      name: 'Govt Schemes',
+      name: "Govt Schemes",
       icon: <GraduationCap className="h-5 w-5" />,
       dropdown: [
-        { name: 'SchemesforSC', href: '/schemes/sc-schemes' },
-        { name: 'SchemesforST', href: '/schemes/st-schemes' },
-        { name: 'SchemesforOBC', href: '/schemes/obc-schemes' },
-        { name: 'SchemesforEWS', href: '/schemes/ews-schemes' },
-
-      ]
+        { name: "SchemesforSC", href: "/schemes/sc-schemes" },
+        { name: "SchemesforST", href: "/schemes/st-schemes" },
+        { name: "SchemesforOBC", href: "/schemes/obc-schemes" },
+        { name: "SchemesforEWS", href: "/schemes/ews-schemes" },
+      ],
     },
     {
       name: "Gallery",
@@ -81,7 +79,7 @@ export default function NavBar() {
   const login = [
     { code: "admin", name: "Admin Login" },
     { code: "student-login", name: "Student Login" },
-  ]
+  ];
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -91,14 +89,12 @@ export default function NavBar() {
     }
   }, [mobileMenuOpen]);
 
-
   const handleLocaleChange = (locale: string) => {
     const currentPath = window.location.pathname;
     const localeRegex = /^\/(en|mr)(\/|$)/;
     const newPath = currentPath.replace(localeRegex, "/") || "/";
     router.replace(newPath, { locale });
   };
-
 
   return (
     <>
@@ -123,7 +119,7 @@ export default function NavBar() {
                 </span>
               </Link>
               <nav className="hidden md:flex md:text-sm gap-6 lg:text-md lg:gap-8">
-                {menuItems.map((item: any) => (
+                {menuItems.map((item: any) =>
                   item?.dropdown ? (
                     <DropdownMenu key={item.name}>
                       <DropdownMenuTrigger className="text-[#FFF] hover:text-[#F3C623] flex items-center">
@@ -131,7 +127,11 @@ export default function NavBar() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         {item.dropdown.map((subItem: any) => (
-                          <DropdownMenuItem key={subItem.name} asChild className="cursor-pointer">
+                          <DropdownMenuItem
+                            key={subItem.name}
+                            asChild
+                            className="cursor-pointer"
+                          >
                             <Link href={subItem.href} className="w-full">
                               {t(subItem.name)}
                             </Link>
@@ -140,11 +140,15 @@ export default function NavBar() {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (
-                    <Link key={item.name} href={item.href} className="text-[#FFF] hover:text-[#F3C623]">
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="text-[#FFF] hover:text-[#F3C623]"
+                    >
                       {t(item.name)}
                     </Link>
-                  )
-                ))}
+                  ),
+                )}
               </nav>
               <div className="flex items-center gap-4 ">
                 <EventCalendar />
@@ -160,7 +164,11 @@ export default function NavBar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="center">
                     {login.map((lang) => (
-                      <Link key={lang.code} href={`/${lang.code}`} target="_blank">
+                      <Link
+                        key={lang.code}
+                        href={`/${lang.code}`}
+                        target="_blank"
+                      >
                         <DropdownMenuItem className="cursor-pointer">
                           {lang.name}
                         </DropdownMenuItem>
@@ -171,16 +179,24 @@ export default function NavBar() {
                 <div className="flex items-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size={"xs"} className="w-[3.5rem]">
+                      <Button
+                        variant="outline"
+                        size={"xs"}
+                        className="w-[3.5rem]"
+                      >
                         <span className="sr-only">Toggle language</span>
                         {locale === "en" ? "EN" : "MR"}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center">
-                      <DropdownMenuItem onClick={() => handleLocaleChange('en')}>
+                      <DropdownMenuItem
+                        onClick={() => handleLocaleChange("en")}
+                      >
                         English
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleLocaleChange('mr')}>
+                      <DropdownMenuItem
+                        onClick={() => handleLocaleChange("mr")}
+                      >
                         मराठी
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -196,10 +212,12 @@ export default function NavBar() {
                   </Button>
                   {mobileMenuOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                      {menuItems.map((item: any) => (
+                      {menuItems.map((item: any) =>
                         item.dropdown ? (
                           <div key={item.name} className="">
-                            <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">{item.icon} {t(item.name)}</span>
+                            <span className="px-4 py-2 text-sm font-semibold text-[#10375C] flex gap-3">
+                              {item.icon} {t(item.name)}
+                            </span>
                             {item.dropdown.map((subItem: any) => (
                               <Link
                                 key={subItem.name}
@@ -207,7 +225,6 @@ export default function NavBar() {
                                 className="block px-4 py-2 text-sm text-[#10375C] hover:bg-[#F3C623] "
                                 onClick={() => setMobileMenuOpen(false)}
                               >
-
                                 {t(subItem.name)}
                               </Link>
                             ))}
@@ -222,8 +239,8 @@ export default function NavBar() {
                             {item.icon}
                             <span className="ml-2">{t(item.name)}</span>
                           </Link>
-                        )
-                      ))}
+                        ),
+                      )}
                     </div>
                   )}
                 </div>
