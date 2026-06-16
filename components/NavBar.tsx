@@ -10,7 +10,7 @@ import {
   GraduationCap,
   BookOpen,
 } from "lucide-react";
-import Link from "next/link";
+import { Link, useRouter } from "@/i18n/routing";
 import TopBar from "./TopBar";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
@@ -24,7 +24,7 @@ import {
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
 import CustomImage from "@/utilities/CustomImage";
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export default function NavBar() {
   const t = useTranslations('');

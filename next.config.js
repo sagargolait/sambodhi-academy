@@ -61,12 +61,12 @@ const nextConfig = {
         ],
       },
       {
-        // Default caching
+        // Default caching — private so CDN doesn't cache locale redirects
         source: "/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, must-revalidate",
+            value: "private, no-cache, must-revalidate",
           },
         ],
       },
