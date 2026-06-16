@@ -36,8 +36,7 @@ const FacultyCarousel: React.FC<FacultyProps> = ({ faculties }) => {
                                                 src={faculty.profileImage.url}
                                                 alt={faculty.profileImage.alt || `alt${faculty.id}`}
                                                 fill
-                                                objectFit="cover"
-                                                className="rounded-full"
+                                                className="rounded-full object-cover"
                                             />
                                         </div>
                                     </div>

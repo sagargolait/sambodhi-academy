@@ -28,7 +28,6 @@ const ImageDialog = (props: Props) => {
                         src={props.allImages[props.selectedImageIndex]?.image.url}
                         alt={props.allImages[props.selectedImageIndex]?.image.alt}
                         fill
-                        objectFit="contain"
                         className="max-h-full max-w-full object-contain"
                     />
 
