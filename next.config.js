@@ -11,12 +11,13 @@ const nextConfig = {
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
   },
   images: {
-    domains: ["sambodhiacademy.com"],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "sambodhiacademy.com",
-        pathname: "/api/media/file/**",
+        pathname: "/**",
       },
     ],
   },
@@ -73,4 +74,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPayload(withPayload(withNextIntl(nextConfig)));
+module.exports = withPayload(withNextIntl(nextConfig));

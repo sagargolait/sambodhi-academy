@@ -68,8 +68,6 @@ export function generateMetadataFromPayload(payloadData: any) {
     image = {},
   } = payloadData;
 
-  console.log("Payload data:", payloadData);
-
   const imageUrl = image?.url || "/default-image.png";
   const pageUrl = `https://example.com/${slug}`;
 

@@ -9,11 +9,10 @@ interface CustomImageProps {
   width?: number
   height?: number
   className?: string
-  fill?: boolean,
-  loading?: 'eager' | 'lazy',
-  onClick?: () => void,
-  priority?: boolean,
-  objectFit?: string
+  fill?: boolean
+  loading?: 'eager' | 'lazy'
+  onClick?: () => void
+  priority?: boolean
 }
 
 export default function CustomImage({
@@ -26,7 +25,6 @@ export default function CustomImage({
   loading,
   onClick,
   priority,
-  objectFit
 }: CustomImageProps) {
   const [error, setError] = useState(false)
 
@@ -44,7 +42,6 @@ export default function CustomImage({
       className={className}
       onError={() => setError(true)}
       onClick={onClick ? () => onClick() : undefined}
-      objectFit={objectFit}
       priority={priority}
     />
   )
