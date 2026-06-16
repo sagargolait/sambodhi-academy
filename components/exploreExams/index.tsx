@@ -11,9 +11,7 @@ interface ExamProps {
 const ExamExplorer: React.FC<ExamProps> = ({ exams }) => {
   return (
     <div className="container mx-auto px-4 py-10">
-      <SectionHeading>
-        ExplorebyExams
-      </SectionHeading>
+      <SectionHeading>ExplorebyExams</SectionHeading>
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content */}
         <div className="container p-0">

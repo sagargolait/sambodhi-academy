@@ -13,9 +13,7 @@ const Associates: React.FC<AssociatesProps> = ({ associates }) => {
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
-        <SectionHeading>
-          EmpanelmentFrom
-        </SectionHeading>
+        <SectionHeading>EmpanelmentFrom</SectionHeading>
         <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
           {associates.map((associate: any) => (
             <Link href={`/associates/${associate.slug}`} key={associate.id}>

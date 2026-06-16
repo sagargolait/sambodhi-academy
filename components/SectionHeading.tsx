@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react'
 
 
-const SectionHeading = ({ children }: { children: React.ReactNode }) => {
+const SectionHeading = ({ children }: { children: string }) => {
   const t = useTranslations();
   return (
     <h2 className="text-3xl font-bold text-center mb-12 text-[#10375C] relative pb-4">
