@@ -23,7 +23,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { EventCalendar } from "./EventsCalendar";
-import CustomImage from "@/utilities/CustomImage";
+import CustomImage from "@/utilities/CustomImage"
+import Image from "next/image";
 import { usePathname } from 'next/navigation'
 
 export default function NavBar() {
@@ -110,8 +111,8 @@ export default function NavBar() {
                 href="/"
                 className="flex items-center gap-4 text-xl font-bold"
               >
-                <CustomImage
-                  src={"/sambodhi-logo.png"}
+                <Image
+                  src="/sambodhi-logo.png"
                   priority={true}
                   width={50}
                   height={50}
