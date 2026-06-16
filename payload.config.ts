@@ -119,16 +119,22 @@ export default buildConfig({
       collections: {
         media: {
           prefix: "media",
+          generateFileURL: ({ filename, prefix }) => {
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            const bucket = process.env.NEXT_PUBLIC_S3_BUCKET;
+            const filePath = prefix ? `${prefix}/${filename}` : filename;
+            return `${supabaseUrl}/storage/v1/object/public/${bucket}/${filePath}`;
+          },
         },
       },
       bucket: process.env.NEXT_PUBLIC_S3_BUCKET || "",
       config: {
         forcePathStyle: true,
         credentials: {
-          accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID || "",
-          secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY || "",
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
         },
-        region: process.env.NEXT_PUBLIC_S3_REGION,
+        region: process.env.S3_REGION,
         endpoint: process.env.NEXT_PUBLIC_S3_ENDPOINT,
       },
     }),
