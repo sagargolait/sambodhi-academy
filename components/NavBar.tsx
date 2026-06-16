@@ -114,9 +114,8 @@ export default function NavBar() {
                   src={"/sambodhi-logo.png"}
                   priority={true}
                   width={50}
-                  height={25}
+                  height={50}
                   alt="logo"
-                  className="aspect-w-4 aspect-h-3"
                 />
                 <span className="text-sm lg:text-lg">
                   Sambodhi <br /> Academy

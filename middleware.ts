@@ -70,6 +70,6 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin).*)",
+    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|eot)).*)",
   ],
 };

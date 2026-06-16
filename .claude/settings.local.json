@@ -4,7 +4,9 @@
       "Bash(npm audit *)",
       "Bash(npm install *)",
       "Bash(npm list *)",
-      "Bash(git grep *)"
+      "Bash(git grep *)",
+      "Bash(identify /Users/sagargolait/Academy/public/sambodhi-logo.png)",
+      "Bash(curl *)"
     ]
   }
 }
