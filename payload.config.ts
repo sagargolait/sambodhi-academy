@@ -120,10 +120,9 @@ export default buildConfig({
         media: {
           prefix: "media",
           generateFileURL: ({ filename, prefix }) => {
-            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-            const bucket = process.env.NEXT_PUBLIC_S3_BUCKET;
+            const bucket = process.env.NEXT_PUBLIC_S3_BUCKET || "sambodhi";
             const filePath = prefix ? `${prefix}/${filename}` : filename;
-            return `${supabaseUrl}/storage/v1/object/public/${bucket}/${filePath}`;
+            return `https://tspoxqadwbrgvpqekdos.supabase.co/storage/v1/object/public/${bucket}/${filePath}`;
           },
         },
       },
