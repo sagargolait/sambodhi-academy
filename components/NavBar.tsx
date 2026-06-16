@@ -114,6 +114,7 @@ export default function NavBar() {
                   width={50}
                   height={50}
                   alt="logo"
+                  unoptimized
                 />
                 <span className="text-sm lg:text-lg">
                   Sambodhi <br /> Academy

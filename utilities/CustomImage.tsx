@@ -43,6 +43,7 @@ export default function CustomImage({
       onError={() => setError(true)}
       onClick={onClick ? () => onClick() : undefined}
       priority={priority}
+      unoptimized
     />
   )
 }

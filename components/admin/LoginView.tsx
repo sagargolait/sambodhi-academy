@@ -69,6 +69,7 @@ export default function LoginView() {
               width={80}
               height={80}
               style={{ objectFit: 'contain' }}
+              unoptimized
             />
           </div>
           <h1
