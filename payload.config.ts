@@ -47,6 +47,13 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      views: {
+        login: {
+          Component: '/components/admin/LoginView#default',
+        },
+      },
+    },
   },
   collections: [
     Users,

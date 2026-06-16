@@ -11,6 +11,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/routing";
+import NextLink from "next/link";
 import TopBar from "./TopBar";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
@@ -164,7 +165,7 @@ export default function NavBar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="center">
                     {login.map((lang) => (
-                      <Link
+                      <NextLink
                         key={lang.code}
                         href={`/${lang.code}`}
                         target="_blank"
@@ -172,7 +173,7 @@ export default function NavBar() {
                         <DropdownMenuItem className="cursor-pointer">
                           {lang.name}
                         </DropdownMenuItem>
-                      </Link>
+                      </NextLink>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
