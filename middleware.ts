@@ -16,6 +16,7 @@ export default function middleware(request: NextRequest) {
     pathname.startsWith("/admin") ||
     pathname.startsWith("/student-admin") ||
     pathname.startsWith("/my-route") ||
+    pathname.startsWith("/keep-alive") ||
     pathname.startsWith("/api")
   ) {
     return NextResponse.next();
@@ -70,6 +71,6 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|eot)).*)",
+    "/((?!_next/static|_next/image|favicon.ico|public|images|api|admin|student-admin|keep-alive|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|eot)).*)",
   ],
 };

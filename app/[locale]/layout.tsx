@@ -46,7 +46,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider messages={messages}>
                     <NotificationProvider>
                         <Toaster position='top-right' />
-                        <Analytics />
+                        {process.env.VERCEL && <Analytics />}
                         <ClientLayout data={{ ...addresses.docs }}>{children}</ClientLayout>
                     </NotificationProvider>
                 </NextIntlClientProvider>

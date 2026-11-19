@@ -1,0 +1,17 @@
+name: Keep site awake
+
+# Free hosts (Render/Koyeb) sleep after ~15 min idle. Ping every 10 min.
+# Set repo variable SITE_URL (Settings -> Secrets and variables -> Actions -> Variables),
+# e.g. https://sambodhiacademy.com
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    if: ${{ vars.SITE_URL != '' }}
+    steps:
+      - name: Ping keep-alive endpoint
+        run: curl -fsS --retry 3 --retry-delay 20 --max-time 90 "${{ vars.SITE_URL }}/keep-alive"

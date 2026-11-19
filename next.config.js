@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Standalone output for Docker / self-hosting (set NEXT_OUTPUT=standalone)
+  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,

@@ -1,0 +1,48 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy: Render Dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: sambodhi-academy
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /keep-alive
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Secrets: fill these in the Render dashboard (sync: false = prompt on first deploy)
+      - key: NEXT_PUBLIC_MONGODB_URI
+        sync: false
+      - key: PAYLOAD_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_SERVER_URL
+        sync: false
+      - key: NEXT_PUBLIC_LOCAL_URL
+        sync: false
+      - key: NEXT_PUBLIC_S3_BUCKET
+        sync: false
+      - key: NEXT_PUBLIC_S3_ENDPOINT
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_APP_ID
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+        sync: false
