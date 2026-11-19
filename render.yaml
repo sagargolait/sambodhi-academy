@@ -22,8 +22,6 @@ services:
         sync: false
       - key: NEXT_PUBLIC_SERVER_URL
         sync: false
-      - key: NEXT_PUBLIC_LOCAL_URL
-        sync: false
       - key: NEXT_PUBLIC_S3_BUCKET
         sync: false
       - key: NEXT_PUBLIC_S3_ENDPOINT
@@ -33,16 +31,4 @@ services:
       - key: S3_ACCESS_KEY_ID
         sync: false
       - key: S3_SECRET_ACCESS_KEY
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_API_KEY
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_APP_ID
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-        sync: false
-      - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
         sync: false
